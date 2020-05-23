@@ -1,14 +1,18 @@
-RUN apt install -y apache2 postfix dovecot-imapd dovecot-pop3d
-  2 - Insternal Site
+## **Webmail server for dev tests**
 
-  Name: maildocker
+****
+**Credentials:** admin:admin
 
-perl /usr/local/squirrelmail/www/config/conf.pl
-
-Choise
+1. Build image:
 ```
-D.  Set pre-defined settings for specific IMAP servers
+docker build -t mail:1.0 .
 ```
-IMAP Server **dovecot**
-
-apt install postfix
+2. Run image:
+```
+docker run -d mail:1.0
+```
+3. Create new user:
+```
+docker exec <container_id|name> sh new-user.sh <user> <password>
+```
+Source: <a href="https://sourceforge.net/projects/squirrelmail/files/stable/1.4.22/squirrelmail-webmail-1.4.22.zip">Squirrel Mail</a>
