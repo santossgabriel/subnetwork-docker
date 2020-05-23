@@ -14,3 +14,4 @@ useradd -p $(openssl passwd -1 $2) $1
 usermod -m -d /var/www/html/$1 $1
 mkdir -p /var/www/html/$1
 chown -R $1:$1 /var/www/html/$1
+echo "User $1 created"
