@@ -1,0 +1,1 @@
+service dovecot start && service postfix start && service apache2 start
