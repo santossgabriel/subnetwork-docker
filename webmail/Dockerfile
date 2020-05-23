@@ -6,6 +6,8 @@ WORKDIR /root/app
 RUN apt update && apt upgrade -y && \
   apt install -y unzip apache2 php dovecot-imapd dovecot-pop3d postfix && \
   unzip /root/app/squirrelmail.zip && \
+  rm /root/app/squirrelmail.zip && \
+  apt remove --purge -y unzip && \
   mkdir -p /var/www/html/ && \
   mv /root/app/squirrelmail-webmail-1.4.22 /var/www/html/squirrelmail && \ 
   chown -R www-data:www-data /var/www/html/squirrelmail && \
@@ -19,5 +21,6 @@ RUN apt update && apt upgrade -y && \
   chown -R www-data:www-data /var/local/squirrelmail && \
   mv /root/app/config.php /var/www/html/squirrelmail/config/config.php && \
   mv /root/app/main.cf /etc/postfix/main.cf && \
+  apt clean && \
   chmod +x /root/app/init.sh
 CMD ["/root/app/init.sh"]
