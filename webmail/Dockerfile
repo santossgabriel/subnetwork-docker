@@ -4,7 +4,7 @@ RUN mkdir /root/app
 COPY app /root/app
 WORKDIR /root/app
 RUN apt update && apt upgrade -y && \
-  apt install -y unzip apache2 php dovecot-imapd dovecot-pop3d postfix && \
+  apt install -y unzip apache2 php dovecot-imapd dovecot-pop3d net-tools iputils-ping postfix && \
   unzip /root/app/squirrelmail.zip && \
   rm /root/app/squirrelmail.zip && \
   apt remove --purge -y unzip && \

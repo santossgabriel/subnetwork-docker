@@ -1,0 +1,12 @@
+acl "trusted" {
+	127.0.0.1;
+};
+
+options {
+	directory "/var/cache/bind";
+	auth-nxdomain no;
+	listen-on port 53 { localhost; 172.17.0.0/16; };
+	allow-query { localhost; 172.17.0.0/16; };
+	forwarders { 8.8.8.8; };
+	recursion yes;
+};

@@ -1,0 +1,9 @@
+zone "DEFAULT_DNS_DOMAIN" {
+	type master;
+	file "/etc/bind/forward.DEFAULT_DNS_DOMAIN";
+};
+
+zone "0.17.172.IN-ADDR.ARPA" {
+	type master;
+	file "/etc/bind/reverse.DEFAULT_DNS_DOMAIN";
+};
