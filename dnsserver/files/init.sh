@@ -1,7 +1,6 @@
 #!/bin/bash
 if [ "$DEFAULT_DNS_DOMAIN" = "" ];
 then 
-  echo DNS Default
 	DEFAULT_DNS_DOMAIN=example.local
 fi
 
@@ -17,4 +16,13 @@ sed -i "s/HOST_IP/$HOST_IP/g" /etc/bind/*
 
 echo DEFAULT_DNS_DOMAIN: $DEFAULT_DNS_DOMAIN
 echo HOST_IP: $HOST_IP
-exec /usr/sbin/named -D "FOREGROUND"
+
+/usr/sbin/named
+while sleep 2; do
+	ps aux |grep named |grep -q -v grep
+	if [ $? -ne 0 ];
+	then
+		echo "Bind process has already exited."
+		exit 1
+	fi
+done
