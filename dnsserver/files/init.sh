@@ -1,4 +1,5 @@
 #!/bin/bash
+echo "***** Bind DNS Server *****"
 if [ "$DEFAULT_DNS_DOMAIN" = "" ];
 then 
 	DEFAULT_DNS_DOMAIN=example.local
@@ -21,13 +22,13 @@ sed -i "s/{HOST_IP_LAST_OCTECT}/$HOST_IP_LAST_OCTECT/g" /etc/bind/*
 sed -i "s/{HOST_IP_FIRST_OCTECTS}/$HOST_IP_FIRST_OCTECTS/g" /etc/bind/*
 sed -i "s/{REV_HOST_IP_FIRST_OCTECTS}/$REV_HOST_IP_FIRST_OCTECTS/g" /etc/bind/*
 
-echo DEFAULT_DNS_DOMAIN: $DEFAULT_DNS_DOMAIN
-echo HOST_IP: $HOST_IP
-echo HOST_IP_FIRST_OCTECTS: $HOST_IP_FIRST_OCTECTS
-echo REV_HOST_IP_FIRST_OCTECTS: $REV_HOST_IP_FIRST_OCTECTS
+echo DOMAIN: $DEFAULT_DNS_DOMAIN
+echo IP: $HOST_IP
 
 service named start
 
+echo ServerName $HOST_IP >> /etc/apache2/apache2.conf 
 mkdir -p /var/run/apache2
 source /etc/apache2/envvars
+echo "* Starting Apache HTTP Server"
 exec /usr/sbin/apache2 -D "FOREGROUND"
