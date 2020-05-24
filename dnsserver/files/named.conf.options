@@ -5,8 +5,8 @@ acl "trusted" {
 options {
 	directory "/var/cache/bind";
 	auth-nxdomain no;
-	listen-on port 53 { localhost; 172.17.0.0/16; };
-	allow-query { localhost; 172.17.0.0/16; };
+	listen-on port 53 { localhost; {HOST_IP_FIRST_OCTECTS}.0/16; };
+	allow-query { localhost; {HOST_IP_FIRST_OCTECTS}.0/16; };
 	forwarders { 8.8.8.8; };
 	recursion yes;
 };
