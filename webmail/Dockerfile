@@ -1,15 +1,14 @@
 FROM ubuntu:latest
 ARG DEBIAN_FRONTEND=noninteractive
-RUN mkdir /root/app
-COPY app /root/app
-WORKDIR /root/app
+WORKDIR /root
+COPY files/* /root/
 RUN apt update && apt upgrade -y && \
   apt install -y unzip apache2 php dovecot-imapd dovecot-pop3d net-tools iputils-ping postfix && \
-  unzip /root/app/squirrelmail.zip && \
-  rm /root/app/squirrelmail.zip && \
+  unzip /root/squirrelmail.zip && \
+  rm /root/squirrelmail.zip && \
   apt remove --purge -y unzip && \
   mkdir -p /var/www/html/ && \
-  mv /root/app/squirrelmail-webmail-1.4.22 /var/www/html/squirrelmail && \ 
+  mv /root/squirrelmail-webmail-1.4.22 /var/www/html/squirrelmail && \ 
   chown -R www-data:www-data /var/www/html/squirrelmail && \
   chmod 755 -R /var/www/html/squirrelmail && \
   useradd -p $(openssl passwd -1 admin) admin && \
@@ -19,8 +18,10 @@ RUN apt update && apt upgrade -y && \
   mkdir -p /var/local/squirrelmail/data/ && \
   mkdir /var/local/squirrelmail/attach/ && \
   chown -R www-data:www-data /var/local/squirrelmail && \
-  mv /root/app/config.php /var/www/html/squirrelmail/config/config.php && \
-  mv /root/app/main.cf /etc/postfix/main.cf && \
+  mv /root/config.php /var/www/html/squirrelmail/config/config.php && \
+  mv /root/main.cf /etc/postfix/main.cf && \
   apt clean && \
-  chmod +x /root/app/init.sh
-CMD ["/root/app/init.sh"]
+  chmod +x /root/init.sh && \
+  cp /root/newuser.sh /usr/bin/newuser && \
+  chmod +x /usr/bin/newuser
+CMD ["/root/init.sh"]

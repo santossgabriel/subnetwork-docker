@@ -13,6 +13,6 @@ docker run -d mail:1.0
 ```
 3. Create new user:
 ```
-docker exec <container_id|name> sh new-user.sh <user> <password>
+docker exec <container_id|name> sh newuser <user> <password>
 ```
 Source: <a href="https://sourceforge.net/projects/squirrelmail/files/stable/1.4.22/squirrelmail-webmail-1.4.22.zip">Squirrel Mail</a>
