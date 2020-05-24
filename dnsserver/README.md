@@ -5,6 +5,10 @@ docker build -t dns:1.0 .
 ```
 2. Run image
 ```
-docker run -d --name dns -e DEFAULT_DNS_DOMAIN=example.local dns:1.0  
+docker run -d -e DEFAULT_DNS_DOMAIN=example.local dns:1.0  
 ```
-**Obs:** Default network is 172.17.0.0/16
+3. Add new host
+```
+docker exec <container_id> newhost <sub_domain> <ip>
+```
+Obs.: Ip in range [1-200]

@@ -2,21 +2,13 @@
 ; BIND data file for local loopback interface
 ;
 $TTL	604800
-@	IN	SOA	primary.DEFAULT_DNS_DOMAIN. root.primary.DEFAULT_DNS_DOMAIN. (
+@	IN	SOA	primary.{DEFAULT_DNS_DOMAIN}. root.primary.{DEFAULT_DNS_DOMAIN}. (
 			      2		; Serial
 			 604800		; Refresh
 			  86400		; Retry
 			2419200		; Expire
 			 604800 )	; Negative Cache TTL
 ;
-@	IN	NS	primary.DEFAULT_DNS_DOMAIN.
+@	IN	NS	primary.{DEFAULT_DNS_DOMAIN}.
 
-primary	IN	A	HOST_IP
-
-DEFAULT_DNS_DOMAIN.	IN	MX 10	mail.DEFAULT_DNS_DOMAIN.
-
-www	IN	A	172.17.0.20
-
-mail	IN 	A	172.17.0.30
-
-ftp	IN	CNAME	www.DEFAULT_DNS_DOMAIN.
+primary	IN	A	{HOST_IP}
