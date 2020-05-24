@@ -28,4 +28,6 @@ echo REV_HOST_IP_FIRST_OCTECTS: $REV_HOST_IP_FIRST_OCTECTS
 
 service named start
 
-tail -f /dev/null
+mkdir -p /var/run/apache2
+source /etc/apache2/envvars
+exec /usr/sbin/apache2 -D "FOREGROUND"
