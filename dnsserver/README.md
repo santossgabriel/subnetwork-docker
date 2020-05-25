@@ -1,4 +1,4 @@
-## **Dns server in docker container**
+## **Dns server for local network tests**
 1. Build image
 ```
 docker build -t dns:1.0 . 

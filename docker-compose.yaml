@@ -13,11 +13,18 @@ services:
         ipv4_address: 172.20.20.80
     environment:
       - DEFAULT_DNS_DOMAIN=test.lab
+  proxy:
+    image: proxy:1.0
+    networks:
+      internal:
+        ipv4_address: 172.20.20.50
+      external:
+        ipv4_address: 172.20.30.50
   threat:
     image: threat:1.0
     hostname: threat
     networks:
-      - internal
+      - external
     volumes:
       - ./threat/resolv.conf:/etc/resolv.conf
 
@@ -27,3 +34,8 @@ networks:
     ipam:
       config:
         - subnet: 172.20.20.0/24
+  external:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.30.0/24
