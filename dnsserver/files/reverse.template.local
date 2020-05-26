@@ -1,5 +1,5 @@
 $TTL    604800
-@       IN      SOA     {DEFAULT_DNS_DOMAIN}. root.{DEFAULT_DNS_DOMAIN}. (
+@       IN      SOA     ##DNS_DOMAIN##. root.##DNS_DOMAIN##. (
                              21         ; Serial
                          604820         ; Refresh
                           864500        ; Retry
@@ -7,10 +7,10 @@ $TTL    604800
                          604880 )       ; Negative Cache TTL
 
 ;Your Name Server Info
-@       IN      NS      primary.{DEFAULT_DNS_DOMAIN}.
-primary IN      A       {HOST_IP}
+@       IN      NS      primary.##DNS_DOMAIN##.
+primary IN      A       ##HOST_IP##
 
 ;Reverse Lookup for Your DNS Server
-{HOST_IP_LAST_OCTECT}      IN      PTR     primary.{DEFAULT_DNS_DOMAIN}.
+##HOST_IP_LAST_OCTECT##      IN      PTR     primary.##DNS_DOMAIN##.
 
 ;PTR Record IP address to HostName
