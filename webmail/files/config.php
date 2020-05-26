@@ -27,7 +27,7 @@ $squirrelmail_default_language = 'en_US';
 $default_charset       = 'iso-8859-1';
 $lossy_encoding        = false;
 
-$domain                 = 'maildocker.com';
+$domain                 = '##DOMAIN##';
 $imapServerAddress      = 'localhost';
 $imapPort               = 143;
 $useSendmail            = false;

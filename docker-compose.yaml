@@ -6,6 +6,9 @@ services:
     networks:
       internal:
         ipv4_address: 172.20.20.10
+    environment:
+      - DOMAIN=internal.lab
+
   dns_int:
     image: binddns:1.0
     networks:
