@@ -1,9 +1,9 @@
-zone "{DEFAULT_DNS_DOMAIN}" {
+zone "##DNS_DOMAIN##" {
 	type master;
-	file "/etc/bind/forward.{DEFAULT_DNS_DOMAIN}";
+	file "/etc/bind/forward.##DNS_DOMAIN##";
 };
 
-zone "{REV_HOST_IP_FIRST_OCTECTS}.IN-ADDR.ARPA" {
+zone "##REV_IP##.IN-ADDR.ARPA" {
 	type master;
-	file "/etc/bind/reverse.{DEFAULT_DNS_DOMAIN}";
+	file "/etc/bind/reverse.##DNS_DOMAIN##";
 };
