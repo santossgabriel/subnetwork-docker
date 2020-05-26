@@ -6,13 +6,20 @@ services:
     networks:
       internal:
         ipv4_address: 172.20.20.10
-  dns:
+  dns_int:
     image: binddns:1.0
     networks:
       internal:
         ipv4_address: 172.20.20.80
     volumes:
-      - ./dnsserver/config.json:/root/config.json
+      - ./dnsserver/dns-int.json:/root/config.json
+  dns_ext:
+    image: binddns:1.0
+    networks:
+      external:
+        ipv4_address: 172.30.30.80
+    volumes:
+      - ./dnsserver/dns-ext.json:/root/config.json
   proxy:
     image: squidproxy:1.0
     networks:

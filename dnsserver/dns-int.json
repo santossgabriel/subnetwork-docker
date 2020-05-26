@@ -6,7 +6,7 @@
   "zones": [
     {
       "rev": "20.20.172",
-      "domain": "test.lab",
+      "domain": "internal.lab",
       "hosts": [
         {
           "subdomain": "mail",
@@ -19,16 +19,6 @@
         {
           "subdomain": "proxy",
           "ip": "172.20.20.50"
-        }
-      ]
-    },
-    {
-      "rev": "30.30.172",
-      "domain": "test2.lab",
-      "hosts": [
-        {
-          "subdomain": "proxy",
-          "ip": "172.30.30.50"
         }
       ]
     }

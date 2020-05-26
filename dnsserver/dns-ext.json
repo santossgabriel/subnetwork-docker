@@ -1,0 +1,18 @@
+{
+  "forwarders": [
+    "8.8.8.8",
+    "8.8.4.4"
+  ],
+  "zones": [
+    {
+      "rev": "30.30.172",
+      "domain": "external.lab",
+      "hosts": [
+        {
+          "subdomain": "proxy",
+          "ip": "172.30.30.50"
+        }
+      ]
+    }
+  ]
+}
