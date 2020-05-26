@@ -1,0 +1,28 @@
+{
+  "forwarders": [
+    "8.8.8.8",
+    "8.8.4.4"
+  ],
+  "zones": [
+    {
+      "rev": "20.20.172",
+      "domain": "test.lab",
+      "hosts": [
+        {
+          "subdomain": "mail",
+          "ip": "10"
+        }
+      ]
+    },
+    {
+      "rev": "30.30.172",
+      "domain": "nemesis.lab",
+      "hosts": [
+        {
+          "subdomain": "www",
+          "ip": "70"
+        }
+      ]
+    }
+  ]
+}
