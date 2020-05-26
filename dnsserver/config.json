@@ -10,17 +10,25 @@
       "hosts": [
         {
           "subdomain": "mail",
-          "ip": "10"
+          "ip": "172.20.20.10"
+        },
+        {
+          "subdomain": "www",
+          "ip": "172.20.20.70"
+        },
+        {
+          "subdomain": "proxy",
+          "ip": "172.20.20.50"
         }
       ]
     },
     {
       "rev": "30.30.172",
-      "domain": "nemesis.lab",
+      "domain": "test2.lab",
       "hosts": [
         {
-          "subdomain": "www",
-          "ip": "70"
+          "subdomain": "proxy",
+          "ip": "172.30.30.50"
         }
       ]
     }

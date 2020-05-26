@@ -2,24 +2,24 @@ version: '2'
 
 services:
   mail:
-    image: tuxfrenetico/squirrelmail
+    image: squirrelmail:1.0
     networks:
       internal:
         ipv4_address: 172.20.20.10
   dns:
-    image: tuxfrenetico/binddns
+    image: binddns:1.0
     networks:
       internal:
         ipv4_address: 172.20.20.80
-    environment:
-      - DEFAULT_DNS_DOMAIN=test.lab
+    volumes:
+      - ./dnsserver/config.json:/root/config.json
   proxy:
-    image: proxy:1.0
+    image: squidproxy:1.0
     networks:
       internal:
         ipv4_address: 172.20.20.50
       external:
-        ipv4_address: 172.20.30.50
+        ipv4_address: 172.30.30.50
   threat:
     image: threat:1.0
     hostname: threat
@@ -38,4 +38,4 @@ networks:
     driver: bridge
     ipam:
       config:
-        - subnet: 172.20.30.0/24
+        - subnet: 172.30.30.0/24
