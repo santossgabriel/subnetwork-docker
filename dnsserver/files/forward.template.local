@@ -2,13 +2,13 @@
 ; BIND data file for local loopback interface
 ;
 $TTL	604800
-@	IN	SOA	primary.{DEFAULT_DNS_DOMAIN}. root.primary.{DEFAULT_DNS_DOMAIN}. (
+@	IN	SOA	primary.##DNS_DOMAIN##. root.primary.##DNS_DOMAIN##. (
 			      2		; Serial
 			 604800		; Refresh
 			  86400		; Retry
 			2419200		; Expire
 			 604800 )	; Negative Cache TTL
 ;
-@	IN	NS	primary.{DEFAULT_DNS_DOMAIN}.
+@	IN	NS	primary.##DNS_DOMAIN##.
 
-primary	IN	A	{HOST_IP}
+primary	IN	A	##HOST_IP##
