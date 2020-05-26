@@ -2,7 +2,8 @@ FROM ubuntu:latest
 ARG DEBIAN_FRONTEND=noninteractive
 WORKDIR /root
 COPY files/* /root/
-RUN apt update && apt upgrade -y && \
+RUN apt update && \
+  apt upgrade -y && \
   apt install -y unzip apache2 php dovecot-imapd dovecot-pop3d net-tools iputils-ping postfix && \
   unzip /root/squirrelmail.zip && \
   rm /root/squirrelmail.zip && \
@@ -22,6 +23,7 @@ RUN apt update && apt upgrade -y && \
   mv /root/main.cf /etc/postfix/main.cf && \
   apt clean && \
   chmod +x /root/init.sh && \
-  cp /root/newuser.sh /usr/bin/newuser && \
+  mv /root/newuser.sh /usr/bin/newuser && \
+  mv squirrelmail.conf /etc/apache2/sites-available/ && \
   chmod +x /usr/bin/newuser
 CMD ["/root/init.sh"]
