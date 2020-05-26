@@ -5,17 +5,21 @@ import subprocess
 import re
 import time
 import json
+import datetime
+import hashlib
+import signal
 
-bind_dir = './bind/'
+bind_dir = '/etc/bind/'
+config_file = '/root/config.json'
 
-print('***** Bind DNS Server *****')
+os.system('echo "***** Bind DNS Server *****"')
 
-arr_ip = subprocess.Popen('ifconfig docker0 | grep netmask', shell=True, stdout=subprocess.PIPE).stdout.readline().decode('utf-8').split(' ')
+arr_ip = subprocess.Popen('ifconfig eth0 | grep netmask', shell=True, stdout=subprocess.PIPE).stdout.readline().decode('utf-8').split(' ')
 host_ip = arr_ip[arr_ip.index('inet')+1]
 arr_ip = host_ip.split('.')
 
 def update():
-  with open('../config.json') as f:
+  with open(config_file) as f:
     config = json.loads(f.read())
 
   with open('./named.conf.options') as f:
@@ -30,7 +34,6 @@ def update():
   named_conf_local = ''
   for z in config['zones']:
     with open('named.conf.local') as f:
-      print(z['domain'])
       ncl = f.read().replace('##DNS_DOMAIN##', z['domain'])
       ncl = ncl.replace('##REV_IP##', z['rev'])
 
@@ -45,49 +48,73 @@ def update():
       forward = f.read().replace('##DNS_DOMAIN##', z['domain'])
     forward = forward.replace('##HOST_IP##', host_ip)
 
-    for h in z['hosts']:
-      reverse += f"\n{h['ip']} IN PTR {h['subdomain']}"
-      forward += f"\n{h['ip']} IN A {h['subdomain']}"
+    try:
+      if 'hosts' in z:
+        for h in z['hosts']:
+          reverse += f"\n{h['ip'].split('.')[3]} IN PTR {h['subdomain']}"
+          forward += f"\n{h['subdomain']} IN A {h['ip']}"
+    except:
+      return 1
 
     with open(bind_dir + 'reverse.' + z['domain'], 'w') as f:
-      f.write(reverse)
+      f.write(reverse + '\n')
 
 
     with open(bind_dir + 'forward.' + z['domain'], 'w') as f:
-      f.write(forward)
+      f.write(forward + '\n')
 
   
   with open(bind_dir + 'named.conf.local', 'w') as f:
     f.write(named_conf_local)
-
   
+  os.system('named-checkconf')
+
+  for z in config['zones']:
+    os.system(f"named-checkzone {z['domain']} {bind_dir}reverse.{z['domain']}")
+    os.system(f"named-checkzone {z['domain']} {bind_dir}forward.{z['domain']}")
     
+  os.system('echo "    Forwarders: ' + '; '.join(config['forwarders']) + '"')
+  os.system('echo "    Domains:"')
 
+  for z in config['zones']:
+    os.system('echo "      ' + z['domain'] + ' ' + z['rev'] + '"')
+    if 'hosts' in z:
+      for h in z['hosts']:
+        os.system('echo "        ' + h['subdomain'] + ' - ' + h['ip'] + '"')
 
-update()
+  os.system('echo " ** Updated! ' + datetime.datetime.now().strftime('%H:%M:%S') + '"')
+  return 0
 
+with open(config_file, 'r', encoding='utf-8') as f:
+  last_hash = hashlib.sha1(f.read().encode('utf-8')).hexdigest()
 
-# for i in zones:
-#   print(i['domain'])
+if update() == 0:
+  os.system('service named start')
+else:
+  os.system('echo " *******  Error in config file  *********"')
 
+class Killer:
+  kill_now = False
+  def __init__(self):
+    signal.signal(signal.SIGINT, self.exit_gracefully)
+    signal.signal(signal.SIGTERM, self.exit_gracefully)
 
-# content = ''
-# with open('./forward.example.local') as f:
-#   for l in f.readlines():
-#     x.replace('##DNS_DOMAIN##', dns_domain, 99).replace()
+  def exit_gracefully(self,signum, frame):
+    self.kill_now = True
 
-# content = [x.replace('##DNS_DOMAIN##', dns_domain, 99) for x in content]
-# print(content)
+killer = Killer()
 
-# sed -i "s/{HOST_IP}/$HOST_IP/g" /etc/bind/*
-# sed -i "s/{HOST_IP_LAST_OCTECT}/$HOST_IP_LAST_OCTECT/g" /etc/bind/*
-# sed -i "s/{HOST_IP_FIRST_OCTECTS}/$HOST_IP_FIRST_OCTECTS/g" /etc/bind/*
-# sed -i "s/{REV_HOST_IP_FIRST_OCTECTS}/$REV_HOST_IP_FIRST_OCTECTS/g" /etc/bind/*
+while not killer.kill_now:
+  time.sleep(1)
 
+  with open(config_file, 'r', encoding='utf-8') as f:
+    new_hash = hashlib.sha1(f.read().encode('utf-8')).hexdigest()
 
-# print(domain)
+  if new_hash != last_hash:
+    os.system('\n\n\necho "*  Updating..."')
 
-# i = 0
-# while True:
-#   time.sleep(1)
-#   # print(++i)
+    if update() == 0:
+      os.system('service named restart')
+      last_hash = new_hash
+    else:
+      os.system('echo " *******  Error in config file  *********"')

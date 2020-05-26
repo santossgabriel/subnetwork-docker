@@ -1,6 +1,5 @@
 FROM ubuntu:latest
 ARG DEBIAN_FRONTEND=noninteractive
-COPY init.sh /root/
 WORKDIR /root
 RUN apt update && apt upgrade -y && \
   apt install -y net-tools iputils-ping openssh-server vim dnsutils && \
