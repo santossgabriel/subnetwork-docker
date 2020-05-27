@@ -7,6 +7,8 @@ services:
   employee:
     image: employee:1.0
     hostname: employee
+    cap_add:
+      - NET_ADMIN
     networks:
       - internal
     volumes:
