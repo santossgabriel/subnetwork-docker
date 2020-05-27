@@ -1,8 +1,8 @@
-FROM ubuntu:latest
+FROM baselab:1.0
 ARG DEBIAN_FRONTEND=noninteractive
 WORKDIR /root
-RUN apt update && apt upgrade -y && \
-  apt install -y net-tools traceroute iputils-ping openssh-server vim dnsutils && \
+RUN apt install -y openssh-server && \
   useradd -m -s /bin/bash -p $(openssl passwd -1 threat) threat && \
-  mkdir -p /run/sshd
+  mkdir -p /run/sshd && \
+  chmod +x /root/init.sh
 CMD ["/usr/sbin/sshd", "-D"]

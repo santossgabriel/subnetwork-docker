@@ -1,5 +1,0 @@
-#!/bin/bash
-for id in $(sudo docker ps -a -q); do
-	sudo docker stop $id
-	sudo docker rm $id
-done

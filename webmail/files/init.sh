@@ -1,5 +1,6 @@
 #!/bin/bash
 echo "***** Squirrel Webmail Server *****"
+
 mkdir -p /var/run/apache2
 HOST_IP=`ifconfig eth0 |egrep netmask |sed -E "s/[a-zA-Z]*//g" |sed "s/   /|/g" |cut -d "|" -f4`
 echo ServerName $HOST_IP >> /etc/apache2/apache2.conf 
