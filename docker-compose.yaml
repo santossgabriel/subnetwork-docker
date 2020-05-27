@@ -1,35 +1,50 @@
 version: '2'
 
 services:
-  mail:
+
+  ############ Company
+  mail_company:
     image: squirrelmail:1.0
     networks:
       internal:
         ipv4_address: 172.20.20.10
     environment:
-      - DOMAIN=internal.lab
+      - DOMAIN=fakebank.lab
 
-  dns_int:
+  dns_company:
     image: binddns:1.0
     networks:
       internal:
         ipv4_address: 172.20.20.80
     volumes:
       - ./dnsserver/dns-int.json:/root/config.json
-  dns_ext:
-    image: binddns:1.0
-    networks:
-      external:
-        ipv4_address: 172.30.30.80
-    volumes:
-      - ./dnsserver/dns-ext.json:/root/config.json
-  proxy:
+
+  proxy_company:
     image: squidproxy:1.0
     networks:
       internal:
         ipv4_address: 172.20.20.50
       external:
         ipv4_address: 172.30.30.50
+
+  ######### Internet
+
+  mail_internet:
+    image: squirrelmail:1.0
+    networks:
+      external:
+        ipv4_address: 172.30.30.10
+    environment:
+      - DOMAIN=internet.lab
+
+  dns_internet:
+    image: binddns:1.0
+    networks:
+      internal:
+        ipv4_address: 172.30.30.80
+    volumes:
+      - ./dnsserver/dns-ext.json:/root/config.json
+  
   threat:
     image: threat:1.0
     hostname: threat
