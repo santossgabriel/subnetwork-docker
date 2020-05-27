@@ -6,11 +6,15 @@
   "zones": [
     {
       "rev": "30.30.172",
-      "domain": "external.lab",
+      "domain": "internet.lab",
       "hosts": [
         {
           "subdomain": "proxy",
           "ip": "172.30.30.50"
+        },
+        {
+          "subdomain": "mail",
+          "ip": "172.30.30.10"
         }
       ]
     }

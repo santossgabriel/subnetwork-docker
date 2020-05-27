@@ -1,12 +1,11 @@
 {
   "forwarders": [
-    "8.8.8.8",
-    "8.8.4.4"
+    "172.30.30.80"
   ],
   "zones": [
     {
       "rev": "20.20.172",
-      "domain": "internal.lab",
+      "domain": "fakebank.lab",
       "hosts": [
         {
           "subdomain": "mail",
