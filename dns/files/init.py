@@ -14,6 +14,12 @@ config_file = '/root/config.json'
 
 os.system('echo "***** Bind DNS Server *****"')
 
+default_gateway = os.environ.get('DEFAULT_GATEWAY', '')
+
+if default_gateway != '':
+  os.system('route del default')
+  os.system(f'route add default gw {default_gateway} eth0')
+
 arr_ip = subprocess.Popen('ifconfig eth0 | grep netmask', shell=True, stdout=subprocess.PIPE).stdout.readline().decode('utf-8').split(' ')
 host_ip = arr_ip[arr_ip.index('inet')+1]
 arr_ip = host_ip.split('.')

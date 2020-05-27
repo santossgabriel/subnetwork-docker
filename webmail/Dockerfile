@@ -1,10 +1,7 @@
-FROM ubuntu:latest
+FROM baselab:1.0
 ARG DEBIAN_FRONTEND=noninteractive
-WORKDIR /root
 COPY files/* /root/
-RUN apt update && \
-  apt upgrade -y && \
-  apt install -y unzip apache2 php dovecot-imapd dovecot-pop3d net-tools iputils-ping postfix && \
+RUN apt install -y unzip apache2 php dovecot-imapd dovecot-pop3d postfix && \
   unzip /root/squirrelmail.zip && \
   rm /root/squirrelmail.zip && \
   apt remove --purge -y unzip && \

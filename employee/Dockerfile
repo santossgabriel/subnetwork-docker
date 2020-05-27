@@ -1,10 +1,9 @@
-FROM ubuntu:latest
+FROM baselab:1.0
 ARG DEBIAN_FRONTEND=noninteractive
 WORKDIR /root
 COPY files/* /root/
-RUN apt update && apt upgrade -y && \
-  apt install -y net-tools traceroute iputils-ping openssh-server vim dnsutils && \
+RUN apt install -y openssh-server && \
   mkdir -p /run/sshd && \
   chmod +x /root/init.sh
-  
+
 CMD ["/root/init.sh"]

@@ -5,25 +5,34 @@ services:
   ############ Company
 
   employee:
-    image: employee:1.0
-    hostname: employee
     cap_add:
       - NET_ADMIN
+    hostname: employee
     networks:
       - internal
+    environment: 
+      - DEFAULT_GATEWAY=172.20.20.50
+    image: employee:1.0
     volumes:
       - ./employee/resolv.conf:/etc/resolv.conf
 
   mail_company:
+    cap_add:
+      - NET_ADMIN
+    environment:
+      - DOMAIN=fakebank.lab
+      - DEFAULT_GATEWAY=172.20.20.50
     image: squirrelmail:1.0
     networks:
       internal:
         ipv4_address: 172.20.20.10
-    environment:
-      - DOMAIN=fakebank.lab
 
   dns_company:
+    cap_add:
+      - NET_ADMIN
     image: binddns:1.0
+    environment: 
+      - DEFAULT_GATEWAY=172.20.20.50
     networks:
       internal:
         ipv4_address: 172.20.20.80
@@ -31,6 +40,8 @@ services:
       - ./dnsserver/dns-int.json:/root/config.json
 
   proxy_company:
+    cap_add:
+      - NET_ADMIN
     image: squidproxy:1.0
     networks:
       internal:
