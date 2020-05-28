@@ -12,7 +12,7 @@ services:
       - internal
     environment: 
       - DEFAULT_GATEWAY=172.20.20.50
-    image: employee:1.0
+    image: employeelab:1.0
     volumes:
       - ./employee/resolv.conf:/etc/resolv.conf
 
@@ -22,7 +22,7 @@ services:
     environment:
       - DOMAIN=fakebank.lab
       - DEFAULT_GATEWAY=172.20.20.50
-    image: squirrelmail:1.0
+    image: webmaillab:1.0
     networks:
       internal:
         ipv4_address: 172.20.20.10
@@ -30,7 +30,7 @@ services:
   dns_company:
     cap_add:
       - NET_ADMIN
-    image: binddns:1.0
+    image: dnslab:1.0
     environment: 
       - DEFAULT_GATEWAY=172.20.20.50
     networks:
@@ -42,7 +42,7 @@ services:
   proxy_company:
     cap_add:
       - NET_ADMIN
-    image: squidproxy:1.0
+    image: proxylab:1.0
     networks:
       internal:
         ipv4_address: 172.20.20.50
@@ -52,7 +52,7 @@ services:
   ######### Internet
 
   mail_internet:
-    image: squirrelmail:1.0
+    image: webmaillab:1.0
     networks:
       external:
         ipv4_address: 172.30.30.10
@@ -60,7 +60,7 @@ services:
       - DOMAIN=internet.lab
 
   dns_internet:
-    image: binddns:1.0
+    image: dnslab:1.0
     networks:
       external:
         ipv4_address: 172.30.30.80
@@ -68,7 +68,7 @@ services:
       - ./dnsserver/dns-ext.json:/root/config.json
   
   threat:
-    image: threat:1.0
+    image: threatlab:1.0
     hostname: threat
     networks:
       - external
