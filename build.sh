@@ -1,12 +1,20 @@
-echo "1 - base"
-echo "2 - dns"
-echo "3 - employee"
-echo "4 - ftp"
-echo "5 - proxy"
-echo "6 - threat"
-echo "7 - webmail"
+#!/bin/bash
 
-read OPTION
+if [ "$1" = "" ];
+then
+	echo "1 - base"
+	echo "2 - dns"
+	echo "3 - employee"
+	echo "4 - ftp"
+	echo "5 - proxy"
+	echo "6 - threat"
+	echo "7 - webmail"
+
+	read OPTION
+else
+	OPTION=$1
+fi
+
 IMAGE=''
 
 case $OPTION in

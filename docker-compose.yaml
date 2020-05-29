@@ -52,6 +52,8 @@ services:
   ######### Internet
 
   mail_internet:
+    cap_add:
+      - NET_ADMIN
     image: webmaillab:1.0
     networks:
       external:
