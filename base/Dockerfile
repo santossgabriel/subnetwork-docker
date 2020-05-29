@@ -1,4 +1,4 @@
-FROM ubuntu:18.04
+FROM ubuntu:latest
 ARG DEBIAN_FRONTEND=noninteractive
 WORKDIR /root
 COPY files/* /root/

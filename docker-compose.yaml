@@ -1,4 +1,4 @@
-version: '2'
+version: '3'
 
 services:
 
@@ -12,6 +12,7 @@ services:
       - internal
     environment: 
       - DEFAULT_GATEWAY=172.20.20.50
+      - http_proxy=172.20.20.50
     image: employeelab:1.0
     volumes:
       - ./employee/resolv.conf:/etc/resolv.conf
@@ -37,7 +38,7 @@ services:
       internal:
         ipv4_address: 172.20.20.80
     volumes:
-      - ./dnsserver/dns-int.json:/root/config.json
+      - ./dns/dns-int.json:/root/config.json
 
   proxy_company:
     cap_add:
@@ -48,6 +49,8 @@ services:
         ipv4_address: 172.20.20.50
       external:
         ipv4_address: 172.30.30.50
+    volumes:
+      - ./proxy/squid.conf:/etc/squid/squid.conf
 
   ######### Internet
 
@@ -67,7 +70,7 @@ services:
       external:
         ipv4_address: 172.30.30.80
     volumes:
-      - ./dnsserver/dns-ext.json:/root/config.json
+      - ./dns/dns-ext.json:/root/config.json
   
   threat:
     image: threatlab:1.0
@@ -76,6 +79,9 @@ services:
       - external
     volumes:
       - ./threat/resolv.conf:/etc/resolv.conf
+    # deploy:
+    #   mode: replicated
+    #   replicas: 6
 
 networks:
   internal:

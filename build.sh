@@ -38,6 +38,8 @@ case $OPTION in
   ;;
 esac
 
+echo "******* Building $IMAGE *********"
+
 docker images |grep "$IMAGE"
 if [ $? = 0 ];
 then
