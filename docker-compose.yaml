@@ -12,7 +12,6 @@ services:
       - internal
     environment: 
       - DEFAULT_GATEWAY=172.20.20.50
-      - http_proxy=172.20.20.50
     image: employeelab:1.0
     volumes:
       - ./employee/resolv.conf:/etc/resolv.conf
