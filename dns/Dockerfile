@@ -4,6 +4,6 @@ WORKDIR /root
 COPY files/* /root/
 RUN apt update && \
   apt upgrade -y && \
-  apt install -y net-tools vim iputils-ping bind9 && \
+  apt install -y bind9 && \
   chmod +x /root/init.py
 CMD ["/root/init.py"]
