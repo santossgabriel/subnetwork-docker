@@ -9,21 +9,21 @@ global $version;
 $config_version = '1.4.0';
 $config_use_color = 2;
 
-$org_name      = "SquirrelMail";
+$org_name      = "##APP_NAME##";
 $org_logo      = SM_PATH . 'images/sm_logo.png';
 $org_logo_width  = '308';
 $org_logo_height = '111';
-$org_title     = "SquirrelMail $version";
+$org_title     = "##APP_NAME## $version";
 $signout_page  = '';
 $frame_top     = '_top';
 
 $provider_uri     = 'http://squirrelmail.org/';
 
-$provider_name     = 'SquirrelMail';
+$provider_name     = '##APP_NAME##';
 
-$motd = "";
+$motd = "My Custom message of the day ";
 
-$squirrelmail_default_language = 'en_US';
+$squirrelmail_default_language = 'pt_BR';
 $default_charset       = 'iso-8859-1';
 $lossy_encoding        = false;
 
@@ -79,7 +79,7 @@ $uid_support              = true;
 
 
 $theme_css = '';
-$theme_default = 0;
+$theme_default = ##THEME_INDEX##;
 $theme[0]['PATH'] = SM_PATH . 'themes/default_theme.php';
 $theme[0]['NAME'] = 'Default';
 $theme[1]['PATH'] = SM_PATH . 'themes/plain_blue_theme.php';
