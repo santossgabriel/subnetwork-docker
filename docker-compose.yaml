@@ -1,4 +1,4 @@
-version: '3'
+version: '2'
 
 services:
 
@@ -9,7 +9,7 @@ services:
       - NET_ADMIN
     hostname: employee
     networks:
-      - internal
+      - vlan
     environment: 
       - DEFAULT_GATEWAY=172.20.20.50
     image: employeelab:1.0
@@ -21,10 +21,11 @@ services:
       - NET_ADMIN
     environment:
       - DOMAIN=fakebank.lab
-      - DEFAULT_GATEWAY=172.20.20.50
+      - THEME_INDEX=6
+      - APP_NAME=Fake Bank
     image: webmaillab:1.0
     networks:
-      internal:
+      vlan:
         ipv4_address: 172.20.20.10
 
   dns_company:
@@ -34,7 +35,7 @@ services:
     environment: 
       - DEFAULT_GATEWAY=172.20.20.50
     networks:
-      internal:
+      vlan:
         ipv4_address: 172.20.20.80
     volumes:
       - ./dns/dns-int.json:/root/config.json
@@ -44,7 +45,7 @@ services:
       - NET_ADMIN
     image: proxylab:1.0
     networks:
-      internal:
+      vlan:
         ipv4_address: 172.20.20.50
       external:
         ipv4_address: 172.30.30.50
@@ -62,6 +63,10 @@ services:
         ipv4_address: 172.30.30.10
     environment:
       - DOMAIN=internet.lab
+      - THEME_INDEX=17
+      - APP_NAME=External Mail
+    volumes:
+      - ./webmail/squirrelmail:/var/www/html/squirrelmail
 
   dns_internet:
     image: dnslab:1.0
@@ -78,16 +83,19 @@ services:
       - external
     volumes:
       - ./threat/resolv.conf:/etc/resolv.conf
-    # deploy:
-    #   mode: replicated
-    #   replicas: 6
 
 networks:
-  internal:
-    driver: bridge
+  vlan:
+    driver: macvlan
+    driver_opts:
+      parent: enp2s0
     ipam:
       config:
         - subnet: 172.20.20.0/24
+          gateway: 172.20.20.254
+          ip_range: 172.20.20.128/25
+      driver: default
+
   external:
     driver: bridge
     ipam:
