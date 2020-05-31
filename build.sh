@@ -47,7 +47,7 @@ then
   docker rmi $IMAGE"lab:1.0"
   if [ $? != 0 ];
   then
-    echo "Image be using."
+    echo "Image $IMAGE""lab:1.0 be using."
     exit 1
   fi
 fi
