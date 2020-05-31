@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Data;
 using Dapper;
 using Npgsql;
-using Site.Services;
+using Site.Config;
 using static System.Console;
 
 namespace Site.Repository
@@ -13,7 +13,7 @@ namespace Site.Repository
 
     public IDbTransaction Transaction { get; private set; }
 
-    protected BaseRepository(ConfigService config)
+    protected BaseRepository(AppConfig config)
     {
       _conn = new NpgsqlConnection(config.ConnectionString);
     }

@@ -26,13 +26,13 @@ body {
   overflow: hidden;
 }
 
-.toolbar > .app-title {
-  font-size: 30px;
+.app-title {
+  font-size: 40px;
   font-weight: bold;
   color: white;
 }
 
-.toolbar > .logged-name {
+.logged-name {
     font-size: 12px;
     margin: 10px;
     color: white;
@@ -125,7 +125,7 @@ body {
 }
 
 .login-form {
-    margin-left: 10px;
+    margin-right: 10px;
 }
 
 .form-input {
@@ -135,6 +135,11 @@ body {
     height: 22px;
     border: none;
     padding: 0 4px;
+    color: #666;
+}
+
+.form-input.lg {
+  width: 150px
 }
 
 .sidebar .footer {
@@ -142,4 +147,14 @@ body {
     text-align: center;
     font-size: 14px;
     margin-top: 10px;
+}
+
+.logo {
+  width: 35px;
+  height: 35px;
+  color: white;
+}
+
+.box-logo {
+  flex: 1;
 }

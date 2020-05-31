@@ -1,7 +1,7 @@
 FROM baselab:1.0
 ARG DEBIAN_FRONTEND=noninteractive
 COPY files/* /root/
-RUN apt install -y unzip apache2 php dovecot-imapd dovecot-pop3d postfix && \
+RUN apt install -y unzip apache2 php dovecot-imapd dovecot-pop3d postfix openssh-server mailutils && \
   unzip /root/squirrelmail.zip && \
   rm /root/squirrelmail.zip && \
   apt remove --purge -y unzip && \

@@ -8,7 +8,10 @@
 </head>
 <body>
     <header class="toolbar">
-        <span class="app-title">Fake Bank</span>
+        <div class="box-logo">
+            <img class="logo" src="~/favicon.ico" />
+            <span class="app-title">Fake Bank</span>
+        </div>
         @if (User.Identity.IsAuthenticated)
         {
             <span class="logged-name">@User.Identity.Name</span>
@@ -27,8 +30,7 @@
         <section class="sidebar">
             <a asp-area="" asp-controller="Home" asp-action="Privacy">Home</a>
             <a asp-area="" asp-controller="Home" asp-action="Privacy">Simulador</a>
-            <a asp-area="" asp-controller="Home" asp-action="Privacy">Contato</a>
-            <a asp-area="" asp-controller="Mail" asp-action="">Mail Sender</a>
+            <a asp-area="" asp-controller="Contact" asp-action="">Contato</a>
             <div class="footer">
                 &copy; 2020 - FakeBank
             </div>

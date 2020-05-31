@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Site.Models
 {
-  public class MailModel
+  public class EmailModel
   {
     [Required]
     public string From { get; set; }
