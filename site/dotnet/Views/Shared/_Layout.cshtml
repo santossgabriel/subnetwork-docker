@@ -8,7 +8,10 @@
 </head>
 <body>
     <header class="toolbar">
-        <span class="app-title">Fake Bank</span>
+        <div class="box-logo">
+            <img class="logo" src="~/favicon.ico" />
+            <span class="app-title">Fake Bank</span>
+        </div>
         @if (User.Identity.IsAuthenticated)
         {
             <span class="logged-name">@User.Identity.Name</span>
