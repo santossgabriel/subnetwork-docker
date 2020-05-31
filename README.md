@@ -17,7 +17,7 @@
   $ ./build.sh 6
   $ ./build.sh 7
   ```
-    * Caso ocorra erro de permissão execute o arquivo de build como root, adicione o usuário logado ao grupo **docker** criado na instalação do docker.
+    * Caso ocorra erro de permissão execute o arquivo de build como root ou adicione o usuário logado ao grupo **docker** criado na instalação do docker.
       ```
       $ sudo usermod -aG docker $USER
       ```
