@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fake Bank</title>
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <header class="toolbar">
+        <span class="app-title">Fake Bank</span>
+        @if (User.Identity.IsAuthenticated)
+        {
+            <span class="logged-name">@User.Identity.Name</span>
+            <a class="btn" asp-area="" asp-controller="Home" asp-action="Logout">Logout</a>
+        }
+        else
+        {
+            <form asp-action="Login" class="login-form">
+                <input class="form-input" name="name" placeholder="Name">
+                <input class="form-input" type="password" name="password" placeholder="Password">
+                <button class="btn">Login</button>
+            </form>
+        }
+    </header>
+    <div class="root-container">
+        <section class="sidebar">
+            <a asp-area="" asp-controller="Home" asp-action="Privacy">Home</a>
+            <a asp-area="" asp-controller="Home" asp-action="Privacy">Simulador</a>
+            <a asp-area="" asp-controller="Home" asp-action="Privacy">Contato</a>
+            <a asp-area="" asp-controller="Mail" asp-action="">Mail Sender</a>
+            <div class="footer">
+                &copy; 2020 - FakeBank
+            </div>
+        </section>
+        <main role="main" class="base-container">
+            @RenderBody()
+        </main>
+    </div>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
