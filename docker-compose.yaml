@@ -1,4 +1,4 @@
-version: '2'
+version: '2.2'
 
 services:
 
@@ -50,7 +50,9 @@ services:
       external:
         ipv4_address: 172.30.30.50
     volumes:
-      - ./proxy/squid.conf:/etc/squid/squid.conf
+      - ./proxy/squid.conf:/etc/squid/squid.conf    
+    sysctls:
+      - net.ipv4.ip_forward=0
 
   ######### Internet
 
