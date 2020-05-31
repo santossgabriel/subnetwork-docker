@@ -29,6 +29,30 @@ fi
 
 sed -i "s/##APP_NAME##/$APP_NAME/g" /var/www/html/squirrelmail/config/config.php
 
+case "$USER_TYPE" in
+  "1")
+  for e in $(cat internal_users);do
+    useradd -m -s /bin/bash -p $(openssl passwd -1 123) $e
+    cp .bash_profile /home/$e
+  done
+  ;;
+  "2")
+  for e in $(cat external_users);do
+    useradd -m -s /bin/bash -p $(openssl passwd -1 123) $e
+    cp .bash_profile /home/$e
+  done
+  ;;
+esac
+
+if [ -e users ]
+then
+  for e in $(cat users);do
+    usermod -m -d /var/www/html/$e $e
+    mkdir /var/www/html/$e
+    chown -R $e:$e /var/www/html/$e
+  done
+fi
+
 a2ensite squirrelmail
 service dovecot start
 service postfix start

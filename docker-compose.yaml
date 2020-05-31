@@ -66,9 +66,8 @@ services:
     environment:
       - DOMAIN=internet.lab
       - THEME_INDEX=17
+      - USER_TYPE=2
       - APP_NAME=External Mail
-    volumes:
-      - ./webmail/squirrelmail:/var/www/html/squirrelmail
 
   dns_internet:
     image: dnslab:1.0
