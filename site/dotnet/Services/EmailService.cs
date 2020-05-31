@@ -9,12 +9,13 @@ namespace Site.Services
   {
     private readonly EmailConfig _config;
 
-    public MailService(EmailConfig config) => _config = config;
+    public MailService(AppConfig config) => _config = config.Email;
 
-    public void Send(MailModel model)
+    public void Send(EmailModel model)
     {
       SmtpClient client = new SmtpClient();
       client.UseDefaultCredentials = _config.UseDefaultCredentials;
+      client.Host = _config.Server;
       client.Credentials = new NetworkCredential(_config.User, _config.Password);
 
       MailMessage mailMessage = new MailMessage();

@@ -21,7 +21,6 @@ namespace Site
 
     public void ConfigureServices(IServiceCollection services)
     {
-      var configService = new ConfigService { ConnectionString = Configuration["ConnectionString"] };
 
       services.AddAuthentication("CookieAuthentication")
         .AddCookie("CookieAuthentication", config =>
@@ -34,11 +33,10 @@ namespace Site
       services.AddControllersWithViews()
           .AddRazorRuntimeCompilation();
 
-      var emailConfig = new EmailConfig();
-      Configuration.GetSection("EmailConfig").Bind(emailConfig);
+      var appConfig = new AppConfig();
+      Configuration.GetSection("AppConfig").Bind(appConfig);
 
-      services.AddSingleton<ConfigService>(configService);
-      services.AddSingleton<EmailConfig>(emailConfig);
+      services.AddSingleton<AppConfig>(appConfig);
 
       services.AddScoped<SimulationService>();
       services.AddScoped<UserService>();

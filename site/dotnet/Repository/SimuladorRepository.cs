@@ -1,13 +1,13 @@
 using System;
 using System.Collections.Generic;
+using Site.Config;
 using Site.Models;
-using Site.Services;
 
 namespace Site.Repository
 {
   public class SimulationRepository : BaseRepository<Simulation>
   {
-    public SimulationRepository(ConfigService conn) : base(conn) { }
+    public SimulationRepository(AppConfig config) : base(config) { }
 
     public void Add(Simulation simulation) => Execute("", simulation);
 

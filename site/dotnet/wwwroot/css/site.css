@@ -135,6 +135,11 @@ body {
     height: 22px;
     border: none;
     padding: 0 4px;
+    color: #666;
+}
+
+.form-input.lg {
+  width: 150px
 }
 
 .sidebar .footer {
