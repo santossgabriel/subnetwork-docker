@@ -13,7 +13,7 @@
         },
         {
           "subdomain": "www",
-          "ip": "172.20.20.70"
+          "ip": "172.20.20.20"
         },
         {
           "subdomain": "proxy",
