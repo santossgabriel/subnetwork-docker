@@ -5,13 +5,12 @@
 }
 
 body {
-  background-color: #ddd;
+  background-color: #ccc;
 }
 
 .page-title {
-    color: white;
-    font-size: 24px;
-    margin-bottom: 20px;
+    color: #666;
+    font-size: 30px;
 }
 
 .toolbar {
@@ -24,6 +23,7 @@ body {
   background-color: #558c4d;
   box-shadow: 5px 5px 5px #888;
   overflow: hidden;
+  box-shadow: 0px 20px 10px #aaa;
 }
 
 .app-title {
@@ -38,45 +38,19 @@ body {
     color: white;
 }
 
-.root-container {
+.root-card {
   display: flex;
   flex-direction: row;
-}
-
-.sidebar {
-  margin-top: 1px;
-  width: 220px;
-  background-color: #558c4d;
   display: flex;
-  flex-direction: column;
-  box-shadow: 5px 5px 5px #888;
-}
-
-.sidebar > a {
-  border-bottom: solid 1px #666;
-  font-weight: bold;
-  color: white;
-  text-transform: uppercase;
-  transition: 300ms;
-  padding: 10px;
-  text-decoration: none;
-}
-
-.sidebar > a:hover {
-  cursor: pointer;
-  background-color: #4b6846;
-}
-
-.base-container {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  font-size: calc(10px + 2vmin);
-  color: #333;
-  padding-top: 30px;
-  padding-bottom: 30px;
-  margin-left: 30px;
+  flex-direction: row;
+  background-color: white;
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 0px;
+  margin-top: 50px;
+  border-radius: 10px;
+  padding: 50px;
+  min-height: 500px;
 }
 
 .link {
@@ -155,10 +129,6 @@ body {
   color: white;
 }
 
-.box-logo {
-  flex: 1;
-}
-
 .form-contact {
   margin-top:20px;
   display: flex;
@@ -178,4 +148,54 @@ body {
   margin-top: 20px;
   font-size: 14px;
   text-align: center;
+}
+
+.menu-toolbar {
+  flex: 1;
+  margin-left: 50px;
+  color: white;
+}
+
+.menu-toolbar > a {
+  color: white;
+  text-decoration: none;
+  font-size: 20px;
+  padding: 0 20px;
+  border-left: solid 1px white;
+  transition: 200ms;
+}
+
+.menu-toolbar > a:last-child{
+  border-right: solid 1px white;
+}
+
+.menu-toolbar > a:hover {
+  color: #ccc;
+}
+
+
+.form-simulation {
+  margin-top:20px;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-simulation input {
+  border: 1px solid #bbb;
+  margin-bottom: 20px;
+  transition: 300ms;
+}
+
+.form-simulation span {
+  color: #666;
+}
+
+.btn-simulation {
+  box-shadow: 0px 0px 8px #999;
+  padding: 8px;
+}
+
+.form-simulation input:focus {
+  box-shadow: 0px 0px 8px #999;;
 }

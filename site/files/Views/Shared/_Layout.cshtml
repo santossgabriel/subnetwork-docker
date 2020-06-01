@@ -8,9 +8,14 @@
 </head>
 <body>
     <header class="toolbar">
-        <div class="box-logo">
+        <div>
             <img class="logo" src="~/favicon.ico" />
             <span class="app-title">Fake Bank</span>
+        </div>
+        <div class="menu-toolbar">
+            <a asp-area="" asp-controller="Home" asp-action="Privacy">Home</a>
+            <a asp-area="" asp-controller="Simulation" asp-action="Index">Simulador</a>
+            <a asp-area="" asp-controller="Contact" asp-action="">Contato</a>
         </div>
         @if (User.Identity.IsAuthenticated)
         {
@@ -26,18 +31,8 @@
             </form>
         }
     </header>
-    <div class="root-container">
-        <section class="sidebar">
-            <a asp-area="" asp-controller="Home" asp-action="Privacy">Home</a>
-            <a asp-area="" asp-controller="Home" asp-action="Privacy">Simulador</a>
-            <a asp-area="" asp-controller="Contact" asp-action="">Contato</a>
-            <div class="footer">
-                &copy; 2020 - FakeBank
-            </div>
-        </section>
-        <main role="main" class="base-container">
-            @RenderBody()
-        </main>
+    <div class="root-card">
+        @RenderBody()
     </div>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)
