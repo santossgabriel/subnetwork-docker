@@ -2,7 +2,7 @@
 
 <div>
     <h3>Contato</h3>
-     <form asp-action="SendMail" style="margin-top:20px;display: flex;flex-direction: column;">
+     <form class="form-contact" asp-action="SendMail">
         Nome: <input class="form-input lg" asp-for="Name" /><br />
         Email: <input class="form-input lg" asp-for="Email" /><br />
         Mensagem: <textarea asp-for="Message"></textarea><br />

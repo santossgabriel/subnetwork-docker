@@ -32,9 +32,15 @@ namespace Site.Controllers
       email.Subject = "Contato";
       email.Body = $"{model.Message}\n\nEmail para contato: {model.Email}";
 
-      _mailService.Send(email);
-
-      return View("Index");
+      var success = _mailService.Send(email);
+      if (success)
+      {
+        return View("Index");
+      }
+      else
+      {
+        return View("Index");
+      }
     }
   }
 }

@@ -16,43 +16,65 @@ services:
   #   volumes:
   #     - ./employee/resolv.conf:/etc/resolv.conf
 
-  # mail_company:
-  #   cap_add:
-  #     - NET_ADMIN
-  #   environment:
-  #     - DOMAIN=fakebank.lab
-  #     - THEME_INDEX=6
-  #     - APP_NAME=Fake Bank
-  #   image: webmaillab:1.0
-  #   networks:
-  #     vlan:
-  #       ipv4_address: 172.20.20.10
+  
+  mail_company:
+    cap_add:
+      - NET_ADMIN
+    environment:
+      - DOMAIN=fakebank.lab
+      - THEME_INDEX=6
+      - APP_NAME=Fake Bank
+      - USER_TYPE=1
+    image: webmaillab:1.0
+    networks:
+      vlan:
+        ipv4_address: 172.20.20.10
 
-  # dns_company:
-  #   cap_add:
-  #     - NET_ADMIN
-  #   image: dnslab:1.0
-  #   environment: 
-  #     - DEFAULT_GATEWAY=172.20.20.50
-  #   networks:
-  #     vlan:
-  #       ipv4_address: 172.20.20.80
-  #   volumes:
-  #     - ./dns/dns-int.json:/root/config.json
 
-  # proxy_company:
-  #   cap_add:
-  #     - NET_ADMIN
-  #   image: proxylab:1.0
-  #   networks:
-  #     vlan:
-  #       ipv4_address: 172.20.20.50
-  #     external:
-  #       ipv4_address: 172.30.30.50
-  #   volumes:
-  #     - ./proxy/squid.conf:/etc/squid/squid.conf    
-  #   sysctls:
-  #     - net.ipv4.ip_forward=0
+  site:
+    cap_add:
+      - NET_ADMIN
+    hostname: site
+    networks:
+      vlan:
+        ipv4_address: 172.20.20.20
+    environment: 
+      - DEFAULT_GATEWAY=172.20.20.50
+      - DATABASE_CONNECTION_STRING=Host=172.20.20.30;Port=5432;Pooling=true;Database=site;User Id=app;Password=123
+      - EMAIL_SERVER=172.20.20.10
+      - EMAIL_USER=admin
+      - EMAIL_PASSWORD=admin
+      - EMAIL_USE_DEFAULT_CREDENTIALS=false
+      - EMAIL_CONTACT=contato@fakebank.lab
+      - EMAIL_SENDER=site@fakebank.lab
+    image: sitelab:1.0
+
+
+  dns_company:
+    cap_add:
+      - NET_ADMIN
+    image: dnslab:1.0
+    environment: 
+      - DEFAULT_GATEWAY=172.20.20.50
+    networks:
+      vlan:
+        ipv4_address: 172.20.20.80
+    volumes:
+      - ./dns/dns-int.json:/root/config.json
+
+  proxy_company:
+    cap_add:
+      - NET_ADMIN
+    image: proxylab:1.0
+    networks:
+      vlan:
+        ipv4_address: 172.20.20.50
+      external:
+        ipv4_address: 172.30.30.50
+    volumes:
+      - ./proxy/squid.conf:/etc/squid/squid.conf    
+    sysctls:
+      - net.ipv4.ip_forward=0
 
   ######### Internet
 
@@ -86,16 +108,16 @@ services:
   #     - ./threat/resolv.conf:/etc/resolv.conf
 
 networks:
-  # vlan:
-  #   driver: macvlan
-  #   driver_opts:
-  #     parent: enp2s0
-  #   ipam:
-  #     config:
-  #       - subnet: 172.20.20.0/24
-  #         gateway: 172.20.20.254
-  #         ip_range: 172.20.20.128/25
-  #     driver: default
+  vlan:
+    driver: macvlan
+    driver_opts:
+      parent: enp2s0
+    ipam:
+      config:
+        - subnet: 172.20.20.0/24
+          gateway: 172.20.20.254
+          ip_range: 172.20.20.128/25
+      driver: default
 
   external:
     driver: bridge

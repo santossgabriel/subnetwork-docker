@@ -1,3 +1,4 @@
+using System;
 using System.Net;
 using System.Net.Mail;
 using Site.Config;
@@ -11,7 +12,7 @@ namespace Site.Services
 
     public MailService(AppConfig config) => _config = config.Email;
 
-    public void Send(EmailModel model)
+    public bool Send(EmailModel model)
     {
       SmtpClient client = new SmtpClient();
       client.UseDefaultCredentials = _config.UseDefaultCredentials;
@@ -23,7 +24,19 @@ namespace Site.Services
       mailMessage.To.Add(model.To);
       mailMessage.Body = model.Body;
       mailMessage.Subject = model.Subject;
-      client.Send(mailMessage);
+
+      try
+      {
+        client.Send(mailMessage);
+        return true;
+      }
+      catch (Exception ex)
+      {
+        Console.WriteLine("Não foi possível enviar o email");
+        Console.WriteLine(ex.Message);
+        Console.WriteLine(ex.StackTrace);
+        return false;
+      }
     }
   }
 }
