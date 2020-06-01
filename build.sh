@@ -35,6 +35,8 @@ case $OPTION in
   ;;
   8) IMAGE="site"
   ;;
+  9) IMAGE="database"
+  ;;
   *)
   echo "Invalid option."
   exit
