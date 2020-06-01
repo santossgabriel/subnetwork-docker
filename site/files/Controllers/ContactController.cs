@@ -17,11 +17,9 @@ namespace Site.Controllers
       _config = config;
     }
 
-    public IActionResult Index()
-    {
-      return View();
-    }
+    public IActionResult Index() => View();
 
+    [HttpPost]
     public IActionResult SendMail(ContactModel model)
     {
       var email = new EmailModel();
@@ -30,17 +28,10 @@ namespace Site.Controllers
       email.To = _config.Email.Contact;
 
       email.Subject = "Contato";
-      email.Body = $"{model.Message}\n\nEmail para contato: {model.Email}";
+      email.Body = $"{model.Message}\n\n\nEmail para contato:\n {model.Email}";
 
-      var success = _mailService.Send(email);
-      if (success)
-      {
-        return View("Index");
-      }
-      else
-      {
-        return View("Index");
-      }
+      model.SendError = !_mailService.Send(email);
+      return View("Index", model);
     }
   }
 }

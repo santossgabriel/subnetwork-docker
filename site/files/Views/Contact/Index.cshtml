@@ -7,5 +7,19 @@
         Email: <input class="form-input lg" asp-for="Email" /><br />
         Mensagem: <textarea asp-for="Message"></textarea><br />
         <button style="margin-top:20px" class="btn">Enviar</button>
-    </form> 
+    </form>
+    @if(Model?.SendError ?? false)
+    {
+        <span class="error-message">Não foi possível enviar o email</span>
+    }
 </div>
+
+<script>
+    setTimeout(() => 
+    {
+        var elem = document.getElementsByClassName('error-message')[0]
+        if(elem)
+            elem.style.display = 'none';
+
+    }, 3000)
+</script>
