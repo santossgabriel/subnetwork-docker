@@ -12,5 +12,7 @@ namespace Site.Models
 
     [Required]
     public string Message { get; set; }
+
+    public bool SendError { get; set; }
   }
 }
