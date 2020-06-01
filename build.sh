@@ -9,6 +9,7 @@ then
 	echo "5 - proxy"
 	echo "6 - threat"
 	echo "7 - webmail"
+  echo "8 - site"
 
 	read OPTION
 else
@@ -32,6 +33,8 @@ case $OPTION in
   ;;
   7) IMAGE="webmail"
   ;;
+  8) IMAGE="site"
+  ;;
   *)
   echo "Invalid option."
   exit
@@ -40,7 +43,7 @@ esac
 
 echo "******* Building $IMAGE *********"
 
-docker images |grep "$IMAGE"
+docker images |grep "$IMAGE:1.0"
 if [ $? = 0 ];
 then
   echo "Removing image..."
