@@ -17,5 +17,18 @@ namespace Site.Services
       var user = _repository.FindByEmail(email);
       return user?.Password == password ? user.WithoutPassword() : null;
     }
+
+    public void Save(UserModel user)
+    {
+      var userDB = _repository.FindByEmail(user.Email);
+      if (userDB == null)
+      {
+        _repository.Add(user);
+      }
+      else
+      {
+        _repository.Update(user);
+      }
+    }
   }
 }

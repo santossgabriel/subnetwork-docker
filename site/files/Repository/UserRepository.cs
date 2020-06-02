@@ -8,6 +8,20 @@ namespace Site.Repository
   {
     public UserRepository(AppConfig config) : base(config) { }
 
+    public long Add(UserModel user)
+    {
+      var query = "INSERT INTO \"USER\" (NAME, EMAIL, PASSWORD) VALUES (@Name, @Email, @Password)";
+      Execute(query, user);
+      return CurrentId(user);
+    }
+
+    public long Update(UserModel user)
+    {
+      var query = "UPDATE \"USER\" SET NAME = @Name, EMAIL = @Email, PASSWORD = @Password WHERE ID = @Id";
+      Execute(query, user);
+      return CurrentId(user);
+    }
+
     public UserModel FindByEmail(string email) => FirstOrDefault($"SELECT ID, NAME, EMAIL, PASSWORD FROM \"USER\" WHERE EMAIL = '{email}'");
 
     public UserModel GetById(int id) => FirstOrDefault($"SELECT * FROM USER WHERE Id = @Id", new { Id = id });
