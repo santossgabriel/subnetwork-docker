@@ -27,7 +27,7 @@ namespace Site.Controllers
     public IActionResult Index() => View();
 
     [HttpPost]
-    public IActionResult SendMail(ContactModel model)
+    public IActionResult SendContact(ContactModel model)
     {
       var user = new UserModel();
       user.Email = model.Email;
