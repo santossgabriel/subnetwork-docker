@@ -1,0 +1,55 @@
+@model Site.Models.SimulationModel
+<div class="box-simulation-details">
+    @if(Model == null)
+    {
+        <h4 class="page-title sm">Simulação não encontrada.</h4>
+    }
+    else
+    {
+        <h3 class="page-title">Detalhes da simulação.</h3>
+        
+        <div>
+            Produto: <span class="label">@Model.Description</span>
+        </div>
+
+        <div>
+            Valor Solicitado: <span class="label">@Model.AmountMoney</span>
+        </div>
+
+        <div>
+            Valor Financiado: <span class="label">@Model.TotalMoney</span>
+        </div>
+
+        <div>
+            Quantidade de parcelas: <span class="label">@Model.Plots</span>
+        </div>
+
+        @if(Model.Total > 0)
+        {
+            <div>
+                Parcelas:
+            </div>
+            <table class="simulation-table">
+                <thead>
+                    <tr>
+                        <th>Número</th>
+                        <th>Valor</th>
+                        <th>Juros</th>
+                        <th>Valor com Juros</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach(var item in Model.Installments)
+                    {
+                        <tr style="@(item.Number % 2 != 0 ? "background-color:#ccc" : "")">
+                            <td>@item.Number</td>
+                            <td>@item.CostMoney</td>
+                            <td>@item.InterestMoney</td>
+                            <td>@item.TotalMoney</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    }
+</div>

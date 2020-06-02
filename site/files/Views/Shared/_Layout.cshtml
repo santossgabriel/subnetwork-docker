@@ -20,14 +20,14 @@
         @if (User.Identity.IsAuthenticated)
         {
             <span class="logged-name">@User.Identity.Name</span>
-            <a class="btn" asp-area="" asp-controller="Home" asp-action="Logout">Logout</a>
+            <a class="btn" asp-area="" asp-controller="Home" asp-action="Logout">Sair</a>
         }
         else
         {
-            <form asp-action="Login" class="login-form">
-                <input class="form-input" name="name" placeholder="Name">
-                <input class="form-input" type="password" name="password" placeholder="Password">
-                <button class="btn">Login</button>
+            <form asp-controller="Home" asp-action="Login" class="login-form">
+                <input class="form-input" name="email" placeholder="Email">
+                <input class="form-input" type="password" name="password" placeholder="Senha">
+                <button class="btn">Entrar</button>
             </form>
         }
     </header>

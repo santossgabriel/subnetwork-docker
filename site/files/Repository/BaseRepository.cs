@@ -1,13 +1,15 @@
+using System;
 using System.Collections.Generic;
 using System.Data;
 using Dapper;
 using Npgsql;
 using Site.Config;
+using Site.Models;
 using static System.Console;
 
 namespace Site.Repository
 {
-  public abstract class BaseRepository<T> where T : class
+  public abstract class BaseRepository<T> where T : BaseEntity
   {
     private readonly IDbConnection _conn;
 
@@ -20,40 +22,88 @@ namespace Site.Repository
 
     protected void Execute(string query, object parameters = null)
     {
-      Log(query);
-      _conn.Execute(query, parameters);
+      try
+      {
+        Log(query);
+        _conn.Execute(query, parameters);
+      }
+      catch (Exception ex)
+      {
+        Console.WriteLine(ex.Message);
+        throw;
+      }
     }
 
     protected U ExecuteScalar<U>(string query, object parameters = null)
     {
-      Log(query);
-      return _conn.ExecuteScalar<U>(query, parameters);
+      try
+      {
+        Log(query);
+        return _conn.ExecuteScalar<U>(query, parameters);
+      }
+      catch (Exception ex)
+      {
+        Console.WriteLine(ex.Message);
+        throw;
+      }
     }
 
     protected T FirstOrDefault(string query, object parameters = null)
     {
-      Log(query);
-      return _conn.QuerySingleOrDefault<T>(query, parameters);
+      try
+      {
+        Log(query);
+        return _conn.QuerySingleOrDefault<T>(query, parameters);
+      }
+      catch (Exception ex)
+      {
+        Console.WriteLine(ex.Message);
+        throw;
+      }
     }
 
     protected IEnumerable<T> Query(string query, object parameters = null)
     {
-      Log(query);
-      return _conn.Query<T>(query, parameters);
+      try
+      {
+        Log(query);
+        return _conn.Query<T>(query, parameters);
+      }
+      catch (Exception ex)
+      {
+        Console.WriteLine(ex.Message);
+        throw;
+      }
     }
 
-    public bool Exists(long id)
+    public bool Exists(T entity)
     {
-      var query = $"SELECT COUNT(1) FROM \"{typeof(T).Name}\" WHERE \"Id\" = @Id";
-      Log(query);
-      return _conn.ExecuteScalar<long>(query, new { Id = id }) > 0;
+      try
+      {
+        var query = $"SELECT COUNT(1) FROM \"{entity.EntityName}\" WHERE \"ID\" = @Id";
+        Log(query);
+        return _conn.ExecuteScalar<long>(query, new { Id = entity.Id }) > 0;
+      }
+      catch (Exception ex)
+      {
+        Console.WriteLine(ex.Message);
+        throw;
+      }
     }
 
-    public long NextId()
+    public long CurrentId(T entity)
     {
-      var query = $"SELECT MAX(\"Id\") FROM \"{typeof(T).Name}\"";
-      Log(query);
-      return _conn.ExecuteScalar<long>(query);
+      try
+      {
+        var query = $"SELECT MAX(ID) FROM \"{entity.EntityName}\"";
+        Log(query);
+        return _conn.ExecuteScalar<long>(query);
+      }
+      catch (Exception ex)
+      {
+        Console.WriteLine(ex.Message);
+        throw;
+      }
     }
 
     private void Log(string query)

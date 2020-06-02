@@ -57,3 +57,4 @@ then
   fi
 fi
 docker build -t $IMAGE"lab:1.0" ./$IMAGE
+date

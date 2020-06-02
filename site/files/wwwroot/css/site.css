@@ -9,8 +9,12 @@ body {
 }
 
 .page-title {
-    color: #666;
-    font-size: 30px;
+  color: #666;
+  font-size: 30px;
+}
+
+.page-title.sm {
+  font-size: 24px;
 }
 
 .toolbar {
@@ -24,6 +28,9 @@ body {
   box-shadow: 5px 5px 5px #888;
   overflow: hidden;
   box-shadow: 0px 20px 10px #aaa;
+  position: sticky;
+  top: 0;
+  padding-right: 20px;
 }
 
 .app-title {
@@ -79,13 +86,16 @@ body {
 
 .btn {
   border: none;
-  font-size: 10px;
-  padding: 2px;
+  font-size: 12px;
+  padding: 4px 8px;
   border-radius: 3px;
   text-transform: uppercase;
   background-color: white;  
   transition: 200ms;
   text-decoration: none;
+  color: #666;
+  box-shadow: 0px 0px 8px #999;
+  font-weight: bold;
 }
 
 .btn:hover {
@@ -99,7 +109,7 @@ body {
 }
 
 .login-form {
-    margin-right: 10px;
+  padding-right: 10px;
 }
 
 .form-input {
@@ -183,8 +193,14 @@ body {
 
 .form-simulation input {
   border: 1px solid #bbb;
-  margin-bottom: 20px;
   transition: 300ms;
+}
+
+.form-simulation .validation-error {
+  margin-top: 2px;
+  margin-bottom: 10px;
+  color: #ff0c0c;
+  font-size: 12px;
 }
 
 .form-simulation span {
@@ -197,5 +213,22 @@ body {
 }
 
 .form-simulation input:focus {
-  box-shadow: 0px 0px 8px #999;;
+  box-shadow: 0px 0px 8px #999;
+}
+
+.simulation-table td {
+  text-align: center;
+  padding: 10px 0;
+}
+
+.simulation-table th {
+  width: 100px;
+}
+
+.box-simulation-details {
+  color: #555;
+}
+
+.box-simulation-details .label {
+  font-weight: bold;
 }

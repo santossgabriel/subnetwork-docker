@@ -12,7 +12,7 @@ namespace Site.Services
       _repository = repository;
     }
 
-    public User Login(string email, string password)
+    public UserModel Login(string email, string password)
     {
       var user = _repository.FindByEmail(email);
       return user?.Password == password ? user.WithoutPassword() : null;
