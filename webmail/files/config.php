@@ -21,7 +21,7 @@ $provider_uri     = 'http://squirrelmail.org/';
 
 $provider_name     = '##APP_NAME##';
 
-$motd = "My Custom message of the day ";
+$motd = "Welcome";
 
 $squirrelmail_default_language = 'pt_BR';
 $default_charset       = 'iso-8859-1';

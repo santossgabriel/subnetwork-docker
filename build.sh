@@ -1,60 +1,26 @@
 #!/bin/bash
 
-if [ "$1" = "" ];
-then
-	echo "1 - base"
-	echo "2 - dns"
-	echo "3 - employee"
-	echo "4 - ftp"
-	echo "5 - proxy"
-	echo "6 - threat"
-	echo "7 - webmail"
-  echo "8 - site"
-
-	read OPTION
-else
-	OPTION=$1
-fi
-
-IMAGE=''
-
-case $OPTION in
-  1) IMAGE="base"
-  ;;
-  2) IMAGE="dns"
-  ;;
-  3) IMAGE="employee"
-  ;;
-  4) IMAGE="ftp"
-  ;;
-  5) IMAGE="proxy"
-  ;;
-  6) IMAGE="threat"
-  ;;
-  7) IMAGE="webmail"
-  ;;
-  8) IMAGE="site"
-  ;;
-  9) IMAGE="database"
+case $1 in base|dns|employee|ftp|proxy|threat|webmail|site|database)
   ;;
   *)
-  echo "Invalid option."
+  echo " base | dns | employee | ftp | proxy | threat | webmail | site | database "
+  echo "Ex.: .\build.sh base"
   exit
   ;;
 esac
 
-echo "******* Building $IMAGE *********"
+echo "******* Building $1 *********"
 
-docker images |grep "$IMAGE:1.0"
+docker images |grep "$1:1.0"
 if [ $? = 0 ];
 then
   echo "Removing image..."
-  docker rmi $IMAGE"lab:1.0"
+  docker rmi $1"lab:1.0"
   if [ $? != 0 ];
   then
-    echo "Image $IMAGE""lab:1.0 be using."
+    echo "Image $1""lab:1.0 be using."
     exit 1
   fi
 fi
-docker build -t $IMAGE"lab:1.0" ./$IMAGE
+docker build -t $1"lab:1.0" ./$1
 date
