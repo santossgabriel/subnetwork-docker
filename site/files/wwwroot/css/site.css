@@ -37,6 +37,7 @@ body {
   font-size: 40px;
   font-weight: bold;
   color: white;
+  text-decoration: none;
 }
 
 .logged-name {
@@ -58,30 +59,11 @@ body {
   border-radius: 10px;
   padding: 50px;
   min-height: 500px;
+  color: #666;
 }
 
 .link {
   margin-left: 20px;
-}
-
-.comment-box {
-  border: 1px solid gray;
-  min-width: 400px;
-  padding: 10px;
-}
-
-.comment-line {
-  display: flex;
-  font-size: 12px;
-  padding: 5px;
-}
-
-.comment-line > span {
-  flex: 1;
-}
-
-.comment-box .comment-line:not(:last-child) {
-    border-bottom: solid 1px #555;
 }
 
 .btn {
@@ -113,13 +95,17 @@ body {
 }
 
 .form-input {
-    width: 100px;
-    font-size: 12px;
-    border-radius: 5px;
-    height: 22px;
-    border: none;
-    padding: 0 4px;
-    color: #666;
+  width: 100px;
+  font-size: 12px;
+  border-radius: 5px;
+  height: 22px;
+  padding: 0 4px;
+  color: #666;
+  border: 1px solid #bbb;
+  transition: 300ms;
+}   
+.form-input:focus {
+  box-shadow: 0px 0px 8px #999;
 }
 
 .form-input.lg {
@@ -143,6 +129,7 @@ body {
   margin-top:20px;
   display: flex;
   flex-direction: column;
+  color: #666; 
 }
 
 .form-contact > input, .form-contact > textarea {
@@ -210,10 +197,6 @@ body {
 .btn-simulation {
   box-shadow: 0px 0px 8px #999;
   padding: 8px;
-}
-
-.form-simulation input:focus {
-  box-shadow: 0px 0px 8px #999;
 }
 
 .simulation-table td {
