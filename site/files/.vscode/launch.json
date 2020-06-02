@@ -20,7 +20,7 @@
       "env": {
         "ASPNETCORE_ENVIRONMENT": "Development",
         "DATABASE_CONNECTION_STRING": "Host=172.17.0.2;Port=5432;Pooling=true;Database=site;User Id=site;Password=123",
-        "EMAIL_SERVER": "172.17.0.2",
+        "EMAIL_SERVER": "172.17.0.3",
         "EMAIL_USER": "admin",
         "EMAIL_PASSWORD": "admin",
         "EMAIL_USE_DEFAULT_CREDENTIALS": "false",
