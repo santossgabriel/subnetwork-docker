@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Site.Models
 {
-  public class ContactModel
+  public class ContactModel : BaseEntity
   {
     [Required]
     public string Name { get; set; }
@@ -14,5 +14,7 @@ namespace Site.Models
     public string Message { get; set; }
 
     public bool SendError { get; set; }
+
+    public override string EntityName => "CONTACT";
   }
 }

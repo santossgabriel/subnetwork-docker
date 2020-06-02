@@ -19,7 +19,7 @@
       },
       "env": {
         "ASPNETCORE_ENVIRONMENT": "Development",
-        "DATABASE_CONNECTION_STRING": "Host=localhost;Port=5432;Pooling=true;Database=site;User Id=app;Password=123",
+        "DATABASE_CONNECTION_STRING": "Host=172.17.0.2;Port=5432;Pooling=true;Database=site;User Id=site;Password=123",
         "EMAIL_SERVER": "172.17.0.2",
         "EMAIL_USER": "admin",
         "EMAIL_PASSWORD": "admin",

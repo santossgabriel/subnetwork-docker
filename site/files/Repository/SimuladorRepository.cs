@@ -5,16 +5,27 @@ using Site.Models;
 
 namespace Site.Repository
 {
-  public class SimulationRepository : BaseRepository<Simulation>
+  public class SimulationRepository : BaseRepository<SimulationModel>
   {
     public SimulationRepository(AppConfig config) : base(config) { }
 
-    public void Add(Simulation simulation) => Execute("", simulation);
+    public long Add(SimulationModel simulation)
+    {
+      var query = "INSERT INTO \"SIMULATION\" (EMAIL, DESCRIPTION, PLOTS, AMOUNT, USER_ID) VALUES (@Email, @Description, @Plots, @Amount, @UserId)";
+      Execute(query, simulation);
+      return CurrentId(simulation);
+    }
 
-    public IEnumerable<Simulation> GetAll() => throw new NotImplementedException();
+    public SimulationModel GetById(long id)
+    {
+      var query = "SELECT EMAIL, DESCRIPTION, PLOTS, AMOUNT FROM \"SIMULATION\" WHERE ID = @Id";
+      return FirstOrDefault(query, new { Id = id });
+    }
 
-    public Simulation GetById(int id) => throw new NotImplementedException();
-
-    public IEnumerable<Simulation> GetByUserId(int userId) => Query("", new { UserId = userId });
+    public IEnumerable<SimulationModel> GetByUser(int userId)
+    {
+      var query = "SELECT EMAIL, DESCRIPTION, PLOTS, AMOUNT FROM \"SIMULATION\" WHERE USER_ID = @UserId";
+      return Query(query, new { UserId = userId });
+    }
   }
 }

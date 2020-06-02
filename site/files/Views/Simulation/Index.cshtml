@@ -1,17 +1,30 @@
+@model Site.Models.SimulationModel
 <div>
-    <h3 class="page-title">Confira qual o valor de crédito que você possui conosco.</h3>
-    <form asp-action="Login" class="form-simulation">
+    <h3 class="page-title">Simule seu financiamento.</h3>
+
+    <form asp-controller="Simulation" asp-action="Add" method="post" class="form-simulation">
+
+        <span>Email para contato:</span>
+        <input class="form-input" name="Email" value="@Model.Email">
+        <span asp-validation-for="Email" class="validation-error"></span>
+
         <span>Descrição da produto:</span>
-        <input class="form-input" name="Description">
+        <input class="form-input" name="Description" value="@Model.Description">
+        <span asp-validation-for="Description" class="validation-error"></span>
 
         <span>Valor total:</span>
-        <input class="form-input" name="Amount">
+        <input class="form-input" name="Amount" value="@Model.Amount">
+        <span asp-validation-for="Amount" class="validation-error"></span>
 
         <span>Quantidade de parcelas:</span>
-        <input class="form-input" name="Plots">
+        <input class="form-input" name="plots" value="@Model.Plots">
+        <span asp-validation-for="Plots" class="validation-error"></span>
         
         <div style="text-align: center">
             <button class="btn btn-simulation">Simular</button>
+            <div style="margin-top: 5px;font-size:12px" >
+                <a href="/Simulation/List">Ver Simulações</a>
+            </div>
         </div>
     </form>
 </div>

@@ -26,16 +26,23 @@ namespace Site.Controllers
     public IActionResult Login() => View();
 
     [HttpPost]
-    public IActionResult Login(string name, string password)
+    public IActionResult Login(string email, string password)
     {
-      var login = _userService.Login(name, password);
+      if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
+        return View("Index");
+
+      var login = _userService.Login(email, password);
 
       if (login is null)
-      {
         return View("Index");
-      }
 
-      var claims = new List<Claim>() { new Claim(ClaimTypes.Role, "Administrator"), new Claim(ClaimTypes.Name, login.Email) };
+      var claims = new List<Claim>()
+      {
+        new Claim(ClaimTypes.Role, "Administrator"),
+        new Claim(ClaimTypes.Name, login.Email),
+        new Claim(ClaimTypes.Sid, login.Id.ToString())
+      };
+
       var identity = new ClaimsIdentity(claims, "User Identity");
       var userPrincipal = new ClaimsPrincipal(new[] { identity });
 

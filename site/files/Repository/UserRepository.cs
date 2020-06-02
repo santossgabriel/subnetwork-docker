@@ -4,14 +4,14 @@ using Site.Models;
 
 namespace Site.Repository
 {
-  public class UserRepository : BaseRepository<User>
+  public class UserRepository : BaseRepository<UserModel>
   {
     public UserRepository(AppConfig config) : base(config) { }
 
-    public User FindByEmail(string email) => FirstOrDefault($"SELECT * FROM USER WHERE EMAIL = {email}");
+    public UserModel FindByEmail(string email) => FirstOrDefault($"SELECT ID, NAME, EMAIL, PASSWORD FROM \"USER\" WHERE EMAIL = '{email}'");
 
-    public User GetById(int id) => FirstOrDefault($"SELECT * FROM USER WHERE Id = @Id", new { Id = id });
+    public UserModel GetById(int id) => FirstOrDefault($"SELECT * FROM USER WHERE Id = @Id", new { Id = id });
 
-    public IEnumerable<User> GetAll() => Query("SELECT * FROM USER");
+    public IEnumerable<UserModel> GetAll() => Query("SELECT * FROM USER");
   }
 }
