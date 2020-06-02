@@ -22,9 +22,6 @@ namespace Site.Controllers
 
     public IActionResult Privacy() => View();
 
-    [HttpGet]
-    public IActionResult Login() => View();
-
     [HttpPost]
     public IActionResult Login(string email, string password)
     {

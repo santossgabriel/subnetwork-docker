@@ -10,17 +10,19 @@
     <header class="toolbar">
         <div>
             <img class="logo" src="~/favicon.ico" />
-            <span class="app-title">Fake Bank</span>
+            <a class="app-title" asp-controller="Home">Fake Bank</a>
         </div>
         <div class="menu-toolbar">
-            <a asp-area="" asp-controller="Home" asp-action="Privacy">Home</a>
-            <a asp-area="" asp-controller="Simulation" asp-action="Index">Simulador</a>
-            <a asp-area="" asp-controller="Contact" asp-action="">Contato</a>
+            @if (User.Identity.IsAuthenticated)
+            {    
+                <a asp-controller="Simulation">Simulador</a>
+            }
+            <a asp-controller="Contact">Contato</a>
         </div>
         @if (User.Identity.IsAuthenticated)
         {
             <span class="logged-name">@User.Identity.Name</span>
-            <a class="btn" asp-area="" asp-controller="Home" asp-action="Logout">Sair</a>
+            <a class="btn" asp-controller="Home" asp-action="Logout">Sair</a>
         }
         else
         {
