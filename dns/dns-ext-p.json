@@ -6,15 +6,11 @@
   "zones": [
     {
       "rev": "30.30.172",
-      "domain": "internet.lab",
+      "domain": "fakebank.lab",
       "hosts": [
         {
-          "subdomain": "proxy",
+          "subdomain": "www",
           "ip": "172.30.30.50"
-        },
-        {
-          "subdomain": "mail",
-          "ip": "172.30.30.10"
         }
       ]
     }

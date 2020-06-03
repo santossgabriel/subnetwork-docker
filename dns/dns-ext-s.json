@@ -1,0 +1,17 @@
+{
+  "forwarders": [
+    "172.30.30.80"
+  ],
+  "zones": [
+    {
+      "rev": "30.30.172",
+      "domain": "internet.lab",
+      "hosts": [
+        {
+          "subdomain": "mail",
+          "ip": "172.30.30.10"
+        }
+      ]
+    }
+  ]
+}

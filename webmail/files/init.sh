@@ -53,4 +53,11 @@ then
   exit 1
 fi
 
+if [ "$EMAIL_GATEWAY" != "" ];
+then
+  echo $EMAIL_GATEWAY | sed "s/;/\n/g" | sed "s/|/ /" > /etc/postfix/transport
+  echo "Email gateways $EMAIL_GATEWAY"
+  postmap /etc/postfix/transport
+fi
+
 exec /usr/sbin/apache2 -D "FOREGROUND"

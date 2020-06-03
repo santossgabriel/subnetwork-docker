@@ -4,7 +4,7 @@ services:
 
   ############## Internal Network ###############
 
-  employee:
+  employee_fakebank:
     cap_add:
       - NET_ADMIN
     hostname: employee
@@ -17,7 +17,7 @@ services:
       - ./employee/resolv.conf:/etc/resolv.conf
 
   
-  mail_company:
+  mail_fakebank:
     cap_add:
       - NET_ADMIN
     environment:
@@ -25,6 +25,7 @@ services:
       - THEME_INDEX=6
       - APP_NAME=Fake Bank
       - USER_TYPE=1
+      - EMAIL_GATEWAY=internet.lab|smtp:172.20.20.50
     image: webmaillab:1.0
     networks:
       vlan:
@@ -49,7 +50,7 @@ services:
       - EMAIL_SENDER=site@fakebank.lab
     image: sitelab:1.0
 
-  database:
+  database_fakebank:
     cap_add:
       - NET_ADMIN
     hostname: site
@@ -59,7 +60,7 @@ services:
     image: databaselab:1.0
 
 
-  dns_company:
+  dns_fakebank:
     cap_add:
       - NET_ADMIN
     image: dnslab:1.0
@@ -72,9 +73,11 @@ services:
       - ./dns/dns-int.json:/root/config.json
 
 
-  proxy_company:
+  proxy_fakebank:
     cap_add:
       - NET_ADMIN
+    environment:
+      - EMAIL_GATEWAY=internet.lab|smtp:172.30.30.10;fakebank.lab|smtp:172.20.20.10
     image: proxylab:1.0
     networks:
       vlan:
@@ -91,25 +94,34 @@ services:
   mail_internet:
     cap_add:
       - NET_ADMIN
-    image: webmaillab:1.0
-    networks:
-      external:
-        ipv4_address: 172.30.30.10
     environment:
       - DOMAIN=internet.lab
       - THEME_INDEX=17
       - USER_TYPE=2
       - APP_NAME=External Mail
+      - EMAIL_GATEWAY=fakebank.lab|smtp:172.30.30.50
+    image: webmaillab:1.0
+    networks:
+      external:
+        ipv4_address: 172.30.30.10
 
-  dns_internet:
+  dns_internet_p:
     image: dnslab:1.0
     networks:
       external:
         ipv4_address: 172.30.30.80
     volumes:
-      - ./dns/dns-ext.json:/root/config.json
+      - ./dns/dns-ext-p.json:/root/config.json
   
-  threat:
+  dns_internet_s:
+    image: dnslab:1.0
+    networks:
+      external:
+        ipv4_address: 172.30.30.90
+    volumes:
+      - ./dns/dns-ext-s.json:/root/config.json
+  
+  threat_internet:
     image: threatlab:1.0
     hostname: threat
     networks:

@@ -14,25 +14,26 @@ namespace Site.Services
 
     public bool Send(EmailModel model)
     {
-      SmtpClient client = new SmtpClient();
-      client.UseDefaultCredentials = _config.UseDefaultCredentials;
-      client.Host = _config.Server;
-      client.Credentials = new NetworkCredential(_config.User, _config.Password);
-
-      MailMessage mailMessage = new MailMessage();
-      mailMessage.From = new MailAddress(model.From);
-      mailMessage.To.Add(model.To);
-      mailMessage.Body = model.Body;
-      mailMessage.Subject = model.Subject;
-
       try
       {
+
+        SmtpClient client = new SmtpClient();
+        client.UseDefaultCredentials = _config.UseDefaultCredentials;
+        client.Host = _config.Server;
+        client.Credentials = new NetworkCredential(_config.User, _config.Password);
+
+        MailMessage mailMessage = new MailMessage();
+        mailMessage.From = new MailAddress(model.From);
+        mailMessage.To.Add(model.To);
+        mailMessage.Body = model.Body;
+        mailMessage.Subject = model.Subject;
+
         client.Send(mailMessage);
         return true;
       }
       catch (Exception ex)
       {
-        Console.WriteLine("Não foi possível enviar o email");
+        Console.WriteLine("Não foi possível realizar a operação.");
         Console.WriteLine(ex.Message);
         Console.WriteLine(ex.StackTrace);
         return false;
