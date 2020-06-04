@@ -11,7 +11,7 @@ esac
 
 echo "******* Building $1 *********"
 
-docker images |grep "$1:1.0"
+docker images |grep $1 |grep 1.0
 if [ $? = 0 ];
 then
   echo "Removing image..."
