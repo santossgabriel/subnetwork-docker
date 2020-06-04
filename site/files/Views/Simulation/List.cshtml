@@ -1,3 +1,36 @@
+@model List<Site.Models.SimulationModel>
 <div>
-  <h3 class="page-title">Lista de simulações.</h3>
+  @if(Model.Any())
+  {
+    <h3 class="page-title">Simulações realizadas.</h3>
+    <table style="margin-top: 50px" class="simulation-table">
+        <thead>
+            <tr>
+              <th>Id</th>
+              <th>Produto</th>
+              <th>Valor Solicitado</th>
+              <th>Valor Financiado</th>
+              <th>Parcelas</th>
+              <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var item in Model)
+            {
+              <tr style="@(item.Id % 2 != 0 ? "background-color:#ccc" : "")">
+                <td>@item.Id</td>
+                <td>@item.Description</td>
+                <td>@item.AmountMoney</td>
+                <td>@item.TotalMoney</td>
+                <td>@item.Plots</td>
+                <td><a href="/Simulation/Details/@item.Id">Detalhes</a></td>
+              </tr>
+            }
+        </tbody>
+    </table>
+  }
+  else
+  {
+    <h4 class="page-title sm">Simulação não encontrada.</h4>
+  }
 </div>

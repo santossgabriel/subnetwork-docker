@@ -10,14 +10,14 @@
     <header class="toolbar">
         <div>
             <img class="logo" src="~/favicon.ico" />
-            <a class="app-title" asp-controller="Home">Fake Bank</a>
+            <a class="app-title" asp-controller="Home" asp-action="Index">Fake Bank</a>
         </div>
         <div class="menu-toolbar">
             @if (User.Identity.IsAuthenticated)
             {    
-                <a asp-controller="Simulation">Simulador</a>
+                <a asp-controller="Simulation" asp-action="Index">Simulador</a>
             }
-            <a asp-controller="Contact">Contato</a>
+            <a asp-controller="Contact" asp-action="Index">Contato</a>
         </div>
         @if (User.Identity.IsAuthenticated)
         {

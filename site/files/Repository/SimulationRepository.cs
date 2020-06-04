@@ -18,13 +18,13 @@ namespace Site.Repository
 
     public SimulationModel GetById(long id)
     {
-      var query = "SELECT EMAIL, DESCRIPTION, PLOTS, AMOUNT FROM \"SIMULATION\" WHERE ID = @Id";
+      var query = "SELECT ID, EMAIL, DESCRIPTION, PLOTS, AMOUNT FROM \"SIMULATION\" WHERE ID = @Id";
       return FirstOrDefault(query, new { Id = id });
     }
 
     public IEnumerable<SimulationModel> GetByUser(int userId)
     {
-      var query = "SELECT EMAIL, DESCRIPTION, PLOTS, AMOUNT FROM \"SIMULATION\" WHERE USER_ID = @UserId";
+      var query = "SELECT ID, EMAIL, DESCRIPTION, PLOTS, AMOUNT FROM \"SIMULATION\" WHERE USER_ID = @UserId";
       return Query(query, new { UserId = userId });
     }
   }
