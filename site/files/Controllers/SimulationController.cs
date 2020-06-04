@@ -33,10 +33,8 @@ namespace Site.Controllers
     [HttpGet]
     public IActionResult List()
     {
-      // var claim = User.Claims.First(p => p.Type == ClaimTypes.Sid);
-      // var list = _service.GetAll(Convert.ToInt32(claim.Value));
-      var list = _service.GetAll(1);
-      return View();
+      var list = _service.GetAll(UserId);
+      return View(list);
     }
   }
 }

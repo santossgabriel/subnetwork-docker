@@ -21,7 +21,10 @@ namespace Site.Services
 
     public IEnumerable<SimulationModel> GetAll(int userId)
     {
-      return _repository.GetByUser(userId);
+      var list = _repository.GetByUser(userId);
+      foreach (var s in list)
+        FillInstallments(s);
+      return list;
     }
 
     public SimulationModel Get(long id, long userId)
@@ -31,6 +34,13 @@ namespace Site.Services
       if (simulation == null || userId == 0)
         return null;
 
+      FillInstallments(simulation);
+
+      return simulation;
+    }
+
+    private void FillInstallments(SimulationModel simulation)
+    {
       simulation.Installments = new List<SimulationInstallmentModel>();
       var installmentCost = simulation.Amount / simulation.Plots;
 
@@ -42,8 +52,6 @@ namespace Site.Services
         item.Interest = Math.Round(installmentCost * 0.07M, 2);
         simulation.Installments.Add(item);
       }
-
-      return simulation;
     }
   }
 }
