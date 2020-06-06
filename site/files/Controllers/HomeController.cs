@@ -35,7 +35,7 @@ namespace Site.Controllers
 
       var claims = new List<Claim>()
       {
-        new Claim(ClaimTypes.Role, "Administrator"),
+        new Claim(ClaimTypes.Role, ((int)login.Role).ToString()),
         new Claim(ClaimTypes.Name, login.Email),
         new Claim(ClaimTypes.Sid, login.Id.ToString())
       };
@@ -49,7 +49,6 @@ namespace Site.Controllers
 
     public IActionResult Logout()
     {
-      var name = User.Identity.Name;
       HttpContext.SignOutAsync();
       return RedirectToAction("Index", "Home");
     }

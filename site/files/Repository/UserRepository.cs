@@ -10,7 +10,7 @@ namespace Site.Repository
 
     public long Add(UserModel user)
     {
-      var query = "INSERT INTO \"USER\" (NAME, EMAIL, PASSWORD) VALUES (@Name, @Email, @Password)";
+      var query = "INSERT INTO \"USER\" (NAME, EMAIL, PASSWORD, ROLE) VALUES (@Name, @Email, @Password, @Role)";
       Execute(query, user);
       return CurrentId(user);
     }
@@ -22,10 +22,10 @@ namespace Site.Repository
       return CurrentId(user);
     }
 
-    public UserModel FindByEmail(string email) => FirstOrDefault($"SELECT ID, NAME, EMAIL, PASSWORD FROM \"USER\" WHERE EMAIL = '{email}'");
+    public UserModel FindByEmail(string email) => FirstOrDefault($"SELECT ID, NAME, EMAIL, PASSWORD, ROLE FROM \"USER\" WHERE EMAIL = '{email}'");
 
-    public UserModel GetById(int id) => FirstOrDefault($"SELECT * FROM USER WHERE Id = @Id", new { Id = id });
+    public UserModel GetById(int id) => FirstOrDefault($"SELECT ID, NAME, EMAIL, PASSWORD, ROLE FROM USER WHERE Id = @Id", new { Id = id });
 
-    public IEnumerable<UserModel> GetAll() => Query("SELECT * FROM USER");
+    public IEnumerable<UserModel> GetAll() => Query("SELECT ID, NAME, EMAIL, PASSWORD, ROLE FROM USER");
   }
 }

@@ -215,3 +215,7 @@ body {
 .box-simulation-details .label {
   font-weight: bold;
 }
+
+.box-simulation-details div {
+  margin-top: 6px;
+}

@@ -2,21 +2,27 @@ using System;
 using System.Linq;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Mvc;
+using Site.Enums;
+using Site.Models;
 
 namespace Site.Controllers
 {
   public class BaseController : Controller
   {
-    protected int UserId
+    private UserModel _user;
+
+    protected UserModel LoggedUser
     {
       get
       {
-        if (User.Identity.IsAuthenticated)
+        if (_user is null && User.Identity.IsAuthenticated)
         {
-          var claim = User.Claims.First(p => p.Type == ClaimTypes.Sid);
-          return Convert.ToInt32(claim.Value);
+          _user = new UserModel();
+          _user.Id = Convert.ToInt32(User.Claims.First(p => p.Type == ClaimTypes.Sid).Value);
+          _user.Role = (UserRole)Convert.ToInt32(User.Claims.First(p => p.Type == ClaimTypes.Role).Value);
+          return _user;
         }
-        return 0;
+        return new UserModel();
       }
     }
   }
