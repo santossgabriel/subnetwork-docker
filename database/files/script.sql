@@ -1,27 +1,26 @@
-CREATE TABLE "USER" (
-  ID SERIAL,
-  NAME VARCHAR(100), 
-  EMAIL VARCHAR(100), 
-  PASSWORD VARCHAR(100),
-  ROLE INT
+CREATE TABLE "User" (
+  Id SERIAL,
+  Name VARCHAR(100), 
+  Email VARCHAR(100), 
+  Password VARCHAR(100),
+  Role INT
 );
 
-CREATE TABLE "SIMULATION" (
-  ID SERIAL,
-  DESCRIPTION VARCHAR(200),
-  PLOTS INT,
-  AMOUNT DECIMAL,
-  EMAIL VARCHAR(100),
-	USER_ID INT,
-  CREATED_AT TIMESTAMP,
-  APPROVED_AT TIMESTAMP
+CREATE TABLE "Simulation" (
+  Id SERIAL,
+  Description VARCHAR(200),
+  Plots INT,
+  Amount DECIMAL,
+	UserId INT,
+  CreatedAt TIMESTAMP,
+  ApprovedAt TIMESTAMP
 );
 
-CREATE TABLE "CONTACT" (
-  ID SERIAL,
-  NAME VARCHAR(100),
-  EMAIL VARCHAR(200),
-  MESSAGE VARCHAR(200)
+CREATE TABLE "Contact" (
+  Id SERIAL,
+  Name VARCHAR(100),
+  Email VARCHAR(200),
+  Message VARCHAR(200)
 );
 
-INSERT INTO "USER" (NAME, EMAIL, PASSWORD, ROLE) VALUES ('approver', 'approver@fakebank.lab', '123', 1);
+INSERT INTO "User" (Name, Email, Password, Role) VALUES ('approver', 'approver@fakebank.lab', '123', 1);
