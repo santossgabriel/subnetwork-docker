@@ -39,6 +39,6 @@ namespace Site.Models
 
     public string ApprovedAtFormatted => ApprovedAt?.ToString("dd/MM/yyyy - HH:mm");
 
-    public override string EntityName => "SIMULATION";
+    public override string EntityName => "Simulation";
   }
 }

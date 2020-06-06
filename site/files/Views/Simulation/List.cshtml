@@ -2,7 +2,14 @@
 <div>
   @if(Model.Any())
   {
-    <h3 class="page-title">Simulações realizadas.</h3>
+    @if(User.IsInRole("1"))
+    {
+      <h3 class="page-title">Simulações</h3>
+    }
+    else
+    {
+      <h3 class="page-title">Simulações realizadas.</h3>
+    }
     <table style="margin-top: 50px" class="simulation-table">
         <thead>
             <tr>
@@ -11,6 +18,7 @@
               <th>Valor Solicitado</th>
               <th>Valor Financiado</th>
               <th>Parcelas</th>
+              <th></th>
               <th></th>
             </tr>
         </thead>
@@ -24,6 +32,19 @@
                 <td>@item.TotalMoney</td>
                 <td>@item.Plots</td>
                 <td><a href="/Simulation/Details/@item.Id">Detalhes</a></td>
+                @if(User.IsInRole("1") && item.ApprovedAt == null)
+                {
+                  <form asp-controller="Simulation" asp-action="Approve" >
+                    <td>
+                      <input style="display: none" name="id" value="@item.Id" />
+                      <button class="btn">Aprovar</button>
+                    </td>
+                  </form>
+                }
+                else
+                {
+                  <td></td>
+                }
               </tr>
             }
         </tbody>
