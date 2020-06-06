@@ -9,12 +9,19 @@
         <h3 class="page-title">Detalhes da simulação.</h3>
         
         <div>
-            Email: <span class="label">@Model.Email</span>
+            Produto: <span class="label">@Model.Description</span>
         </div>
 
         <div>
-            Produto: <span class="label">@Model.Description</span>
+            Criado em: <span class="label">@Model.CreatedAtFormatted</span>
         </div>
+
+        if(@Model.ApprovedAt != null)
+        {
+            <div>
+                Aprovado em: <span class="label">@Model.ApprovedAtFormatted</span>
+            </div>
+        }
 
         <div>
             Valor Solicitado: <span class="label">@Model.AmountMoney</span>

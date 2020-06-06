@@ -1,3 +1,5 @@
+using Site.Enums;
+
 namespace Site.Models
 {
   public class UserModel : BaseEntity
@@ -8,7 +10,9 @@ namespace Site.Models
 
     public string Password { get; set; }
 
-    public UserModel WithoutPassword() => new UserModel { Id = this.Id, Name = this.Name, Email = this.Email };
+    public UserRole Role { get; set; }
+
+    public UserModel WithoutPassword() => new UserModel { Id = this.Id, Name = this.Name, Email = this.Email, Role = this.Role };
 
     public override string EntityName => "USER";
   }

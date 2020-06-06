@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using Site.Enums;
 using Site.Extentions;
 
 namespace Site.Models
@@ -20,7 +21,11 @@ namespace Site.Models
     [Required, Range(1000, 1000000)]
     public decimal Amount { get; set; }
 
-    public int UserId { get; set; }
+    public long UserId { get; set; }
+
+    public DateTime CreatedAt { get; set; }
+
+    public DateTime? ApprovedAt { get; set; }
 
     public List<SimulationInstallmentModel> Installments { get; set; }
 
@@ -29,6 +34,10 @@ namespace Site.Models
     public string TotalMoney => Total.ToMoney();
 
     public string AmountMoney => Amount.ToMoney();
+
+    public string CreatedAtFormatted => CreatedAt.ToString("dd/MM/yyyy - HH:mm");
+
+    public string ApprovedAtFormatted => ApprovedAt?.ToString("dd/MM/yyyy - HH:mm");
 
     public override string EntityName => "SIMULATION";
   }

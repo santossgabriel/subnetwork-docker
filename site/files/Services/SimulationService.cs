@@ -19,9 +19,17 @@ namespace Site.Services
       return _repository.Add(simulation);
     }
 
-    public IEnumerable<SimulationModel> GetAll(int userId)
+    public IEnumerable<SimulationModel> GetByUser(long userId)
     {
       var list = _repository.GetByUser(userId);
+      foreach (var s in list)
+        FillInstallments(s);
+      return list;
+    }
+
+    public IEnumerable<SimulationModel> GetAll()
+    {
+      var list = _repository.GetAll();
       foreach (var s in list)
         FillInstallments(s);
       return list;
@@ -38,6 +46,8 @@ namespace Site.Services
 
       return simulation;
     }
+
+    public void Approve(long id) => _repository.Approve(id);
 
     private void FillInstallments(SimulationModel simulation)
     {
