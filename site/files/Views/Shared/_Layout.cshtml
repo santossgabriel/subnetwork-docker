@@ -15,9 +15,19 @@
         <div class="menu-toolbar">
             @if (User.Identity.IsAuthenticated)
             {    
-                <a asp-controller="Simulation" asp-action="Index">Simulador</a>
+                @if(User.IsInRole("1"))
+                {
+                    <a asp-controller="Simulation" asp-action="List">Simulações</a>
+                }
+                else
+                {
+                    <a asp-controller="Simulation" asp-action="Index">Simulador</a>
+                }
             }
-            <a asp-controller="Contact" asp-action="Index">Contato</a>
+            else
+            {
+                <a asp-controller="Contact" asp-action="Index">Contato</a>
+            }
         </div>
         @if (User.Identity.IsAuthenticated)
         {

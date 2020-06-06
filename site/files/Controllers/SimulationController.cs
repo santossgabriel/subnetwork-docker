@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Mvc;
-using Site.Enums;
 using Site.Models;
 using Site.Services;
 
@@ -20,7 +19,7 @@ namespace Site.Controllers
 
       if (ModelState.IsValid)
       {
-        simulation.UserId = LoggedUser.Id;
+        simulation.UserId = UserId;
         simulation.Id = _service.Add(simulation);
         return RedirectToAction("Details", new { id = simulation.Id });
       }
@@ -28,16 +27,23 @@ namespace Site.Controllers
         return View("Index", simulation);
     }
 
+    [HttpPost]
+    public IActionResult Approve(long id)
+    {
+      _service.Approve(id);
+      return RedirectToAction("List");
+    }
+
     [HttpGet]
-    public IActionResult Details(long id) => View(_service.Get(id, LoggedUser.Id));
+    public IActionResult Details(long id) => View(_service.Get(id, UserId));
 
     [HttpGet]
     public IActionResult List()
     {
-      if (LoggedUser.Role == UserRole.Approver)
+      if (IsApprover)
         return View(_service.GetAll());
 
-      return View(_service.GetByUser(LoggedUser.Id));
+      return View(_service.GetByUser(UserId));
     }
   }
 }
