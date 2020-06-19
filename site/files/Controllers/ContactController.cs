@@ -6,6 +6,7 @@ using Site.Services;
 
 namespace Site.Controllers
 {
+  [Route("api/[controller]")]
   public class ContactController : Controller
   {
     private readonly MailService _mailService;
@@ -24,10 +25,8 @@ namespace Site.Controllers
       _config = config;
     }
 
-    public IActionResult Index() => View();
-
     [HttpPost]
-    public IActionResult SendContact(ContactModel model)
+    public IActionResult Contact([FromBody] ContactModel model)
     {
       var user = new UserModel();
       user.Email = model.Email;
@@ -43,7 +42,7 @@ namespace Site.Controllers
 
       model.SendError = !_mailService.Send(email);
 
-      return View("Index", model);
+      return Ok();
     }
   }
 }

@@ -3,9 +3,9 @@ import { Provider } from 'react-redux'
 import { HashRouter, Route } from 'react-router-dom'
 import './App.css'
 import { Sidebar, Toast, Toolbar, Header } from './components'
+import { Contact, Simulation, Home, SimulationDetails, SimulationList } from './scene'
 import { AppContainer, BaseContainer, CoreAppContainer } from './components/styles'
 import Store from './store'
-import { ROUTES } from './utils'
 
 export default function App() {
   return (
@@ -15,7 +15,11 @@ export default function App() {
           <Header />
           <div class="root-card">
             <BaseContainer>
-              {ROUTES.map((r, i) => <Route key={i + ''} path={r.route} exact={r.exact} component={r.component} />)}
+              <Route path="/" exact={true} component={Home} />
+              <Route path="/contact" component={Contact} />
+              <Route path="/simulation" component={Simulation} />
+              <Route path="/simulation-list" component={SimulationList} />
+              <Route path="/simulation-details/:id" component={SimulationDetails} />
             </BaseContainer>
             <Toast />
           </div>
