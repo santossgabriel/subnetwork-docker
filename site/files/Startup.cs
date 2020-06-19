@@ -30,9 +30,6 @@ namespace Site
           config.ExpireTimeSpan = TimeSpan.FromMinutes(30);
         });
 
-      services.AddControllersWithViews()
-      .AddRazorRuntimeCompilation();
-
       services.AddSingleton<AppConfig>(new AppConfig());
 
       services.AddScoped<SimulationService>();

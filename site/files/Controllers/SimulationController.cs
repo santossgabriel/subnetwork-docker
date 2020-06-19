@@ -10,28 +10,25 @@ namespace Site.Controllers
 
     public SimulationController(SimulationService service) => _service = service;
 
-    [HttpGet]
-    public IActionResult Index() => View(new SimulationModel());
-
     [HttpPost]
-    public IActionResult Add(SimulationModel simulation)
+    public IActionResult Add([FromBody] SimulationModel simulation)
     {
 
       if (ModelState.IsValid)
       {
         simulation.UserId = UserId;
         simulation.Id = _service.Add(simulation);
-        return RedirectToAction("Details", new { id = simulation.Id });
+        return Ok();
       }
       else
-        return View("Index", simulation);
+        return UnprocessableEntity();
     }
 
     [HttpPost]
     public IActionResult Approve(long id)
     {
       _service.Approve(id);
-      return RedirectToAction("List");
+      return Ok();
     }
 
     [HttpGet]
@@ -41,9 +38,9 @@ namespace Site.Controllers
     public IActionResult List()
     {
       if (IsApprover)
-        return View(_service.GetAll());
+        return Ok(_service.GetAll());
 
-      return View(_service.GetByUser(UserId));
+      return Ok(_service.GetByUser(UserId));
     }
   }
 }

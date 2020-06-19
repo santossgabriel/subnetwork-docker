@@ -1,2 +1,5 @@
 export { Home } from './Home/Home'
 export { Contact } from './Contact/Contact'
+export { Simulation } from './Simulation/Simulation'
+export { SimulationDetails } from './Simulation/SimulationDetails'
+export { SimulationList } from './Simulation/SimulationList'
