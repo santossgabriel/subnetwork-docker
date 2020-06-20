@@ -30,6 +30,8 @@ namespace Site
           config.ExpireTimeSpan = TimeSpan.FromMinutes(30);
         });
 
+      services.AddControllers();
+
       services.AddSingleton<AppConfig>(new AppConfig());
 
       services.AddScoped<SimulationService>();

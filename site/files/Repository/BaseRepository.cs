@@ -13,11 +13,14 @@ namespace Site.Repository
   {
     private readonly IDbConnection _conn;
 
+    protected readonly string TableName;
+
     public IDbTransaction Transaction { get; private set; }
 
     protected BaseRepository(AppConfig config)
     {
       _conn = new NpgsqlConnection(config.ConnectionString);
+      TableName = (Activator.CreateInstance(typeof(T)) as T).EntityName;
     }
 
     protected void Execute(string query, object parameters = null)

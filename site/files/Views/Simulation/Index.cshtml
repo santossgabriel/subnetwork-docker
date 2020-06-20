@@ -4,10 +4,6 @@
 
     <form asp-controller="Simulation" asp-action="Add" method="post" class="form-simulation">
 
-        <span>Email para contato:</span>
-        <input class="form-input" name="Email" value="@Model.Email">
-        <span asp-validation-for="Email" class="validation-error"></span>
-
         <span>Descrição da produto:</span>
         <input class="form-input" name="Description" value="@Model.Description">
         <span asp-validation-for="Description" class="validation-error"></span>

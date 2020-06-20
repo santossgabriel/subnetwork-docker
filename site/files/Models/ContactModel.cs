@@ -15,6 +15,6 @@ namespace Site.Models
 
     public bool SendError { get; set; }
 
-    public override string EntityName => "CONTACT";
+    public override string EntityName => "Contact";
   }
 }
