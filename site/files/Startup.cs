@@ -1,10 +1,11 @@
-using System;
+using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
 using Site.Config;
 using Site.Repository;
 using Site.Services;
@@ -22,19 +23,27 @@ namespace Site
 
     public void ConfigureServices(IServiceCollection services)
     {
+      var jwtKey = Configuration["JwtKey"];
+      var tokenValidationParameters = new TokenValidationParameters
+      {
+        ValidateLifetime = true,
+        ValidateAudience = false,
+        ValidateIssuer = false,
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(jwtKey))
+      };
 
-      services.AddAuthentication("CookieAuthentication")
-        .AddCookie("CookieAuthentication", config =>
-        {
-          config.LoginPath = "/Home/Index";
-          config.Cookie.HttpOnly = false;
-          config.ExpireTimeSpan = TimeSpan.FromMinutes(30);
-          config.Cookie.SameSite = SameSiteMode.None;
-        });
+      services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+        .AddJwtBearer(
+          options =>
+          {
+            options.TokenValidationParameters = tokenValidationParameters;
+          }
+        );
 
       services.AddControllers();
 
-      services.AddSingleton<AppConfig>(new AppConfig());
+      services.AddSingleton<AppConfig>(new AppConfig(jwtKey));
 
       services.AddScoped<SimulationService>();
       services.AddScoped<UserService>();

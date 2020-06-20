@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 
 import { accountService } from '../../services'
 import { userChanged } from '../../store/actions'
@@ -14,6 +14,8 @@ export function Header() {
   const dispatch = useDispatch()
   const user = useSelector(state => state.appState.user)
 
+  const history = useHistory()
+
   function login() {
     accountService.login(email, password)
       .then(res => dispatch(userChanged(res)))
@@ -22,7 +24,10 @@ export function Header() {
 
   function logout() {
     accountService.logout()
-      .then(() => dispatch(userChanged(null)))
+      .then(() => {
+        dispatch(userChanged(null))
+        history.push('/')
+      })
       .catch(err => console.error(err))
   }
 

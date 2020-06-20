@@ -1,8 +1,7 @@
 import axios from 'axios'
+import storageService from './storageService'
 
-const getToken = () => localStorage.getItem('TOKEN')
-
-export const setToken = token => localStorage.setItem('TOKEN', token)
+const getToken = () => `Bearer ${(storageService.getUser() || {}).token || ''}`
 
 const sendRequest = (method, url, headers, data) => {
   return axios({
@@ -16,7 +15,7 @@ const sendRequest = (method, url, headers, data) => {
     })
 }
 
-const getHeaders = () => ({ token: getToken() })
+const getHeaders = () => ({ Authorization: getToken() })
 
 export default {
   getToken,

@@ -25,6 +25,9 @@ export function SimulationList() {
       .catch(err => console.error(err))
   }
 
+  if (!user)
+    return <div></div>
+
   return (
     <div>
       {
