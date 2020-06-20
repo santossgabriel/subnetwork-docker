@@ -4,8 +4,9 @@ namespace Site.Config
 {
   public class AppConfig
   {
-    public AppConfig()
+    public AppConfig(string jwtKey)
     {
+      JwtKey = jwtKey;
       ConnectionString = Environment.GetEnvironmentVariable("DATABASE_CONNECTION_STRING");
       Email = new EmailConfig();
       Email.Server = Environment.GetEnvironmentVariable("EMAIL_SERVER");
@@ -16,9 +17,11 @@ namespace Site.Config
       Email.Sender = Environment.GetEnvironmentVariable("EMAIL_SENDER");
     }
 
-    public EmailConfig Email { get; set; }
+    public string JwtKey { get; private set; }
 
-    public string ConnectionString { get; set; }
+    public EmailConfig Email { get; private set; }
+
+    public string ConnectionString { get; private set; }
   }
 
   public class EmailConfig

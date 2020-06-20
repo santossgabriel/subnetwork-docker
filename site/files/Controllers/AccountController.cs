@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Authentication;
 using Site.Services;
 using Site.Models;
 using Microsoft.AspNetCore.Authorization;
+using Cashflow.Api.Auth;
+using Site.Config;
 
 namespace Site.Controllers
 {
@@ -14,7 +16,13 @@ namespace Site.Controllers
   {
     private readonly UserService _userService;
 
-    public AccountController(UserService userService) => _userService = userService;
+    private readonly AppConfig _config;
+
+    public AccountController(AppConfig config, UserService userService)
+    {
+      _userService = userService;
+      _config = config;
+    }
 
     [HttpPost, Route("login"), AllowAnonymous]
     public IActionResult Post([FromBody] UserModel model)
@@ -34,11 +42,9 @@ namespace Site.Controllers
         new Claim(ClaimTypes.Sid, login.Id.ToString())
       };
 
-      var identity = new ClaimsIdentity(claims, "User Identity");
-      var userPrincipal = new ClaimsPrincipal(new[] { identity });
+      var token = new JwtTokenBuilder(_config.JwtKey, claims).Build().Value;
 
-      HttpContext.SignInAsync(userPrincipal);
-      return Ok(login);
+      return Ok(new { token, email = login.Email, role = login.Role, name = login.Name });
     }
 
     [HttpGet, Route("logout")]
