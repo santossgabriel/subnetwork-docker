@@ -27,15 +27,15 @@ namespace Site.Controllers
         return UnprocessableEntity();
     }
 
-    [HttpPost, Route("approve")]
+    [HttpPut, Route("approve/{id}")]
     public IActionResult Approve(long id)
     {
       _service.Approve(id);
       return Ok();
     }
 
-    [HttpGet]
-    public IActionResult Details(long id) => View(_service.Get(id, UserId));
+    [HttpGet("{id}")]
+    public IActionResult Details(long id) => Ok(_service.Get(id, UserId));
 
     [HttpGet]
     public IActionResult List()

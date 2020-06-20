@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-
+import { Link } from 'react-router-dom'
 import { simulationService } from '../../services'
 
 export function Simulation() {
@@ -10,7 +10,7 @@ export function Simulation() {
 
   function simulate() {
     simulationService.create({ description, amount: parseFloat(amount), plots: parseInt(plots) })
-      .then(res => console.log(res))
+      .then(() => { })
       .catch(err => console.log(err))
   }
 
@@ -29,13 +29,13 @@ export function Simulation() {
         <span asp-validation-for="Amount" className="validation-error"></span>
 
         <span>Quantidade de parcelas:</span>
-        <input class="form-input" onChange={e => setPlost(e.target.value)} />
+        <input className="form-input" onChange={e => setPlost(e.target.value)} />
         <span asp-validation-for="Plots" className="validation-error"></span>
 
         <div style={{ textAlign: 'center' }}>
           <button type="button" onClick={() => simulate()} className="btn btn-simulation">Simular</button>
           <div style={{ marginTop: '5px', fontSize: '12px' }} >
-            <a href="/Simulation/List">Ver Simulações</a>
+            <Link to="simulation-list">Ver Simulações</Link>
           </div>
         </div>
       </form>

@@ -1,4 +1,3 @@
-import { toastTypes } from '../../utils'
 import { UserActionsTypes } from '../actions'
 import { storageService } from '../../services'
 

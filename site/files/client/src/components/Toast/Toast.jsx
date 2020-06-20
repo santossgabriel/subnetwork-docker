@@ -6,7 +6,6 @@ import { ContainerContent, ContainerGlobalToast, ContainerText } from './styles'
 export function Toast() {
 
   const { message, type } = useSelector(state => state.toastState)
-  console.log({ message, type })
 
   return (
     <ContainerGlobalToast show={!!message} error={type === toastTypes.ERROR} >

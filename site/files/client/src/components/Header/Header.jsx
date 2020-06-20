@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 
 import { accountService } from '../../services'
 import { userChanged } from '../../store/actions'
+import { UserRoles } from '../../utils'
 
 export function Header() {
 
@@ -16,30 +17,31 @@ export function Header() {
   function login() {
     accountService.login(email, password)
       .then(res => dispatch(userChanged(res)))
-      .catch(err => console.log(err))
+      .catch(err => console.error(err))
   }
 
   function logout() {
     accountService.logout()
       .then(() => dispatch(userChanged(null)))
-      .catch(err => console.log(err))
+      .catch(err => console.error(err))
   }
 
   return (
     <header className="toolbar">
       <div>
-        <img className="logo" src="favicon.ico" />
+        <img alt="icon" className="logo" src="favicon.ico" />
         <Link className="app-title" to="/">Fake Bank</Link>
       </div>
       <div className="menu-toolbar">
-        {user && <Link to="simulation">Simulador</Link>}
+        {user && user.role === UserRoles.Client && <Link to="simulation">Simulador</Link>}
+        {user && user.role === UserRoles.Approver && <Link to="simulation-list">Simulações</Link>}
         <Link to="contact">Contato</Link>
       </div>
 
       {user ?
         <>
           <span className="logged-name">{user.name}</span>
-          <a onClick={() => logout()} className="btn">Sair</a>
+          <button type="button" onClick={() => logout()} className="btn">Sair</button>
         </>
         :
         <form className="login-form">

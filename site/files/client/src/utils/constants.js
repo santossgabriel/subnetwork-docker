@@ -10,3 +10,8 @@ export const toastTypes = {
   ERROR: 0,
   SUCCESS: 1
 }
+
+export const UserRoles = {
+  Client: 0,
+  Approver: 1
+}
