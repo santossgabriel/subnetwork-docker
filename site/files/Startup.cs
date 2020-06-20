@@ -65,18 +65,14 @@ namespace Site
         app.UseHsts();
       }
 
-      app.UseStaticFiles();
       app.UseRouting();
 
       app.UseAuthentication();
       app.UseAuthorization();
 
-      app.UseEndpoints(endpoints =>
-      {
-        endpoints.MapControllerRoute(
-                  name: "default",
-                  pattern: "{controller=Home}/{action=Index}/{id?}");
-      });
+      app.UseDefaultFiles();
+      app.UseStaticFiles();
+      app.UseEndpoints(endpoints => endpoints.MapControllers());
     }
   }
 }
