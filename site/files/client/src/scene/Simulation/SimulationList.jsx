@@ -1,15 +1,28 @@
-import React from 'react'
-
+import React, { useState, useEffect } from 'react'
+import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
-const isAdmin = false
-
-const simulations = []
+import { UserRoles } from '../../utils'
+import { simulationService } from '../../services'
 
 export function SimulationList() {
 
+  const [simulations, setSimulations] = useState([])
+
+  const user = useSelector(state => state.appState.user)
+
+  useEffect(() => refresh(), [])
+
+  function refresh() {
+    simulationService.getAll()
+      .then(res => setSimulations(res))
+      .catch(err => console.error(err))
+  }
+
   function approve(id) {
-    console.log(id)
+    simulationService.approve(id)
+      .then(() => refresh())
+      .catch(err => console.error(err))
   }
 
   return (
@@ -17,7 +30,7 @@ export function SimulationList() {
       {
         simulations.length ?
           <>
-            {isAdmin ?
+            {user.role === UserRoles.Approver ?
               <h3 className="page-title">Simulações</h3>
               :
               <h3 className="page-title">Simulações realizadas.</h3>
@@ -37,7 +50,7 @@ export function SimulationList() {
               <tbody>
                 {
                   simulations.map((s, i) =>
-                    <tr style={{ backgroundColor: i % 2 != 0 ? "#ccc" : "#fff" }}>
+                    <tr key={`${i}`} style={{ backgroundColor: i % 2 !== 0 ? "#ccc" : "#fff" }}>
                       <td>{s.id}</td>
                       <td>{s.description}</td>
                       <td>{s.amountMoney}</td>
@@ -45,7 +58,7 @@ export function SimulationList() {
                       <td>{s.plots}</td>
                       <td><Link to={`/simulation-details/${s.id}`}>Detalhes</Link></td>
                       {
-                        isAdmin && !s.ApprovedAt ?
+                        user.role === UserRoles.Approver && !s.approvedAt ?
                           <td>
                             <button onClick={() => approve(s.id)} className="btn">Aprovar</button>
                           </td>

@@ -1,6 +1,7 @@
 using System;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -28,6 +29,7 @@ namespace Site
           config.LoginPath = "/Home/Index";
           config.Cookie.HttpOnly = false;
           config.ExpireTimeSpan = TimeSpan.FromMinutes(30);
+          config.Cookie.SameSite = SameSiteMode.None;
         });
 
       services.AddControllers();

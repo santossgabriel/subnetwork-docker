@@ -1,42 +1,49 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
-export function SimulationDetails() {
+import { simulationService } from '../../services'
+
+export function SimulationDetails({ match }) {
 
   const [simulation, setSimulation] = useState(null)
+  const { id } = match.params
+
+  useEffect(() => {
+    simulationService.get(id)
+      .then(res => setSimulation(res))
+      .catch(err => console.error(err))
+  }, [id])
 
   return (
     <div className="box-simulation-details">
 
       {simulation ?
-        <h4 class="page-title sm">Simulação não encontrada.</h4>
-        :
         <>
-          <h3 class="page-title">Detalhes da simulação.</h3>
+          <h3 className="page-title">Detalhes da simulação.</h3>
 
           <div>
-            Produto: <span class="label">{simulation.description}</span>
+            Produto: <span className="label">{simulation.description}</span>
           </div>
 
           <div>
-            Criado em: <span class="label">{simulation.createdAtFormatted}</span>
+            Criado em: <span className="label">{simulation.createdAtFormatted}</span>
           </div>
 
           {simulation.ApprovedAt &&
             <div>
-              Aprovado em: <span class="label">{simulation.approvedAtFormatted}</span>
+              Aprovado em: <span className="label">{simulation.approvedAtFormatted}</span>
             </div>
           }
 
           <div>
-            Valor Solicitado: <span class="label">{simulation.amountMoney}</span>
+            Valor Solicitado: <span className="label">{simulation.amountMoney}</span>
           </div>
 
           <div>
-            Valor Financiado: <span class="label">{simulation.totalMoney}</span>
+            Valor Financiado: <span className="label">{simulation.totalMoney}</span>
           </div>
 
           <div>
-            Quantidade de parcelas: <span class="label">{simulation.plots}</span>
+            Quantidade de parcelas: <span className="label">{simulation.plots}</span>
           </div>
 
           {simulation.total > 0 &&
@@ -44,7 +51,7 @@ export function SimulationDetails() {
               <div>
                 Parcelas:
               </div>
-              <table class="simulation-table">
+              <table className="simulation-table">
                 <thead>
                   <tr>
                     <th>Número</th>
@@ -55,7 +62,7 @@ export function SimulationDetails() {
                 </thead>
                 <tbody>
                   {simulation.installments.map((p, i) =>
-                    <tr style={{ backgroundColor: i % 2 != 0 ? "#ccc" : "#fff" }}>
+                    <tr key={`${i}`} style={{ backgroundColor: i % 2 !== 0 ? "#ccc" : "#fff" }}>
                       <td>{p.number}</td>
                       <td>{p.costMoney}</td>
                       <td>{p.interestMoney}</td>
@@ -67,6 +74,8 @@ export function SimulationDetails() {
             </>
           }
         </>
+        :
+        <h4 className="page-title sm">Simulação não encontrada.</h4>
       }
     </div >
   )

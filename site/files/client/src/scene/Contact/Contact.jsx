@@ -10,8 +10,8 @@ export function Contact() {
 
   function sendContact() {
     contactService.send({ name, email, message })
-      .then(res => console.log(res))
-      .catch(err => console.error(err))
+      .then(res => { })
+      .catch(err => setError(true))
   }
 
   return (

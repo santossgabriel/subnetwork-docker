@@ -27,7 +27,7 @@ namespace Site.Repository
 
     public IEnumerable<SimulationModel> GetByUser(long userId)
     {
-      var query = $"SELECT {SELECT_COLUMNS} FROM \"{TableName}\" WHERE USER_ID = @UserId ORDER BY Id";
+      var query = $"SELECT {SELECT_COLUMNS} FROM \"{TableName}\" WHERE UserId = @UserId ORDER BY Id";
       return Query(query, new { UserId = userId });
     }
 

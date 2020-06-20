@@ -2,9 +2,9 @@ import React from 'react'
 import { Provider } from 'react-redux'
 import { HashRouter, Route } from 'react-router-dom'
 import './App.css'
-import { Sidebar, Toast, Toolbar, Header } from './components'
+import { Toast, Header } from './components'
 import { Contact, Simulation, Home, SimulationDetails, SimulationList } from './scene'
-import { AppContainer, BaseContainer, CoreAppContainer } from './components/styles'
+import { AppContainer, BaseContainer } from './components/styles'
 import Store from './store'
 
 export default function App() {
@@ -13,7 +13,7 @@ export default function App() {
       <AppContainer>
         <HashRouter>
           <Header />
-          <div class="root-card">
+          <div className="root-card">
             <BaseContainer>
               <Route path="/" exact={true} component={Home} />
               <Route path="/contact" component={Contact} />
