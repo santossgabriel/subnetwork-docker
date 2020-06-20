@@ -1,10 +1,8 @@
 import { combineReducers } from 'redux'
-import { bannerGrabbingReducer } from './banner-grabbing.reducer'
-import { networkSweepingReducer } from './network-sweeping.reducer'
 import { toastReducer } from './toast.reducer'
+import { appReducer } from './app.reducer'
 
 export default combineReducers({
-    bannerGrabbingState: bannerGrabbingReducer,
-    networkSweepingState: networkSweepingReducer,
+    appState: appReducer,
     toastState: toastReducer
 })

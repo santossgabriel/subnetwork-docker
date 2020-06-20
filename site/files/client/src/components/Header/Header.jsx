@@ -1,23 +1,27 @@
 import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 import { accountService } from '../../services'
+import { userChanged } from '../../store/actions'
 
 export function Header() {
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [user, setUser] = useState(null)
+
+  const dispatch = useDispatch()
+  const user = useSelector(state => state.appState.user)
 
   function login() {
     accountService.login(email, password)
-      .then(res => setUser(res))
+      .then(res => dispatch(userChanged(res)))
       .catch(err => console.log(err))
   }
 
   function logout() {
     accountService.logout()
-      .then(res => setUser(null))
+      .then(() => dispatch(userChanged(null)))
       .catch(err => console.log(err))
   }
 
@@ -28,7 +32,7 @@ export function Header() {
         <Link className="app-title" to="/">Fake Bank</Link>
       </div>
       <div className="menu-toolbar">
-        {user && <Link to="simulator">Simulador</Link>}
+        {user && <Link to="simulation">Simulador</Link>}
         <Link to="contact">Contato</Link>
       </div>
 

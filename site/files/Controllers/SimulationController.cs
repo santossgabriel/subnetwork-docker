@@ -1,9 +1,12 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Site.Models;
 using Site.Services;
 
 namespace Site.Controllers
 {
+  [Authorize]
+  [Route("api/[controller]")]
   public class SimulationController : BaseController
   {
     private SimulationService _service;
@@ -24,7 +27,7 @@ namespace Site.Controllers
         return UnprocessableEntity();
     }
 
-    [HttpPost]
+    [HttpPost, Route("approve")]
     public IActionResult Approve(long id)
     {
       _service.Approve(id);

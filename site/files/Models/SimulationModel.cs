@@ -12,9 +12,6 @@ namespace Site.Models
     [Required]
     public string Description { get; set; }
 
-    [Required]
-    public string Email { get; set; }
-
     [Required, Range(12, 36)]
     public int Plots { get; set; }
 
@@ -39,6 +36,6 @@ namespace Site.Models
 
     public string ApprovedAtFormatted => ApprovedAt?.ToString("dd/MM/yyyy - HH:mm");
 
-    public override string EntityName => "SIMULATION";
+    public override string EntityName => "Simulation";
   }
 }
