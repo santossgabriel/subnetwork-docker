@@ -12,14 +12,14 @@ namespace Site.Repository
 
     public long Add(UserModel user)
     {
-      var query = $"INSERT INTO \"{TableName}\" (Name, Email, Password, Role) VALUES (@Name, @Email, @Password, @Role)";
+      var query = $"INSERT INTO \"{TableName}\" (Name, Email, Password, Role, Document) VALUES (@Name, @Email, @Password, @Role, @Document)";
       Execute(query, user);
       return CurrentId(user);
     }
 
     public long Update(UserModel user)
     {
-      var query = $"UPDATE \"{TableName}\" SET Name = @Name, Email = @Email, Password = @Password WHERE Id = @Id";
+      var query = $"UPDATE \"{TableName}\" SET Name = @Name, Email = @Email, Password = @Password, Document = @Document WHERE Id = @Id";
       Execute(query, user);
       return CurrentId(user);
     }

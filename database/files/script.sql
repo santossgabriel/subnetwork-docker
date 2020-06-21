@@ -3,7 +3,8 @@ CREATE TABLE "User" (
   Name VARCHAR(100), 
   Email VARCHAR(100), 
   Password VARCHAR(100),
-  Role INT
+  Role INT,
+  Document VARCHAR(200)
 );
 
 CREATE TABLE "Simulation" (

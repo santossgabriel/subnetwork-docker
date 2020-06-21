@@ -34,6 +34,7 @@ namespace Site.Controllers
       user.Email = model.Email;
       user.Name = model.Name.FirstLetterToUpper();
       user.Password = StringUtils.PasswordGenerate();
+      user.Document = model.FilePath;
       _userService.Save(user);
 
       var email = new EmailModel();
@@ -44,7 +45,7 @@ namespace Site.Controllers
 
       model.SendError = !_mailService.Send(email);
       if (model.SendError)
-        return UnprocessableEntity("Não foi possível solicitar cadastro.");
+        return BadRequest("Não foi possível solicitar cadastro.");
 
       return Ok("Dados de acesso foram enviados para o email informado.");
     }

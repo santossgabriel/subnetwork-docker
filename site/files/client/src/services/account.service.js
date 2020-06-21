@@ -6,8 +6,15 @@ const passwordReset = email => httpService.postNotAuthenticated('/account/passwo
 
 const logout = () => httpService.get('/account/logout')
 
+const uploadDocument = file => {
+  const data = new FormData()
+  data.append('file', file)
+  return httpService.postNotAuthenticated('/account/upload/document', data)
+}
+
 export default {
   login,
   logout,
-  passwordReset
+  passwordReset,
+  uploadDocument
 }
