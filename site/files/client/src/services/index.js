@@ -1,4 +1,4 @@
-export { default as accountService } from './accountService'
-export { default as storageService } from './storageService'
-export { default as contactService } from './contactService'
-export { default as simulationService } from './simulationService'
+export { default as accountService } from './account.service'
+export { default as storageService } from './storage.service'
+export { default as contactService } from './contact.service'
+export { default as simulationService } from './simulation.service'

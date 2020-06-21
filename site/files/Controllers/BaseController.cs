@@ -20,5 +20,9 @@ namespace Site.Controllers
         return 0;
       }
     }
+
+    protected BadRequestObjectResult BadRequest(string error) => BadRequest(new { error });
+
+    protected OkObjectResult Ok(string message) => Ok(new { message });
   }
 }

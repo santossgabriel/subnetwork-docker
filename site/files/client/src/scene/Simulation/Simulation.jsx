@@ -11,7 +11,6 @@ export function Simulation() {
   function simulate() {
     simulationService.create({ description, amount: parseFloat(amount), plots: parseInt(plots) })
       .then(() => { })
-      .catch(err => console.log(err))
   }
 
   return (

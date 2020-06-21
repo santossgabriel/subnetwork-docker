@@ -19,7 +19,6 @@ export function Header() {
   function login() {
     accountService.login(email, password)
       .then(res => dispatch(userChanged(res)))
-      .catch(err => console.error(err))
   }
 
   function logout() {
@@ -28,7 +27,6 @@ export function Header() {
         dispatch(userChanged(null))
         history.push('/')
       })
-      .catch(err => console.error(err))
   }
 
   return (
@@ -52,7 +50,9 @@ export function Header() {
         <form className="login-form">
           <input className="form-input" placeholder="Email" onChange={e => setEmail(e.target.value)} />
           <input className="form-input" type="password" placeholder="Senha" onChange={e => setPassword(e.target.value)} />
-          <button type="button" className="btn" onClick={() => login()}>Entrar</button>
+          <button disabled={!email || !password} type="button" className="btn" onClick={() => login()}>Entrar</button>
+          <br />
+          <Link to="/password-reset" style={{ fontSize: 12 }}>Esqueci a senha</Link>
         </form>
       }
     </header>

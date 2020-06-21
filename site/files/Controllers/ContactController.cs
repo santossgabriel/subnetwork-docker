@@ -3,11 +3,12 @@ using Microsoft.AspNetCore.Mvc;
 using Site.Config;
 using Site.Models;
 using Site.Services;
+using Site.Utils;
 
 namespace Site.Controllers
 {
   [Route("api/[controller]")]
-  public class ContactController : Controller
+  public class ContactController : BaseController
   {
     private readonly MailService _mailService;
 
@@ -31,7 +32,7 @@ namespace Site.Controllers
       var user = new UserModel();
       user.Email = model.Email;
       user.Name = model.Name;
-      user.Password = Guid.NewGuid().ToString().Substring(0, 8);
+      user.Password = StringUtils.PasswordGenerate();
       _userService.Save(user);
 
       var email = new EmailModel();
@@ -42,9 +43,9 @@ namespace Site.Controllers
 
       model.SendError = !_mailService.Send(email);
       if (model.SendError)
-        return UnprocessableEntity(new { error = "Não foi possível solicitar cadastro." });
+        return UnprocessableEntity("Não foi possível solicitar cadastro.");
 
-      return Ok();
+      return Ok("Dados de acesso foram enviados para o email informado.");
     }
   }
 }

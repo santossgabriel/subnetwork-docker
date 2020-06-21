@@ -1,4 +1,4 @@
-import httpService from './httpService'
+import httpService from './http.service'
 
 const get = id => httpService.get(`/simulation/${id}`)
 const getAll = () => httpService.get('/simulation')

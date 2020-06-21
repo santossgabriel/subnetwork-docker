@@ -10,7 +10,6 @@ export function SimulationDetails({ match }) {
   useEffect(() => {
     simulationService.get(id)
       .then(res => setSimulation(res))
-      .catch(err => console.error(err))
   }, [id])
 
   return (
