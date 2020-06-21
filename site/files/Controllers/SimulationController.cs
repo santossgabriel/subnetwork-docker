@@ -24,7 +24,7 @@ namespace Site.Controllers
         return Ok();
       }
       else
-        return UnprocessableEntity();
+        return BadRequest("Dados inválidos.");
     }
 
     [HttpPut, Route("approve/{id}")]

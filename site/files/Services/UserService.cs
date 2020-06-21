@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations;
 using Site.Models;
 using Site.Repository;
 
@@ -28,6 +29,16 @@ namespace Site.Services
       {
         _repository.Update(user);
       }
+    }
+
+    public UserModel UpdatePassword(string email, string password)
+    {
+      var user = _repository.FindByEmail(email);
+      if (user == null)
+        throw new ValidationException("Email não cadastrado");
+      user.Password = password;
+      _repository.Update(user);
+      return user.WithoutPassword();
     }
   }
 }

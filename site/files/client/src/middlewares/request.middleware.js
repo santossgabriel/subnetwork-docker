@@ -1,6 +1,6 @@
-import { hideLoader, showLoader, toastError, toastHide } from '../store/actions'
+import { hideLoader, showLoader, toastError, toastHide, toastSuccess } from '../store/actions'
 
-const handler = (() => {
+const middleware = (() => {
   const _self = {}
 
   let pending = 0
@@ -28,7 +28,12 @@ const handler = (() => {
     setTimeout(() => dispatch(toastHide()), 2000)
   }
 
+  _self.showSuccess = message => {
+    dispatch(toastSuccess(message))
+    setTimeout(() => dispatch(toastHide()), 2000)
+  }
+
   return _self
 })()
 
-export const requestHandler = handler
+export const requestMiddleware = middleware

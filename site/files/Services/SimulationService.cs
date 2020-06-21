@@ -47,7 +47,14 @@ namespace Site.Services
       return simulation;
     }
 
-    public void Approve(long id) => _repository.Approve(id);
+    public bool Approve(long id)
+    {
+      var simulation = _repository.GetById(id);
+      if (simulation == null || simulation.ApprovedAt != null)
+        return false;
+      _repository.Approve(id);
+      return true;
+    }
 
     private void FillInstallments(SimulationModel simulation)
     {

@@ -16,13 +16,11 @@ export function SimulationList() {
   function refresh() {
     simulationService.getAll()
       .then(res => setSimulations(res))
-      .catch(err => console.error(err))
   }
 
   function approve(id) {
     simulationService.approve(id)
       .then(() => refresh())
-      .catch(err => console.error(err))
   }
 
   if (!user)

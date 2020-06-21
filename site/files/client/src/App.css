@@ -94,6 +94,10 @@ body {
   padding-right: 10px;
 }
 
+.login-form > .form-input {
+  margin-right: 10px;
+}
+
 .form-input {
   width: 100px;
   font-size: 12px;

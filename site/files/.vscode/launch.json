@@ -13,10 +13,6 @@
       "args": [],
       "cwd": "${workspaceFolder}",
       "stopAtEntry": false,
-      "serverReadyAction": {
-        "action": "openExternally",
-        "pattern": "^\\s*Now listening on:\\s+(https?://\\S+)"
-      },
       "env": {
         "ASPNETCORE_ENVIRONMENT": "Development",
         "DATABASE_CONNECTION_STRING": "Host=172.17.0.2;Port=5432;Pooling=true;Database=site;User Id=site;Password=123",
@@ -26,9 +22,6 @@
         "EMAIL_USE_DEFAULT_CREDENTIALS": "false",
         "EMAIL_CONTACT": "contato@fakebank.lab",
         "EMAIL_SENDER": "site@fakebank.lab"
-      },
-      "sourceFileMap": {
-        "/Views": "${workspaceFolder}/Views"
       }
     },
     {
