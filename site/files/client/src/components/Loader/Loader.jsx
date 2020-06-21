@@ -1,21 +1,31 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 
-export function Loader({hidden}) {
+import { Container } from './styles'
+
+export function Loader() {
+
+
+    const loading = useSelector(state => state.appState.loading)
 
     return (
-        <div className="lds-spinner">
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-        </div>
+        loading ?
+            <Container>
+                <div className="lds-spinner">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+            </Container>
+            : null
     )
 }

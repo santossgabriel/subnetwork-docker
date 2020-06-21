@@ -1,16 +1,23 @@
 import axios from 'axios'
+
 import storageService from './storageService'
+import { loaderHandler } from '../handlers/loader-handler'
 
 const getToken = () => `Bearer ${(storageService.getUser() || {}).token || ''}`
 
 const sendRequest = (method, url, headers, data) => {
+  loaderHandler.requestStarted()
   return axios({
     method: method,
     headers: headers,
     url: url,
     data: data
-  }).then(res => res.data)
+  }).then(res => {
+    loaderHandler.requestEnded()
+    return res.data
+  })
     .catch(err => {
+      loaderHandler.requestEnded()
       throw err.response.data
     })
 }
