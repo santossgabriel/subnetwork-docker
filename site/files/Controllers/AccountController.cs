@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 using Cashflow.Api.Auth;
 using Site.Config;
 using Site.Utils;
+using Site.Extentions;
 
 namespace Site.Controllers
 {
@@ -59,10 +60,10 @@ namespace Site.Controllers
       var email = new EmailModel();
       email.From = _config.Email.Contact;
       email.To = model.Email;
-      email.Subject = "Senha restaurada";
-      email.Body = $"Olá {user.Name}, sua senha foi restaurada: {password}";
+      email.Subject = "Senha redefinida";
+      email.Body = $"Ola {user.Name.FirstLetterToUpper()}!\n\nSua senha foi redefinida para: \n\n{password}";
       if (!_mailService.Send(email))
-        return BadRequest("Não foi possível restaurar senha.");
+        return BadRequest("Não foi possível redefinir a senha.");
       else
         return Ok("Um email foi enviado com a nova senha.");
     }

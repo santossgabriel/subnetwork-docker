@@ -1,6 +1,7 @@
 using System;
 using Microsoft.AspNetCore.Mvc;
 using Site.Config;
+using Site.Extentions;
 using Site.Models;
 using Site.Services;
 using Site.Utils;
@@ -31,7 +32,7 @@ namespace Site.Controllers
     {
       var user = new UserModel();
       user.Email = model.Email;
-      user.Name = model.Name;
+      user.Name = model.Name.FirstLetterToUpper();
       user.Password = StringUtils.PasswordGenerate();
       _userService.Save(user);
 
@@ -39,7 +40,7 @@ namespace Site.Controllers
       email.From = _config.Email.Contact;
       email.To = model.Email;
       email.Subject = "Senha de acesso";
-      email.Body = $"Olá {model.Name}, recebemos seu contato e já preparamos um usuário pra você. Basta acessar nosso site com o seu email utilizando a seguinte senha:\n{user.Password}\n\nO grupo Fake Bank agradece sua escolha!";
+      email.Body = $"Ola {user.Name}! \nRecebemos seu contato e ja preparamos um usuario pra voce. Basta acessar nosso site com o seu email utilizando a seguinte senha:\n{user.Password}\n\nO grupo Fake Bank agradece sua escolha!";
 
       model.SendError = !_mailService.Send(email);
       if (model.SendError)
