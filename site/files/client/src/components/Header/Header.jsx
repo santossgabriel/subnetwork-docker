@@ -38,9 +38,9 @@ export function Header() {
         <Link className="app-title" to="/">Fake Bank</Link>
       </div>
       <div className="menu-toolbar">
-        {user && user.role === UserRoles.Client && <Link to="simulation">Simulador</Link>}
-        {user && user.role === UserRoles.Approver && <Link to="simulation-list">Simulações</Link>}
-        <Link to="contact">Contato</Link>
+        {user && user.role === UserRoles.Client && <Link to="/simulation">Simulador</Link>}
+        {user && user.role === UserRoles.Approver && <Link to="/simulation-list">Simulações</Link>}
+        <Link to="/contact">Contato</Link>
       </div>
 
       {user ?

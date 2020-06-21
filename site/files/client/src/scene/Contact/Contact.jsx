@@ -1,17 +1,22 @@
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
 import { contactService } from '../../services'
+import { toastSuccess, toastHide } from '../../store/actions'
 
 export function Contact() {
 
-  const [error, setError] = useState(false)
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [message, setMessage] = useState('')
 
+  const dispatch = useDispatch()
+
   function sendContact() {
     contactService.send({ name, email, message })
-      .then(res => { })
-      .catch(err => setError(true))
+      .then(res => {
+        dispatch(toastSuccess('Email enviado.'))
+        setTimeout(() => dispatch(toastHide()), 2000)
+      })
   }
 
   return (
@@ -26,7 +31,6 @@ export function Contact() {
           style={{ marginTop: '20px' }}
           className="btn">Enviar</button>
       </form>
-      {error && <span className="error-message">Não foi possível enviar o email</span>}
     </div>
   )
 }

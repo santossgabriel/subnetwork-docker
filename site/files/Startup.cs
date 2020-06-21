@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Site.Config;
+using Site.Extentions;
 using Site.Repository;
 using Site.Services;
 
@@ -55,15 +56,8 @@ namespace Site
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
-      if (env.IsDevelopment())
-      {
-        app.UseDeveloperExceptionPage();
-      }
-      else
-      {
-        app.UseExceptionHandler("/Home/Error");
-        app.UseHsts();
-      }
+      app.UseMiddleware(typeof(ExceptionHandler));
+      app.UseHsts();
 
       app.UseRouting();
 
