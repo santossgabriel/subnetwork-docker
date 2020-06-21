@@ -11,7 +11,7 @@ namespace Site.Models
     public string Email { get; set; }
 
     [Required]
-    public string Message { get; set; }
+    public string FilePath { get; set; }
 
     public bool SendError { get; set; }
 

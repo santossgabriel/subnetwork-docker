@@ -12,6 +12,8 @@ namespace Site.Models
 
     public UserRole Role { get; set; }
 
+    public string Document { get; set; }
+
     public UserModel WithoutPassword() => new UserModel { Id = this.Id, Name = this.Name, Email = this.Email, Role = this.Role };
 
     public override string EntityName => "User";

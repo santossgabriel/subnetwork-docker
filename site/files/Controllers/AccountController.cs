@@ -9,6 +9,8 @@ using Cashflow.Api.Auth;
 using Site.Config;
 using Site.Utils;
 using Site.Extentions;
+using System.IO;
+using System.Threading.Tasks;
 
 namespace Site.Controllers
 {
@@ -66,6 +68,28 @@ namespace Site.Controllers
         return BadRequest("Não foi possível redefinir a senha.");
       else
         return Ok("Um email foi enviado com a nova senha.");
+    }
+
+    [HttpPost, Route("upload/document"), AllowAnonymous]
+    public async Task<IActionResult> Upload(UploadFileModel model)
+    {
+      var file = model.File;
+
+      if (file.Length > 0)
+      {
+        const string uploadPath = "temp";
+        if (!Directory.Exists(uploadPath))
+          Directory.CreateDirectory(uploadPath);
+        var fileName = StringUtils.HashGenerate() + file.FileName;
+        using (var fs = new FileStream(Path.Combine(uploadPath, fileName), FileMode.Create))
+        {
+          await file.CopyToAsync(fs);
+        }
+
+        model.Source = $"{uploadPath}/{fileName}";
+        model.Extension = Path.GetExtension(fileName).Substring(1);
+      }
+      return Ok(new { file = model.Source });
     }
 
     [HttpGet, Route("logout")]

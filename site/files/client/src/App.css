@@ -85,6 +85,11 @@ body {
     opacity: .8;
 }
 
+.btn:disabled {
+  cursor: initial;
+  opacity: .8;
+}
+
 .warn {
     background-color: #882020;
     color: white;
