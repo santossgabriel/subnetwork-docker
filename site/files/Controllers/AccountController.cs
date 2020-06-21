@@ -28,12 +28,12 @@ namespace Site.Controllers
     public IActionResult Post([FromBody] UserModel model)
     {
       if (string.IsNullOrEmpty(model.Email) || string.IsNullOrEmpty(model.Password))
-        return Unauthorized();
+        return Unauthorized(new { error = "Credenciais inválidas" });
 
       var login = _userService.Login(model.Email, model.Password);
 
       if (login is null)
-        return Unauthorized();
+        return Unauthorized(new { error = "Credenciais inválidas" });
 
       var claims = new List<Claim>()
       {

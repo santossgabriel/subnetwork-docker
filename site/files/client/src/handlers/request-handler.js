@@ -1,4 +1,4 @@
-import { hideLoader, showLoader } from '../store/actions'
+import { hideLoader, showLoader, toastError, toastHide } from '../store/actions'
 
 const handler = (() => {
   const _self = {}
@@ -23,7 +23,12 @@ const handler = (() => {
       setTimeout(() => dispatch(hideLoader()), 300)
   }
 
+  _self.showError = error => {
+    dispatch(toastError(error))
+    setTimeout(() => dispatch(toastHide()), 2000)
+  }
+
   return _self
 })()
 
-export const loaderHandler = handler
+export const requestHandler = handler

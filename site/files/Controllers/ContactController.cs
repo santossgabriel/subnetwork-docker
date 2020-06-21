@@ -41,6 +41,8 @@ namespace Site.Controllers
       email.Body = $"Olá {model.Name}, recebemos seu contato e já preparamos um usuário pra você. Basta acessar nosso site com o seu email utilizando a seguinte senha:\n{user.Password}\n\nO grupo Fake Bank agradece sua escolha!";
 
       model.SendError = !_mailService.Send(email);
+      if (model.SendError)
+        return UnprocessableEntity(new { error = "Não foi possível solicitar cadastro." });
 
       return Ok();
     }

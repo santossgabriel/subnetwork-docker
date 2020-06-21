@@ -1,6 +1,6 @@
 import { compose, createStore } from 'redux'
 import Reducers from './reducers'
-import { loaderHandler } from '../handlers/loader-handler'
+import { requestHandler } from '../handlers/request-handler'
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
@@ -9,6 +9,6 @@ const store = createStore(
     composeEnhancers()
 )
 
-loaderHandler.init(store.dispatch)
+requestHandler.init(store.dispatch)
 
 export default store
