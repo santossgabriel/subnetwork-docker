@@ -25,7 +25,7 @@ namespace Site.Services
         MailMessage mailMessage = new MailMessage();
         mailMessage.From = new MailAddress(model.From);
         mailMessage.To.Add(model.To);
-        mailMessage.Body = model.Body;
+        mailMessage.Body = $"{model.Body}\n\nAtt.:\n{model.From}";
         mailMessage.Subject = model.Subject;
 
         client.Send(mailMessage);

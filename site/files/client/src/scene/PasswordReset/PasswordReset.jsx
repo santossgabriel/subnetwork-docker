@@ -16,6 +16,7 @@ export function PasswordReset() {
       <br />
       Email: <input className="form-input lg" onChange={e => setEmail(e.target.value)} />
       <button type="button"
+        disabled={!email}
         onClick={() => send()}
         style={{ marginTop: '20px', marginLeft: '30px' }}
         className="btn">Enviar</button>
