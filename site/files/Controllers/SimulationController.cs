@@ -24,7 +24,9 @@ namespace Site.Controllers
         return Ok(simulation);
       }
       else
-        return BadRequest("Dados inválidos.");
+      {
+        return BadRequestModel(ModelState);
+      }
     }
 
     [HttpPut, Route("approve/{id}")]

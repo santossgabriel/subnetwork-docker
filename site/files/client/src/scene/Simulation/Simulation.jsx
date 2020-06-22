@@ -5,8 +5,8 @@ import { simulationService } from '../../services'
 export function Simulation() {
 
   const [description, setDescription] = useState('')
-  const [amount, setAmount] = useState('')
-  const [plots, setPlost] = useState('')
+  const [amount, setAmount] = useState(0)
+  const [plots, setPlost] = useState(0)
 
   const history = useHistory()
 
@@ -26,11 +26,11 @@ export function Simulation() {
         <span asp-validation-for="Description" className="validation-error"></span>
 
         <span>Valor total:</span>
-        <input className="form-input" onChange={e => setAmount(e.target.value)} />
+        <input className="form-input" onChange={e => setAmount(e.target.value || 0)} />
         <span asp-validation-for="Amount" className="validation-error"></span>
 
         <span>Quantidade de parcelas:</span>
-        <input className="form-input" onChange={e => setPlost(e.target.value)} />
+        <input className="form-input" onChange={e => setPlost(e.target.value || 0)} />
         <span asp-validation-for="Plots" className="validation-error"></span>
 
         <div style={{ textAlign: 'center' }}>

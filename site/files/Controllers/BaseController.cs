@@ -1,7 +1,9 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Site.Enums;
 
 namespace Site.Controllers
@@ -22,6 +24,15 @@ namespace Site.Controllers
     }
 
     protected BadRequestObjectResult BadRequest(string error) => BadRequest(new { error });
+
+    protected BadRequestObjectResult BadRequestModel(ModelStateDictionary model)
+    {
+      var errors = new List<string>();
+      foreach (var item in model.Values)
+        foreach (var error in item.Errors)
+          errors.Add(error.ErrorMessage);
+      return BadRequest(string.Join("\n", errors));
+    }
 
     protected OkObjectResult Ok(string message) => Ok(new { message });
   }
