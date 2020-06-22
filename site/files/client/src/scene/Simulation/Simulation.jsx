@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { simulationService } from '../../services'
 
 export function Simulation() {
@@ -8,9 +8,11 @@ export function Simulation() {
   const [amount, setAmount] = useState('')
   const [plots, setPlost] = useState('')
 
+  const history = useHistory()
+
   function simulate() {
     simulationService.create({ description, amount: parseFloat(amount), plots: parseInt(plots) })
-      .then(() => { })
+      .then(res => history.push(`/simulation-details/${res.id}`))
   }
 
   return (
