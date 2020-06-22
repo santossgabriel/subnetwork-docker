@@ -25,5 +25,5 @@ export const ContainerContent = styled.div`
 `
 
 export const ContainerText = styled.div`
-  margin: 20px 6px;
+  margin: 20px 10px;
 `

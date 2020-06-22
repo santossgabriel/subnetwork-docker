@@ -43,7 +43,7 @@ export function Header() {
 
       {user ?
         <>
-          <span className="logged-name">{user.name}</span>
+          <Link className="logged-name" to="/account-data"><span>{user.name}</span></Link>
           <button type="button" onClick={() => logout()} className="btn">Sair</button>
         </>
         :

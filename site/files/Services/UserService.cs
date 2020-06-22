@@ -40,5 +40,16 @@ namespace Site.Services
       _repository.Update(user);
       return user.WithoutPassword();
     }
+
+    public UserModel UpdateAccount(UserModel model)
+    {
+      var user = _repository.GetById(model.Id);
+      if (user == null)
+        throw new ValidationException("Usuário não encontrado.");
+      user.Document = model.Document;
+      user.Name = model.Name;
+      _repository.Update(user);
+      return user.WithoutPassword();
+    }
   }
 }

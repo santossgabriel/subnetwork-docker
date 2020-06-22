@@ -24,9 +24,8 @@ export function SimulationDetails({ match }) {
           </div>
 
           <div>
-            Produto: <span className="label">{simulation.description}</span>
+            Produto: <span className="label" dangerouslySetInnerHTML={{ __html: simulation.description }}></span>
           </div>
-
           <div>
             Criado em: <span className="label">{simulation.createdAtFormatted}</span>
           </div>

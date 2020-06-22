@@ -35,12 +35,12 @@ namespace Site.Controllers
     public IActionResult Post([FromBody] UserModel model)
     {
       if (string.IsNullOrEmpty(model.Email) || string.IsNullOrEmpty(model.Password))
-        return Unauthorized("Credenciais inválidas");
+        return Unauthorized("Credenciais inválidas.");
 
       var login = _userService.Login(model.Email, model.Password);
 
       if (login is null)
-        return Unauthorized("Credenciais inválidas");
+        return Unauthorized("Credenciais inválidas.");
 
       var claims = new List<Claim>()
       {
@@ -51,7 +51,14 @@ namespace Site.Controllers
 
       var token = new JwtTokenBuilder(_config.JwtKey, claims).Build().Value;
 
-      return Ok(new { token, email = login.Email, role = login.Role, name = login.Name });
+      return Ok(new
+      {
+        token,
+        email = login.Email,
+        role = login.Role,
+        name = login.Name,
+        document = login.Document
+      });
     }
 
     [HttpPost, Route("password/reset"), AllowAnonymous]
@@ -68,6 +75,21 @@ namespace Site.Controllers
         return BadRequest("Não foi possível redefinir a senha.");
       else
         return Ok("Um email foi enviado com a nova senha.");
+    }
+
+    [HttpPut]
+    public IActionResult UpdateAccount([FromBody] UserModel model)
+    {
+      if (string.IsNullOrEmpty(model.Name))
+        return BadRequest("Nome inválido.");
+
+      if (string.IsNullOrEmpty(model.Document))
+        return BadRequest("Documento inválido.");
+
+      model.Id = UserId;
+
+      var user = _userService.UpdateAccount(model);
+      return Ok("Cadastro atualizado.");
     }
 
     [HttpPost, Route("upload/document"), AllowAnonymous]
