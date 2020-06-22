@@ -7,58 +7,62 @@ namespace Site.Services
 {
   public class SimulationService
   {
-    private SimulationRepository _repository;
+    private SimulationRepository _simulationRepository;
 
-    public SimulationService(SimulationRepository repository)
+    private UserRepository _userRepository;
+
+    public SimulationService(SimulationRepository simulationRepository, UserRepository userRepository)
     {
-      _repository = repository;
+      _simulationRepository = simulationRepository;
+      _userRepository = userRepository;
     }
 
     public long Add(SimulationModel simulation)
     {
-      return _repository.Add(simulation);
+      return _simulationRepository.Add(simulation);
     }
 
     public IEnumerable<SimulationModel> GetByUser(long userId)
     {
-      var list = _repository.GetByUser(userId);
+      var list = _simulationRepository.GetByUser(userId);
       foreach (var s in list)
-        FillInstallments(s);
+        FillProps(s);
       return list;
     }
 
     public IEnumerable<SimulationModel> GetAll()
     {
-      var list = _repository.GetAll();
+      var list = _simulationRepository.GetAll();
       foreach (var s in list)
-        FillInstallments(s);
+        FillProps(s);
       return list;
     }
 
     public SimulationModel Get(long id, long userId)
     {
-      var simulation = _repository.GetById(id);
+      var simulation = _simulationRepository.GetById(id);
 
       if (simulation == null || userId == 0)
         return null;
 
-      FillInstallments(simulation);
+      FillProps(simulation);
 
       return simulation;
     }
 
     public bool Approve(long id)
     {
-      var simulation = _repository.GetById(id);
+      var simulation = _simulationRepository.GetById(id);
       if (simulation == null || simulation.ApprovedAt != null)
         return false;
-      _repository.Approve(id);
+      _simulationRepository.Approve(id);
       return true;
     }
 
-    private void FillInstallments(SimulationModel simulation)
+    private void FillProps(SimulationModel simulation)
     {
       simulation.Installments = new List<SimulationInstallmentModel>();
+      simulation.User = _userRepository.GetById(simulation.UserId).WithoutPassword();
       var installmentCost = simulation.Amount / simulation.Plots;
 
       for (int i = 1; i <= simulation.Plots; i++)

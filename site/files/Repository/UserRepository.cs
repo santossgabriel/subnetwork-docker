@@ -26,7 +26,7 @@ namespace Site.Repository
 
     public UserModel FindByEmail(string email) => FirstOrDefault($"SELECT {SELECT_COLUMNS} FROM \"{TableName}\" WHERE EMAIL = '{email}'");
 
-    public UserModel GetById(int id) => FirstOrDefault($"SELECT {SELECT_COLUMNS} FROM \"{TableName}\" WHERE Id = @Id", new { Id = id });
+    public UserModel GetById(long id) => FirstOrDefault($"SELECT {SELECT_COLUMNS} FROM \"{TableName}\" WHERE Id = @Id", new { Id = id });
 
     public IEnumerable<UserModel> GetAll() => Query($"SELECT {SELECT_COLUMNS} FROM \"{TableName}\"");
   }
