@@ -12,10 +12,10 @@ namespace Site.Models
     [Required]
     public string Description { get; set; }
 
-    [Required, Range(12, 36)]
+    [Required, Range(2, 72)]
     public int Plots { get; set; }
 
-    [Required, Range(1000, 1000000)]
+    [Required, Range(100, 1000000)]
     public decimal Amount { get; set; }
 
     public long UserId { get; set; }
@@ -25,6 +25,8 @@ namespace Site.Models
     public DateTime? ApprovedAt { get; set; }
 
     public List<SimulationInstallmentModel> Installments { get; set; }
+
+    public UserModel User { get; set; }
 
     public decimal Total => Installments?.Sum(p => p.Total) ?? 0;
 
