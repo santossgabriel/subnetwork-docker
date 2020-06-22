@@ -12,9 +12,12 @@ const uploadDocument = file => {
   return httpService.postNotAuthenticated('/account/upload/document', data)
 }
 
+const save = data => httpService.put('/account', data)
+
 export default {
   login,
   logout,
   passwordReset,
-  uploadDocument
+  uploadDocument,
+  save
 }

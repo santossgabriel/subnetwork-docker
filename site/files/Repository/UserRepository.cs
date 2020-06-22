@@ -6,7 +6,7 @@ namespace Site.Repository
 {
   public class UserRepository : BaseRepository<UserModel>
   {
-    private const string SELECT_COLUMNS = "Id, Name, Email, Password, Role";
+    private const string SELECT_COLUMNS = "Id, Name, Email, Password, Role, Document";
 
     public UserRepository(AppConfig config) : base(config) { }
 

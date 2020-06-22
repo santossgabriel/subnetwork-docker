@@ -35,5 +35,7 @@ namespace Site.Controllers
     }
 
     protected OkObjectResult Ok(string message) => Ok(new { message });
+
+    protected UnauthorizedObjectResult Unauthorized(string error) => Unauthorized(new { error });
   }
 }

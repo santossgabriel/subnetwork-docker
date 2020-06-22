@@ -3,7 +3,7 @@ import { Provider } from 'react-redux'
 import { HashRouter, Route } from 'react-router-dom'
 import './App.css'
 import { Toast, Header, Loader } from './components'
-import { Contact, Simulation, Home, SimulationDetails, SimulationList, PasswordReset } from './scene'
+import { Contact, Simulation, Home, SimulationDetails, SimulationList, PasswordReset, AccountData } from './scene'
 import { AppContainer, BaseContainer } from './components/styles'
 import Store from './store'
 
@@ -21,6 +21,7 @@ export default function App() {
               <Route path="/simulation-list" component={SimulationList} />
               <Route path="/simulation-details/:id" component={SimulationDetails} />
               <Route path="/password-reset" component={PasswordReset} />
+              <Route path="/account-data" component={AccountData} />
             </BaseContainer>
             <Toast />
           </div>
