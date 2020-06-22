@@ -21,7 +21,7 @@ namespace Site.Controllers
       {
         simulation.UserId = UserId;
         simulation.Id = _service.Add(simulation);
-        return Ok();
+        return Ok(simulation);
       }
       else
         return BadRequest("Dados inválidos.");
