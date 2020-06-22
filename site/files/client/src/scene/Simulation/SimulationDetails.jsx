@@ -20,6 +20,10 @@ export function SimulationDetails({ match }) {
           <h3 className="page-title">Detalhes da simulação.</h3>
 
           <div>
+            Cliente: <span className="label">{simulation.user.name}</span>
+          </div>
+
+          <div>
             Produto: <span className="label">{simulation.description}</span>
           </div>
 
