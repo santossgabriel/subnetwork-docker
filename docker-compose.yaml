@@ -7,12 +7,12 @@ services:
   employee_fakebank:
     cap_add:
       - NET_ADMIN
-    hostname: employee
-    networks:
-      - vlan
     environment: 
       - DEFAULT_GATEWAY=172.20.20.50
+    hostname: employee
     image: employeelab:1.0
+    networks:
+      - vlan
     volumes:
       - ./employee/resolv.conf:/etc/resolv.conf
 
@@ -35,10 +35,6 @@ services:
   site:
     cap_add:
       - NET_ADMIN
-    hostname: site
-    networks:
-      vlan:
-        ipv4_address: 172.20.20.20
     environment: 
       - DEFAULT_GATEWAY=172.20.20.50
       - DATABASE_CONNECTION_STRING=Host=172.20.20.30;Port=5432;Pooling=true;Database=site;User Id=site;Password=123
@@ -48,24 +44,28 @@ services:
       - EMAIL_USE_DEFAULT_CREDENTIALS=false
       - EMAIL_CONTACT=contato@fakebank.lab
       - EMAIL_SENDER=site@fakebank.lab
+    hostname: site
     image: sitelab:1.0
+    networks:
+      vlan:
+        ipv4_address: 172.20.20.20
 
   database_fakebank:
     cap_add:
       - NET_ADMIN
     hostname: site
+    image: databaselab:1.0
     networks:
       vlan:
         ipv4_address: 172.20.20.30
-    image: databaselab:1.0
 
 
   dns_fakebank:
     cap_add:
       - NET_ADMIN
-    image: dnslab:1.0
     environment: 
       - DEFAULT_GATEWAY=172.20.20.50
+    image: dnslab:1.0
     networks:
       vlan:
         ipv4_address: 172.20.20.80
@@ -122,8 +122,8 @@ services:
       - ./dns/dns-ext-s.json:/root/config.json
   
   threat_internet:
-    image: threatlab:1.0
     hostname: threat
+    image: threatlab:1.0
     networks:
       - external
     volumes:
