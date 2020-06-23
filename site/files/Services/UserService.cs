@@ -18,6 +18,8 @@ namespace Site.Services
       return user?.Password == password ? user.WithoutPassword() : null;
     }
 
+    public bool EmailAlreadyExists(string email) => _repository.FindByEmail(email) != null;
+
     public void Save(UserModel user)
     {
       var userDB = _repository.FindByEmail(user.Email);

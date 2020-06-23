@@ -30,6 +30,12 @@ namespace Site.Controllers
     [HttpPost]
     public IActionResult Contact([FromBody] ContactModel model)
     {
+      if (!ModelState.IsValid)
+        return BadRequestModel(ModelState);
+
+      if (_userService.EmailAlreadyExists(model.Email))
+        return BadRequest("Email já cadastrado.");
+
       var user = new UserModel();
       user.Email = model.Email;
       user.Name = model.Name.FirstLetterToUpper();
