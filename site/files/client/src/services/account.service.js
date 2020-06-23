@@ -9,15 +9,18 @@ const logout = () => httpService.get('/account/logout')
 const uploadDocument = file => {
   const data = new FormData()
   data.append('file', file)
-  return httpService.postNotAuthenticated('/account/upload/document', data)
+  return httpService.postNotAuthenticated('/account/document', data)
 }
 
 const save = data => httpService.put('/account', data)
+
+const download = fileName => httpService.get(`/account/document/${fileName}`)
 
 export default {
   login,
   logout,
   passwordReset,
   uploadDocument,
-  save
+  save,
+  download
 }

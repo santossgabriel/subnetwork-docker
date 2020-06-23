@@ -11,6 +11,8 @@ using Site.Utils;
 using Site.Extentions;
 using System.IO;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.StaticFiles;
+using System.Linq;
 
 namespace Site.Controllers
 {
@@ -18,6 +20,8 @@ namespace Site.Controllers
   [Route("api/[controller]")]
   public class AccountController : BaseController
   {
+    private readonly string _uploadPath;
+
     private readonly UserService _userService;
 
     private readonly AppConfig _config;
@@ -29,6 +33,7 @@ namespace Site.Controllers
       _userService = userService;
       _config = config;
       _mailService = mailService;
+      _uploadPath = $"{Directory.GetCurrentDirectory()}/upload";
     }
 
     [HttpPost, Route("login"), AllowAnonymous]
@@ -92,26 +97,41 @@ namespace Site.Controllers
       return Ok("Cadastro atualizado.");
     }
 
-    [HttpPost, Route("upload/document"), AllowAnonymous]
-    public async Task<IActionResult> Upload(UploadFileModel model)
+    [HttpPost, Route("document"), AllowAnonymous]
+    public async Task<IActionResult> UploadDocument(UploadFileModel model)
     {
       var file = model.File;
 
       if (file.Length > 0)
       {
-        const string uploadPath = "temp";
-        if (!Directory.Exists(uploadPath))
-          Directory.CreateDirectory(uploadPath);
+        if (!Directory.Exists(_uploadPath))
+          Directory.CreateDirectory(_uploadPath);
         var fileName = StringUtils.HashGenerate() + file.FileName;
-        using (var fs = new FileStream(Path.Combine(uploadPath, fileName), FileMode.Create))
+        using (var fs = new FileStream(Path.Combine(_uploadPath, fileName), FileMode.Create))
         {
           await file.CopyToAsync(fs);
         }
 
-        model.Source = $"{uploadPath}/{fileName}";
+        model.Source = fileName;
         model.Extension = Path.GetExtension(fileName).Substring(1);
       }
       return Ok(new { file = model.Source });
+    }
+
+    [HttpGet, Route("document/{name}")]
+    public IActionResult DownloadDocument(string name)
+    {
+      var file = $"{_uploadPath}/{name}";
+      if (System.IO.File.Exists(file))
+      {
+        var provider = new FileExtensionContentTypeProvider();
+        string contentType;
+        if (!provider.TryGetContentType(file, out contentType))
+          contentType = "application/octet-stream";
+        var bytes = System.IO.File.ReadAllBytes(file);
+        return Ok(new { bytes = bytes.ToList(), contentType });
+      }
+      return NotFound();
     }
 
     [HttpGet, Route("logout")]

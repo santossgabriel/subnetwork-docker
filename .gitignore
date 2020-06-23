@@ -3,4 +3,4 @@ bin
 obj
 node_modules
 site/files/wwwroot
-temp
+upload
