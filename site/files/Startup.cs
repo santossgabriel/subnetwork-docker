@@ -42,6 +42,8 @@ namespace Site
           }
         );
 
+      services.AddHttpsRedirection(options => options.HttpsPort = 443);
+
       services.AddControllers();
 
       services.AddSingleton<AppConfig>(new AppConfig(jwtKey));
@@ -63,6 +65,8 @@ namespace Site
 
       app.UseAuthentication();
       app.UseAuthorization();
+
+      app.UseHttpsRedirection();
 
       app.UseDefaultFiles();
       app.UseStaticFiles();

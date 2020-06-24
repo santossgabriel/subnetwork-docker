@@ -11,4 +11,4 @@ RUN dotnet publish -o /root/publish /root/app/ && \
   mv /root/app/wwwroot /root/publish/wwwroot && \
   rm -rf app
 WORKDIR /root/publish
-CMD [ "/usr/bin/dotnet", "/root/publish/Site.dll", "--urls=http://*" ]
+CMD [ "/usr/bin/dotnet", "/root/publish/Site.dll", "--urls=https://*" ]
