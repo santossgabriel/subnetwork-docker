@@ -98,7 +98,7 @@ services:
       - DOMAIN=internet.lab
       - THEME_INDEX=17
       - USER_TYPE=2
-      - APP_NAME=External Mail
+      - APP_NAME=Internet Mail
       - EMAIL_GATEWAY=fakebank.lab|smtp:172.30.30.50
     image: webmaillab:1.0
     networks:
