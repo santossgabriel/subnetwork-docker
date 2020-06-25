@@ -1,7 +1,6 @@
 FROM baselab:1.0
 ARG DEBIAN_FRONTEND=noninteractive
 COPY files/* /root/
-COPY files/ssl /root/
 RUN apt install -y squid apache2 postfix && \
   cp /root/default-ssl.conf /etc/apache2/sites-available/default-ssl.conf && \
   mkdir /root/ssl /etc/apache2/ssl && \
