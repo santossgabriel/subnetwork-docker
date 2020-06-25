@@ -17,6 +17,8 @@ RUN apt install -y unzip apache2 php dovecot-imapd dovecot-pop3d postfix openssh
   mkdir /var/local/squirrelmail/attach/ && \
   chown -R www-data:www-data /var/local/squirrelmail && \
   mv /root/config.php /var/www/html/squirrelmail/config/config.php && \
+  mv /root/logo1.png /var/www/html/squirrelmail/images && \
+  mv /root/logo2.jpg /var/www/html/squirrelmail/images && \
   mv /root/main.cf /etc/postfix/main.cf && \
   apt clean && \
   chmod +x /root/init.sh && \

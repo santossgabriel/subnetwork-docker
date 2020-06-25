@@ -11,9 +11,16 @@ then
   DOMAIN=example.lab
 fi
 
+if [ "$LOGO" = "" ];
+then
+  DOMAIN=sm_logo.png
+fi
+
 sed -i "s/##DOMAIN##/$DOMAIN/g" /var/www/html/squirrelmail/config/config.php
 sed -i "s/##DOMAIN##/$DOMAIN/g" /etc/postfix/main.cf
-sed -i "s/##DOMAIN##/mail.$DOMAIN/g" /etc/apache2/sites-available/squirrelmail.conf 
+sed -i "s/##DOMAIN##/mail.$DOMAIN/g" /etc/apache2/sites-available/squirrelmail.conf
+
+sed -i "s/##LOGO##/$LOGO/g" /var/www/html/squirrelmail/config/config.php
 
 if [ "$THEME_INDEX" != "" ];
 then
