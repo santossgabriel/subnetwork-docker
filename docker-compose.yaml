@@ -22,10 +22,11 @@ services:
       - NET_ADMIN
     environment:
       - DOMAIN=fakebank.lab
-      - THEME_INDEX=6
-      - APP_NAME=Fake Bank
+      - THEME_INDEX=42
+      - APP_NAME=Fake Bank Mail
       - USER_TYPE=1
       - EMAIL_GATEWAY=internet.lab|smtp:172.20.20.50
+      - LOGO=logo2.jpg
     image: webmaillab:1.0
     networks:
       vlan:
@@ -96,10 +97,11 @@ services:
       - NET_ADMIN
     environment:
       - DOMAIN=internet.lab
-      - THEME_INDEX=17
+      - THEME_INDEX=33
       - USER_TYPE=2
       - APP_NAME=Internet Mail
       - EMAIL_GATEWAY=fakebank.lab|smtp:172.30.30.50
+      - LOGO=logo1.png
     image: webmaillab:1.0
     networks:
       external:

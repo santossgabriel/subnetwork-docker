@@ -10,14 +10,14 @@ $config_version = '1.4.0';
 $config_use_color = 2;
 
 $org_name      = "##APP_NAME##";
-$org_logo      = SM_PATH . 'images/sm_logo.png';
+$org_logo      = SM_PATH . 'images/##LOGO##';
 $org_logo_width  = '308';
 $org_logo_height = '111';
 $org_title     = "##APP_NAME## $version";
 $signout_page  = '';
 $frame_top     = '_top';
 
-$provider_uri     = 'http://squirrelmail.org/';
+$provider_uri     = 'http://mail.##DOMAIN##/';
 
 $provider_name     = '##APP_NAME##';
 
