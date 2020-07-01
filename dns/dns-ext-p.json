@@ -15,6 +15,10 @@
         {
           "subdomain": "mail",
           "ip": "172.30.30.50"
+        },
+        {
+          "subdomain": "intranet",
+          "ip": "172.30.30.50"
         }
       ]
     }
