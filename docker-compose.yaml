@@ -124,12 +124,24 @@ services:
       - ./dns/dns-ext-s.json:/root/config.json
   
   threat_internet:
+    command: ["/usr/sbin/sshd", "-D"]
     hostname: threat
+    environment:
+      - USER_TYPE=2
     image: threatlab:1.0
     networks:
-      - external
+      external:
+        ipv4_address: 172.30.30.148
     volumes:
       - ./threat/resolv.conf:/etc/resolv.conf
+
+
+  log_server:
+    image: logsitelab:1.0
+    networks:
+      external:
+        ipv4_address: 172.30.30.150
+
 
 networks:
   vlan:
