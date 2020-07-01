@@ -4,3 +4,4 @@ obj
 node_modules
 site/files/wwwroot
 upload
+log.json
