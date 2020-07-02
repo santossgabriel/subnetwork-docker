@@ -26,7 +26,7 @@ CREATE TABLE "Contact" (
 
 INSERT INTO "User" (Name, Email, Password, Role, Document)
   VALUES
-('approver', 'approver@fakebank.lab', '123', 1),
+('approver', 'approver@fakebank.lab', '123', 1, null),
 ('Naruto Uzumaki', 'narutouzumaki@internet.lab', '6a8047cda9f32487f243a3c3569bb84b', 0, 'a3a8c02dcnh-naruto.jpeg'),
 ('Sasuke Uchiha', 'sasukeuchiha@internet.lab', '6a8047cda9f32487f243a3c3569bb84b', 0, '674ea1e3069cnh-sasuke.jpeg'),
 ('Shikamaru Nara', 'shikamarunara@internet.lab', '6a8047cda9f32487f243a3c3569bb84b', 0, '13096995cnh-shikamaru.jpeg');
