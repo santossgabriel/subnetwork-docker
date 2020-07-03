@@ -1,0 +1,10 @@
+./build.sh base 
+./build.sh dns 
+./build.sh employee 
+./build.sh ftp
+./build.sh proxy
+./build.sh threat 
+./build.sh webmail
+./build.sh site
+./build.sh logsite 
+./build.sh database 
