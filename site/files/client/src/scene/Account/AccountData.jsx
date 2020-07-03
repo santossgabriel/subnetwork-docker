@@ -50,7 +50,7 @@ export function AccountData() {
       <input defaultValue={user.name} className="form-input" onChange={e => setName(e.target.value)} />
       <br />
       <br />
-      Documento Atual: <a onClick={() => download(user.document)}>{user.document}</a>
+      Documento Atual: <a style={{ cursor: 'pointer' }} onClick={() => download(user.document)}>{user.document}</a>
       <br />
       <br />
       Documento: <input type="file" onChange={e => upload(e)} /><br />
