@@ -3,31 +3,28 @@ import os
 import time
 import datetime
 
-user = os.environ.get('BOT_NAME', '')
-password = os.environ.get('BOT_PASSWORD', '')
-server = os.environ.get('FTP_SERVER', 'ftp.fakebank.lab')
+user = os.environ.get('BOT_NAME', 'a')
+password = os.environ.get('BOT_PASSWORD', 'a')
+server = os.environ.get('FTP_SERVER', '172.17.0.1')
 timer_sec = int(os.environ.get('TIMER_SECONDS', '10'))
 
-if user != '' and password != '' and server != '':
-
+def ftp_run():
     time.sleep(timer_sec)
-
-    while True:
-
+    os.system('echo " ** ' + datetime.datetime.now().strftime('%H:%M:%S') + '"')
+    try:
         ftp = ftplib.FTP(server)
         ftp.login(user, password)
-
         data = []
-
         ftp.dir(data.append)
-
         ftp.quit()
-
-        os.system('echo " ** ' + datetime.datetime.now().strftime('%H:%M:%S') + '"')
-
         for line in data:
             os.system('echo "- ' + line + '"')
-        time.sleep(timer_sec)
+    except ConnectionRefusedError:
+        print('Connection refused server ' + server)
+
+if user != '' and password != '' and server != '':
+    while True:
+        ftp_run()
 
 else:
     print('User or password not provided.')
