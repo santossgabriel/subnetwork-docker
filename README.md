@@ -1,4 +1,4 @@
-## **Laboratório para estudo de segurança em Aplicações WEB**
+## **Laboratório para estudo de conceitos de segurança**
 
 **Descrição:** Este projeto vem com o objetivo de automatizar a criação de um ambiente virtual, para facilitar a prática e entendimento de alguns conceitos básicos de segurança em aplicações WEB.
 

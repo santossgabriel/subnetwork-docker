@@ -9,7 +9,7 @@ services:
       - NET_ADMIN
     environment: 
       - DEFAULT_GATEWAY=172.20.20.50
-    hostname: employee
+      - USER_TYPE=1
     image: employeelab:1.0
     networks:
       - vlan
@@ -70,6 +70,20 @@ services:
     networks:
       vlan:
         ipv4_address: 172.20.20.80
+    volumes:
+      - ./dns/dns-int.json:/root/config.json
+
+
+  ftp_fakebank:
+    cap_add:
+      - NET_ADMIN
+    environment: 
+      - DEFAULT_GATEWAY=172.20.20.50
+      - USER_TYPE=1
+    image: ftplab:1.0
+    networks:
+      vlan:
+        ipv4_address: 172.20.20.100
     volumes:
       - ./dns/dns-int.json:/root/config.json
 
