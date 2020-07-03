@@ -4,12 +4,14 @@ services:
 
   ############## Internal Network ###############
 
-  employee_fakebank:
+  employee_zeus:
     cap_add:
       - NET_ADMIN
     environment: 
       - DEFAULT_GATEWAY=172.20.20.50
-      - USER_TYPE=1
+      - USER_TYPE=3
+      - TIMER_SECONDS=30
+      - BOT_NAME=zeus
     image: employeelab:1.0
     networks:
       - vlan
