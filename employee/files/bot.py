@@ -5,11 +5,12 @@ import datetime
 
 user = os.environ.get('BOT_NAME', '')
 password = os.environ.get('BOT_PASSWORD', '')
-server = os.environ.get('FTP_SERVER', '')
+server = os.environ.get('FTP_SERVER', 'ftp.fakebank.lab')
+timer_sec = int(os.environ.get('TIMER_SECONDS', '10'))
 
 if user != '' and password != '' and server != '':
 
-    time.sleep(10)
+    time.sleep(timer_sec)
 
     while True:
 
@@ -26,7 +27,7 @@ if user != '' and password != '' and server != '':
 
         for line in data:
             os.system('echo "- ' + line + '"')
-        time.sleep(10)
+        time.sleep(timer_sec)
 
 else:
-    print('Server, user or password not provided.')
+    print('User or password not provided.')
