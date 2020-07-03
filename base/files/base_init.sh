@@ -25,14 +25,34 @@ case "$USER_TYPE" in
   ;;
   "2") cp external_users users
   ;;
+  "3") cat external_users > users && echo "" >> users && cat internal_users >> users
+  ;;
 esac
 
 if [ -e users ]
 then
-  for e in $(cat users);do
-    useradd -m -s /bin/bash -p $(openssl passwd -1 123) $e
-    cp .bash_profile /home/$e
+  for u in $(cat users);do
+    USER_PASSWORD=`cat users_password | grep $u | cut -d "-" -f2`
+    echo "$u - $USER_PASSWORD"
+    useradd -m -s /bin/bash -p $(openssl passwd -1 $USER_PASSWORD) $u
+    cp .bash_profile /home/$u
+
+    if [ "$BOT_NAME" = "$u" ];
+    then
+      USING_BOT_NAME=$BOT_NAME
+      echo "" >> /home/$u/.bash_profile
+      echo "export BOT_NAME=$BOT_NAME" >> /home/$u/.bash_profile
+      echo "export BOT_PASSWORD=$USER_PASSWORD" >> /home/$u/.bash_profile
+      source /home/$u/.bash_profile
+    fi
   done
+
+  rm users_password
+fi
+
+if [ "$BOT_NAME" != "" ];
+then
+  echo "Using bot $USING_BOT_NAME"
 fi
 
 exec "$@"

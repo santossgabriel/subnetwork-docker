@@ -6,4 +6,4 @@ RUN apt install -y vsftpd && \
   chmod 777 /home/public && \
   cp /root/vsftpd.conf /etc && \
   mkdir -p /var/run/vsftpd/empty
-CMD ["/usr/sbin/vsftpd", "/etc/vsftpd.conf"]
+CMD ["/usr/bin/python3", "/root/init.py"]
