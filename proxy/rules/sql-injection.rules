@@ -1,0 +1,2 @@
+alert tcp any any -> any 80 (msg: "UNION SQL Injection Detected"; content: "union"; nocase; sid:100000061; priority: 1; )
+alert tcp any any -> any 443 (msg: "UNION SQL Injection Detected"; content: "union"; nocase; sid:100000062; priority: 1; )
