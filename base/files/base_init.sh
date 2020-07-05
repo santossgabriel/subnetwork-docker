@@ -1,5 +1,8 @@
 #!/bin/bash
 
+TZ='America/Sao_Paulo'
+export TZ
+
 if [ "$DEFAULT_GATEWAY" != '' ];
 then
   route del default
