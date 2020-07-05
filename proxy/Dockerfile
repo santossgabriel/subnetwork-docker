@@ -10,7 +10,6 @@ RUN add-apt-repository ppa:oisf/suricata-stable && \
   mv /root/apache.crt /etc/apache2/ssl && \
   mv /root/apache.key /etc/apache2/ssl && \
   mv /root/main.cf /etc/postfix/main.cf && \
-  mv /root/suricata.yaml /etc/suricata && \
   cp /root/rules/* /etc/suricata/rules && \
   a2enmod proxy proxy_http ssl rewrite && \
   a2dissite 000-default.conf && \

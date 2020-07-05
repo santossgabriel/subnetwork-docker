@@ -1,7 +1,5 @@
 {
-  "forwarders": [
-    "172.30.30.80"
-  ],
+  "forwarders": [],
   "zones": [
     {
       "rev": "20.20.172",
@@ -9,11 +7,11 @@
       "hosts": [
         {
           "subdomain": "mail",
-          "ip": "172.20.20.10"
+          "ip": "172.20.20.50"
         },
         {
           "subdomain": "www",
-          "ip": "172.20.20.20"
+          "ip": "172.20.20.50"
         },
         {
           "subdomain": "db",

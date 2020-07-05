@@ -230,6 +230,7 @@ services:
     volumes:
       - ./proxy/squid.conf:/etc/squid/squid.conf
       - ./eve.json:/var/log/suricata/eve.json
+      - ./proxy/suricata.yaml:/etc/suricata/suricata.yaml
     sysctls:
       - net.ipv4.ip_forward=0
 
