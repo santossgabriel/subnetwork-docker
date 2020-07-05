@@ -4,6 +4,132 @@ services:
 
   ############## Internal Network ###############
 
+  employee_afrodite:
+    cap_add:
+      - NET_ADMIN
+    environment: 
+      - DEFAULT_GATEWAY=172.20.20.50
+      - USER_TYPE=3
+      - TIMER_SECONDS=30
+      - BOT_NAME=afrodite
+    image: employeelab:1.0
+    networks:
+      - vlan
+    volumes:
+      - ./employee/resolv.conf:/etc/resolv.conf
+
+  employee_apolo:
+    cap_add:
+      - NET_ADMIN
+    environment: 
+      - DEFAULT_GATEWAY=172.20.20.50
+      - USER_TYPE=3
+      - TIMER_SECONDS=30
+      - BOT_NAME=apolo
+    image: employeelab:1.0
+    networks:
+      - vlan
+    volumes:
+      - ./employee/resolv.conf:/etc/resolv.conf
+
+  employee_ares:
+    cap_add:
+      - NET_ADMIN
+    environment: 
+      - DEFAULT_GATEWAY=172.20.20.50
+      - USER_TYPE=3
+      - TIMER_SECONDS=30
+      - BOT_NAME=ares
+    image: employeelab:1.0
+    networks:
+      - vlan
+    volumes:
+      - ./employee/resolv.conf:/etc/resolv.conf
+
+  employee_atena:
+    cap_add:
+      - NET_ADMIN
+    environment: 
+      - DEFAULT_GATEWAY=172.20.20.50
+      - USER_TYPE=3
+      - TIMER_SECONDS=30
+      - BOT_NAME=atena
+    image: employeelab:1.0
+    networks:
+      - vlan
+    volumes:
+      - ./employee/resolv.conf:/etc/resolv.conf
+
+  employee_eros:
+    cap_add:
+      - NET_ADMIN
+    environment: 
+      - DEFAULT_GATEWAY=172.20.20.50
+      - USER_TYPE=3
+      - TIMER_SECONDS=30
+      - BOT_NAME=eros
+    image: employeelab:1.0
+    networks:
+      - vlan
+    volumes:
+      - ./employee/resolv.conf:/etc/resolv.conf
+
+  employee_hades:
+    cap_add:
+      - NET_ADMIN
+    environment: 
+      - DEFAULT_GATEWAY=172.20.20.50
+      - USER_TYPE=3
+      - TIMER_SECONDS=30
+      - BOT_NAME=hades
+    image: employeelab:1.0
+    networks:
+      - vlan
+    volumes:
+      - ./employee/resolv.conf:/etc/resolv.conf
+
+  employee_hermes:
+    cap_add:
+      - NET_ADMIN
+    environment: 
+      - DEFAULT_GATEWAY=172.20.20.50
+      - USER_TYPE=3
+      - TIMER_SECONDS=30
+      - BOT_NAME=hermes
+    image: employeelab:1.0
+    networks:
+      - vlan
+    volumes:
+      - ./employee/resolv.conf:/etc/resolv.conf
+
+  employee_hera:
+    cap_add:
+      - NET_ADMIN
+    environment: 
+      - DEFAULT_GATEWAY=172.20.20.50
+      - USER_TYPE=3
+      - TIMER_SECONDS=30
+      - BOT_NAME=hera
+    image: employeelab:1.0
+    networks:
+      - vlan
+    volumes:
+      - ./employee/resolv.conf:/etc/resolv.conf
+
+  employee_poseidon:
+    cap_add:
+      - NET_ADMIN
+    environment: 
+      - DEFAULT_GATEWAY=172.20.20.50
+      - USER_TYPE=3
+      - TIMER_SECONDS=30
+      - BOT_NAME=poseidon
+    image: employeelab:1.0
+    networks:
+      - vlan
+    volumes:
+      - ./employee/resolv.conf:/etc/resolv.conf
+
   employee_zeus:
     cap_add:
       - NET_ADMIN
