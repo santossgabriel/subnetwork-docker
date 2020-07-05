@@ -3,9 +3,9 @@ import os
 import time
 import datetime
 
-user = os.environ.get('BOT_NAME', 'a')
-password = os.environ.get('BOT_PASSWORD', 'a')
-server = os.environ.get('FTP_SERVER', '172.17.0.1')
+user = os.environ.get('BOT_NAME', '')
+password = os.environ.get('BOT_PASSWORD', '')
+server = os.environ.get('FTP_SERVER', 'ftp.fakebank.lab')
 timer_sec = int(os.environ.get('TIMER_SECONDS', '10'))
 
 def ftp_run():
