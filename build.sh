@@ -1,9 +1,9 @@
 #!/bin/bash
 
-case $1 in base|dns|employee|ftp|proxy|threat|webmail|site|logsite|database)
+case $1 in base|dns|employee|ftp|proxy|threat|webmail|site|logsite|database|evebox)
   ;;
   *)
-  echo " base | dns | employee | ftp | proxy | threat | webmail | site | logsite | database "
+  echo " base | dns | employee | ftp | proxy | threat | webmail | site | logsite | database | evebox"
   echo "Ex.: .\build.sh base"
   exit
   ;;
