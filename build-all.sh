@@ -7,4 +7,5 @@
 ./build.sh webmail
 ./build.sh site
 ./build.sh logsite 
-./build.sh database 
+./build.sh database
+./build.sh evebox

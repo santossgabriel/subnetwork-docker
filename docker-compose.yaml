@@ -107,6 +107,16 @@ services:
     sysctls:
       - net.ipv4.ip_forward=0
 
+  evebox_fakebank:
+    cap_add:
+      - NET_ADMIN
+    image: eveboxlab:1.0
+    networks:
+      vlan:
+        ipv4_address: 172.20.20.110
+    volumes:
+      - ./eve.json:/var/log/suricata/eve.json
+
   ############## External Network ###############
 
   mail_internet:
