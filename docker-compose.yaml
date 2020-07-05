@@ -102,7 +102,8 @@ services:
       external:
         ipv4_address: 172.30.30.50
     volumes:
-      - ./proxy/squid.conf:/etc/squid/squid.conf    
+      - ./proxy/squid.conf:/etc/squid/squid.conf
+      - ./eve.json:/var/log/suricata/eve.json
     sysctls:
       - net.ipv4.ip_forward=0
 

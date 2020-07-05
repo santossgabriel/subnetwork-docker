@@ -15,6 +15,12 @@ then
   exit 1
 fi
 
+service suricata start
+if [ $? != 0 ];
+then
+  exit 1
+fi
+
 if [ "$EMAIL_GATEWAY" != "" ];
 then
   echo $EMAIL_GATEWAY | sed "s/;/\n/g" | sed "s/|/ /" > /etc/postfix/transport
