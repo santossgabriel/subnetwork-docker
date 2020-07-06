@@ -42,8 +42,6 @@ namespace Site
           }
         );
 
-      services.AddHttpsRedirection(options => options.HttpsPort = 443);
-
       services.AddControllers();
 
       services.AddSingleton<AppConfig>(new AppConfig(jwtKey));
@@ -59,14 +57,11 @@ namespace Site
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
       app.UseMiddleware(typeof(ExceptionHandler));
-      app.UseHsts();
 
       app.UseRouting();
 
       app.UseAuthentication();
       app.UseAuthorization();
-
-      app.UseHttpsRedirection();
 
       app.UseDefaultFiles();
       app.UseStaticFiles();
