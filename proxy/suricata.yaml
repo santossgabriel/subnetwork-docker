@@ -15,7 +15,7 @@ vars:
     #HOME_NET: "[192.168.0.0/16,10.0.0.0/8,172.16.0.0/12]"
     #HOME_NET: "[192.168.0.0/16]"
     #HOME_NET: "[10.0.0.0/8]"
-    HOME_NET: "[172.20.20.0/24]"
+    HOME_NET: "[172.20.20.0/24,172.30.30.0/24]"
     #HOME_NET: "any"
 
     EXTERNAL_NET: "!$HOME_NET"
@@ -146,17 +146,18 @@ outputs:
 
       types:
         - alert:
-            payload: yes             # enable dumping payload in Base64
+            # payload: yes             # enable dumping payload in Base64
             # payload-buffer-size: 4kb # max size of payload buffer to output in eve-log
             # payload-printable: yes   # enable dumping payload in printable (lossy) format
             # packet: yes              # enable dumping of packet (without stream segments)
             # metadata: no             # enable inclusion of app layer metadata with alert. Default yes
-            # http-body: yes           # Requires metadata; enable dumping of http body in Base64
+            http-body: yes           # Requires metadata; enable dumping of http body in Base64
             # http-body-printable: yes # Requires metadata; enable dumping of http body in printable format
 
             # Enable the logging of tagged packets for rules using the
             # "tag" keyword.
-            tagged-packets: yes
+            # tagged-packets: yes
+            responses: no
         - anomaly:
             # Anomaly log records describe unexpected conditions such
             # as truncated packets, packets with invalid IP/UDP/TCP
@@ -579,12 +580,12 @@ logging:
 
 # Linux high speed capture support
 af-packet:
-  # - interface: eth0
-  #   cluster-id: 99
-  #   cluster-type: cluster_flow
-  #   defrag: yes
-  #   use-mmap: yes
-  #   tpacket-v3: yes
+  - interface: eth0
+    cluster-id: 98
+    cluster-type: cluster_flow
+    defrag: yes
+    use-mmap: yes
+    tpacket-v3: yes
 
   - interface: eth1
     cluster-id: 99
@@ -600,8 +601,8 @@ af-packet:
 
 # Cross platform libpcap capture support
 pcap:
-  # - interface: eth0
-  - interface: eth1
+  - interface: eth0
+  # - interface: eth1
     # On Linux, pcap will try to use mmaped capture and will use buffer-size
     # as total of memory used by the ring. So set this to something bigger
     # than 1% of your bandwidth.
@@ -1625,15 +1626,15 @@ netmap:
 # PF_RING configuration. for use with native PF_RING support
 # for more info see http://www.ntop.org/products/pf_ring/
 pfring:
-  # - interface: eth0
-  #   threads: auto
-  #   cluster-id: 99
-  #   cluster-type: cluster_flow
-
-  - interface: eth1
+  - interface: eth0
     threads: auto
     cluster-id: 99
     cluster-type: cluster_flow
+
+  # - interface: eth1
+  #   threads: auto
+  #   cluster-id: 99
+  #   cluster-type: cluster_flow
 
   - interface: default
     #threads: 2
