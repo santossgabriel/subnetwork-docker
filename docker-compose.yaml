@@ -261,6 +261,12 @@ services:
       external:
         ipv4_address: 172.30.30.10
 
+  whois_internet:
+    image: whoislab:1.0
+    networks:
+      external:
+        ipv4_address: 172.30.30.30
+
   dns_internet_p:
     image: dnslab:1.0
     networks:
