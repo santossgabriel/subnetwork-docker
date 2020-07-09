@@ -9,3 +9,4 @@
 ./build.sh logsite 
 ./build.sh database
 ./build.sh evebox
+./build.sh whois
