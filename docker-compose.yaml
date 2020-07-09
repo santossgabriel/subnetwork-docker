@@ -192,14 +192,16 @@ services:
   dns_fakebank:
     cap_add:
       - NET_ADMIN
-    environment: 
-      - DEFAULT_GATEWAY=172.20.20.50
     image: dnslab:1.0
     networks:
       vlan:
         ipv4_address: 172.20.20.80
+      external:
+        ipv4_address: 172.30.30.60
     volumes:
       - ./dns/dns-int.json:/root/config.json
+    sysctls:
+      - net.ipv4.ip_forward=0
 
 
   ftp_fakebank:

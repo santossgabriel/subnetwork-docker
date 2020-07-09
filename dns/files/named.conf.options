@@ -1,15 +1,9 @@
-acl trusted {
-	##HOST_IP_NETMASK##;
-	127.0.0.1;
-	localhost;
-	localnets;
-};
-
 options {
 	directory "/var/cache/bind";
 	auth-nxdomain no;
 	listen-on port 53 { localhost; ##HOST_IP_NETMASK##; };
-	allow-query { trusted; };
+	allow-query { ##query## };
+	allow-transfer { ##transfer## };
 	forwarders { ##forwarders## };
 	recursion yes;
 	dnssec-validation yes;

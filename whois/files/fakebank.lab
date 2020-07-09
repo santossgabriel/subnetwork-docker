@@ -1,0 +1,17 @@
+% Copyright (c) internet.lab
+
+Registrar WHOIS Server: whois.internet.lab
+Updated Date: 2020-03-10T18:53:59Z
+Creation Date: 1997-03-29T05:00:00Z
+Registry Expiry Date: 2028-03-30T04:00:00Z
+
+domain:      fakebank.lab
+owner:       Fake Bank Internet
+responsible: Domain Administrator
+country:     BR
+nserver:     ns1.fakebank.lab
+nserver:     ns2.fakebank.lab
+created:     19990518 #162310
+changed:     20200417
+expires:     20210518
+status:      published
