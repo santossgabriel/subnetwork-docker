@@ -31,10 +31,21 @@ def update():
   with open('./named.conf.options') as f:
     named_conf_options = f.read()
     named_conf_options = named_conf_options.replace('##HOST_IP_NETMASK##', f'{arr_ip[0]}.{arr_ip[1]}.{arr_ip[2]}.0/24', 99)
+    
     forwarders = '; '.join(config['forwarders']) + ';'
     if forwarders == ';':
       forwarders = ''
     named_conf_options = named_conf_options.replace('##forwarders##', forwarders )
+
+    transfer = '; '.join(config['transfer']) + ';'
+    if transfer == ';':
+      transfer = ''
+    named_conf_options = named_conf_options.replace('##transfer##', transfer )
+
+    query = '; '.join(config['query']) + ';'
+    if query == ';':
+      query = ''
+    named_conf_options = named_conf_options.replace('##query##', query )
 
   with open(bind_dir + 'named.conf.options', 'w') as f:
     f.write(named_conf_options)
